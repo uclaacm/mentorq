@@ -25,6 +25,31 @@ It is often slow to do front-end development in a Docker container and wait for 
 3. `npm install` (do this only the first time or if you change `client/package.json`)
 4. `npm start`
 
+## Git Workflow
+1. `git checkout -b <your-name>/<feature-name>`
+2. Code until you hit a good checkpoint. Make sure there are no errors/broken builds.
+3. `git status` shows you what files you have changed.
+4. Commit your files
+    * If you want to commit all modified files:
+      ```
+      git add -A
+      ```
+    * Otherwise to add the particular files you want to commit:
+      ```
+      git add <file1> <file2> <...>
+      ```
+5. `git commit -m "some commit message"`
+6. Push your branch
+    * For brand new branches:
+      ```
+      git push -u origin <branch name>
+      ```
+    * For previously pushed branches:
+      ```
+      git push
+      ```
+    * you can find your branch names with `git branch` 
+
 ## Pull Request Workflow
 * Make a new branch formatted `<your-name>/<feature-name>` to submit a pull request to master.
 * Notify team that a PR has been made :)
