@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db_mongo:
+    build: ./mongo
+    ports:
+      - "27017:27017"
+    logging: 
+      driver: "none"
+  api:
+    build: ./api
+    ports:
+      - "3005:3005"
+    links:
+      - db_mongo
+  web_client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    links:
+      - api
