@@ -1,9 +1,11 @@
+'use strict';
+
 // Bring Mongoose into the app 
 const mongoose = require('mongoose');
 const config = require('../config');
 
 // Build the connection string 
-var dbURI = config.database.uri;
+const dbURI = config.database.uri;
 
 // Create the database connection 
 mongoose.connect(dbURI);
