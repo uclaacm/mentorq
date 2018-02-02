@@ -9,7 +9,7 @@ services:
   api:
     build: ./api
     ports:
-      - "3005:3005"
+      - "8080:8080"
     links:
       - db_mongo
   web_client:
