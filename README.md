@@ -12,6 +12,7 @@
 
 
 ## Overall Development Workflow
+This workflow is for if you want to run the entire application using Docker.
 1. Navigate to the project directory
 2. Make sure your Docker Daemon is running. For Mac, you'll see the whale icon on the top right corner which is the daemon, so make sure that is running.
 3. Run `docker-compose up --build` when you've made changes to the code. Or omit the `--build` flag if you have made no changes.
@@ -25,7 +26,7 @@ It is often slow to do front-end development in a Docker container and wait for 
 3. `npm install` (do this only the first time or if you change `client/package.json`)
 4. `npm start`
 
-## Git Workflow
+## Git Development Workflow
 1. `git checkout -b <your-name>/<feature-name>`
 2. Code until you hit a good checkpoint. Make sure there are no errors/broken builds.
 3. `git status` shows you what files you have changed.
@@ -83,3 +84,6 @@ It is often slow to do front-end development in a Docker container and wait for 
     git push -f
     ```
     **Do _NOT_ force push to other people's branches or shared branches**
+
+## Documentation
+* We are using [documentation.js](https://github.com/documentationjs/documentation) to document code.
