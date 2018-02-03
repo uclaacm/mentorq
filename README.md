@@ -5,9 +5,13 @@
   1. Install [Homebrew](https://brew.sh/) if you haven't already. 
   2. `brew install docker`
   3. `brew install docker-compose`
+  4. `brew install node`
+  5. Navigate to this project directory and run `./scripts/setup.sh`
 * For windows users:
   1. Go to https://docs.docker.com/docker-for-windows/install/ to install Docker.
   2. Go to https://docs.docker.com/compose/install/#install-compose to install Docker Compose.
+  3. Go to https://nodejs.org/en/download/ to install node.js
+  4. Navigate to this project directory and run `./scripts/setup.sh`
 ### Preferred IDE: [VS Code](https://code.visualstudio.com/)
 
 
