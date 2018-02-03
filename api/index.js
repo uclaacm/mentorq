@@ -8,12 +8,12 @@ const server = http.createServer(app);
 const config = require('./config');
 
 // Connect to database
-const db = require('./models');
+require('./models');
 
 // Set up router endpoints
 const userRouter = require('./routes/user');
-app.use("/user", userRouter);
+app.use('/user', userRouter);
 
 server.listen(config.server.port, () => {
-	console.log("Listening on port " + config.server.port);
+	console.log('Listening on port ' + config.server.port);
 });
