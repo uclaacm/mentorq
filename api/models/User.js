@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 // User Schema Definition
 var userSchema = new mongoose.Schema({
-    name: String
+	name: String
 });
 
 // User Schema Methods
@@ -19,16 +19,16 @@ var userSchema = new mongoose.Schema({
  *     .catch(error => console.error(error));
  */
 userSchema.statics.create = function(name) {
-    var user = new this({
-        name: name
-    });
+	var user = new this({
+		name: name
+	});
 
-    return new Promise((resolve, reject) => {
-        user.save((error, newUser) => {
-            if (error) reject(error);
-            else resolve(newUser);
-        });
-    });
-}
+	return new Promise((resolve, reject) => {
+		user.save((error, newUser) => {
+			if (error) reject(error);
+			else resolve(newUser);
+		});
+	});
+};
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
