@@ -7,11 +7,13 @@
   3. `brew install docker-compose`
   4. `brew install node`
   5. Navigate to the root of this project directory and run `./scripts/setup.sh`
+  6. Run `docker-compose up --build`
 * For windows users:
   1. Go to https://docs.docker.com/docker-for-windows/install/ to install Docker.
   2. Go to https://docs.docker.com/compose/install/#install-compose to install Docker Compose.
   3. Go to https://nodejs.org/en/download/ to install node.js
   4. Navigate to the root of this project directory and run `./scripts/setup.sh`
+  5. Run `docker-compose up --build`
 ### Preferred IDE: [VS Code](https://code.visualstudio.com/)
 
 
