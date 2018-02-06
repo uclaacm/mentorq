@@ -10,9 +10,11 @@
   6. Run `docker-compose up --build`
 * For windows users:
   1. Go to https://docs.docker.com/docker-for-windows/install/ to install Docker.
+      * For an older more stable version: 
+    https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe
   2. Go to https://docs.docker.com/compose/install/#install-compose to install Docker Compose.
   3. Go to https://nodejs.org/en/download/ to install node.js
-  4. Navigate to the root of this project directory and run `./scripts/setup.sh`
+  4. Navigate to the root of this project directory and run `./scripts/setup.sh` in bash
   5. Run `docker-compose up --build`
 ### Preferred IDE: [VS Code](https://code.visualstudio.com/)
 
