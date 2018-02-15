@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Container from './components/Container';
+import Nav from './components/Nav';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path='/' component={Container} />
           <Redirect to='/' />
         </Switch>
+        <h1> THIS IS A TEST FROM DUSTIN </h1>
       </div>
     )
   }

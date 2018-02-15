@@ -2,8 +2,11 @@
     "dependencies": {
         "react": "15.6.1",
         "react-dom": "15.6.1",
+        "react-router": "^4.1.1",
         "react-router-dom": "^4.1.1",
-        "material-ui": "^0.20.0"
+        "redux": "3.7.2",
+        "material-ui": "^0.20.0",
+        "react-redux": "5.0.6"
     },
     "devDependencies": {
         "react-scripts": "0.9.5"
