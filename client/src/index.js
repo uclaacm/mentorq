@@ -5,14 +5,12 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import reducers from './reducers';
+import App from './App.jsx';
 
 let socket = io('http://localhost:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import App from './App.jsx';
 
 let store = applyMiddleware(socketIoMiddleware)(createStore)(reducers);
 
