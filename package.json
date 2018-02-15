@@ -5,12 +5,7 @@
   "main": "",
   "devDependencies": {
     "eslint": "^4.16.0",
-    "eslint-plugin-react": "^7.6.1",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "react-router-dom": "^4.1.1",
-    "redux": "^3.7.2",
-    "react-redux": "5.0.6"
+    "eslint-plugin-react": "^7.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/uclaacm/mentorq/issues"
   },
-  "homepage": "https://github.com/uclaacm/mentorq#readme",
-  "dependencies": {
-    "react-redux": "^5.0.6"
-  }
+  "homepage": "https://github.com/uclaacm/mentorq#readme"
 }
