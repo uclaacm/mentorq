@@ -1,0 +1,6 @@
+sudo: false
+language: node_js
+
+# Always use latest Node.js version
+node_js:
+  - node
