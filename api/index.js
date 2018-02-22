@@ -14,6 +14,6 @@ require('./models');
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 
-server.listen(config.server.port, () => {
+server.listen('0.0.0.0', config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);
 });
