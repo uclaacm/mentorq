@@ -3,14 +3,12 @@ var TextReducer = (state = {
 }, action) => {
 	switch (action.type) {
 	case 'ADD_TEXT':
-		console.log('TextReducer called');
 		return {
 			...state,
 			text: action.text
 		};
-	default: {
+	default: 
 		return state;
-	}
 	}
 };
 
