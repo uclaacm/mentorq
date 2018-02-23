@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Nav from './Nav';
 import * as textAction from '../actions/text.js';
 import { connect } from 'react-redux';
@@ -6,9 +7,7 @@ import { connect } from 'react-redux';
 class Container extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-		};
-		// eslint-disable-next-line
+		this.state = {};
 		this.props.addText('some text');
 	}
 
@@ -16,14 +15,16 @@ class Container extends Component {
 		return (
 			<div className="container">
 				<Nav />	
-				<p></p>
 			</div>
 		);
 	}
 }
 
+Container.propTypes = {
+	addText: PropTypes.func
+};
+
 const mapDispatchToProps = (dispatch) => {
-	console.log('mapDispatchToProps called');
 	return {
 		addText: (textToAdd) => dispatch(textAction.addText(textToAdd))
 	};
