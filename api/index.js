@@ -14,9 +14,6 @@ require('./models');
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 
-// include user database
-// const User = require('./models/User');	
-
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);
 });
