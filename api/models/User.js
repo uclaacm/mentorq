@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 
 // User Schema Definition
 var userSchema = new mongoose.Schema({
-	name: {type : String , required : true},
-	isAdmin: {type: Boolean , default : false},
-	isMentor: {type: Boolean , default : false},
+	name: {type: String , required: true},
+	isAdmin: {type: Boolean , default: false},
+	isMentor: {type: Boolean , default: false},
 	skills: [String],
-	googleID: { type : String , unique : true, required : true }
+	googleID: { type: String , unique: true, required: true }
 });
 
 // User Schema Methods
@@ -25,8 +25,7 @@ var userSchema = new mongoose.Schema({
  
 var User;
 
-userSchema.statics.create = function(name, googleId)
-{
+userSchema.statics.create = function(name, googleId){
 	var user = new this({
 		name: name,
 		skills: [],
@@ -51,8 +50,7 @@ userSchema.statics.create = function(name, googleId)
  *     .catch(error => console.error(error));
  */
 
-userSchema.statics.read = function(googleId)
-{
+userSchema.statics.read = function(googleId){
 	return new Promise((resolve , reject) => {
 		User.findOne({googleID: googleId}, (err, user) => {
 			if (err) reject(err);
@@ -70,8 +68,7 @@ userSchema.statics.read = function(googleId)
  *     .catch(error => console.error(error));
  */
 
-userSchema.statics.delete = function(googleId)
-{
+userSchema.statics.delete = function(googleId){
 	return new Promise((resolve, reject) => {
 		User.findOne({googleID: googleId}).remove((err, offer) => {
 			if(err) reject(err);
@@ -92,8 +89,7 @@ userSchema.statics.delete = function(googleId)
  *	   .catch(error => console.error(error));
  */
 
-userSchema.methods.setAdminStatus = function(adminStatus)
-{
+userSchema.methods.setAdminStatus = function(adminStatus){
 	this.isAdmin = adminStatus;
 	
 	return new Promise((resolve, reject) => {
@@ -116,8 +112,7 @@ userSchema.methods.setAdminStatus = function(adminStatus)
  *	   .catch(error => console.error(error));
  */
 
-userSchema.methods.setMentorStatus = function(mentorStatus)
-{
+userSchema.methods.setMentorStatus = function(mentorStatus){
 	this.isMentor = mentorStatus;
 
 	return new Promise((resolve, reject) => {
@@ -143,8 +138,7 @@ userSchema.methods.setMentorStatus = function(mentorStatus)
  * an error will be thrown
  */
 
-userSchema.methods.addSkill = function(skill)
-{
+userSchema.methods.addSkill = function(skill){
 	// skill does not exist if index is -1;
 	// skill exists already if index is >=0;
 	const index = this.skills.indexOf(skill);
@@ -178,8 +172,7 @@ userSchema.methods.addSkill = function(skill)
  * an error will be thrown
  */
 
-userSchema.methods.removeSkill = function(skill)
-{
+userSchema.methods.removeSkill = function(skill){
 	const index = this.skills.indexOf(skill);
 
 	if (index < 0){
