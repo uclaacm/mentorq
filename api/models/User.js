@@ -15,21 +15,21 @@ var userSchema = new mongoose.Schema({
 
 /**
  * Creates and saves a User object in the database
- * @param {string} user's name
+ * @param {string} user's name, {string} user's GoogleID (as hash)
  * @returns {User} newly saved User object
  * @example
- * User.create("Joe Bruin")
+ * User.create('Joe Bruin', 'someGoogleIdHash')
  *     .then(user => console.log(user))
  *     .catch(error => console.error(error));
  */
  
 var User;
 
-userSchema.statics.create = function(name, GoogleID) {
+userSchema.statics.create = function(name, googleId) {
 	var user = new this({
 		name: name,
 		skills:[],
-		googleID: GoogleID
+		googleID: googleId
 	});
 
 	return new Promise((resolve, reject) => {
@@ -40,31 +40,58 @@ userSchema.statics.create = function(name, GoogleID) {
 	});
 };
 
-userSchema.statics.read = function(GoogleID)
+/**
+ * Read and Retrieve a User object from the database
+ * @param {string} user's googleID (as hash)
+ * @returns {User} one User object with matching ID
+ * @example
+ * User.read('someGoogleIdHash')
+ *     .then(user => console.log(user))
+ *	   .catch(error => console.error(error));
+ */
+
+
+
+userSchema.statics.read = function(googleId)
 {
 	return new Promise((resolve , reject) => {
-		User.findOne({googleID: GoogleID}, (err,user)=>{
+		User.findOne({googleID: googleId}, (err,user)=>{
 			if(err) reject(err);
 			else resolve(user);
 		});
 	});
 };
 
-userSchema.statics.delete = function(GoogleID)
+/**
+ * Delete a User object from the database
+ * @param {string} user's googleID (as hash)
+ * @returns {void} nothing
+ * @example
+ * User.delete('someGoogleIdHash')
+ *     .catch(error => console.error(error));
+ */
+
+userSchema.statics.delete = function(googleId)
 {
 	return new Promise((resolve, reject)=>{
-		User.findOne({googleID: GoogleID}).remove((err,offer)=>{
+		User.findOne({googleID: googleId}).remove((err,offer)=>{
 			if(err) reject(err);
 			resolve(offer);
 		});
 	});
 };
 
-
-// Static: User.doSomething
-// Instance method: 
-// var user;
-// user.doSomething()
+/**
+ * Change User's isAdmin status
+ * @param {Boolean} User's new isAdmin status
+ * @returns {User} changed user object
+ * @example
+ * User.read('someGoogleIdHash')
+ *     .then(user => {
+ *	        user.setAdminStatus(true);
+ *     })
+ *	   .catch(error => console.error(error));
+ */
 
 
 userSchema.methods.setAdminStatus = function(adminStatus)
@@ -79,6 +106,17 @@ userSchema.methods.setAdminStatus = function(adminStatus)
 	});
 };
 
+/**
+ * Change User's isMentor status
+ * @param {Boolean} User's new isMentor status
+ * @returns {User} changed user object
+ * @example
+ * User.read('someGoogleIdHash')
+ *     .then(user => {
+ *	        user.setMentorStatus(true);
+ *     })
+ *	   .catch(error => console.error(error));
+ */
 
 userSchema.methods.setMentorStatus = function(mentorStatus)
 {
@@ -91,6 +129,22 @@ userSchema.methods.setMentorStatus = function(mentorStatus)
 		});
 	});
 };
+
+
+/**
+ * Add a new skill to the User object
+ * @param {string} User's new skill
+ * @returns {User} changed user object
+ * @example
+ * User.read('someGoogleIdHash')
+ *     .then(user => {
+ *	        user.addSkill('python');
+ *     })
+ *	   .catch(error => console.error(error));
+ *
+ * If attempt to add a skill that already exists, 
+ * an error will be thrown
+ */
 
 userSchema.methods.addSkill = function(skill)
 {
@@ -111,6 +165,21 @@ userSchema.methods.addSkill = function(skill)
 		});
 	});
 };
+
+/**
+ * Remove a skill from the User object
+ * @param {string} skill to remove from the User object
+ * @returns {User} changed user object
+ * @example
+ * User.read('someGoogleIdHash')
+ *     .then(user => {
+ *	        user.removeSkill('python');
+ *     })
+ *	   .catch(error => console.error(error));
+ *
+ * If attempt to remove a skill that does not exists, 
+ * an error will be thrown
+ */
 
 userSchema.methods.removeSkill = function(skill)
 {
