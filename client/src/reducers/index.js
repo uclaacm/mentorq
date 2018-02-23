@@ -1,10 +1,8 @@
-const reducers = (state = [], action) => {
-	switch (action.type) {
-	// test reducers and things would go in here
-	// will not know more until we discuss specifics of the app
-	default:
-		return state;
-	}
-};
+import { combineReducers } from 'redux';
+import TextReducer from './text.js';
+
+const reducers = combineReducers({
+	textReducer: TextReducer
+});
 
 export default reducers;

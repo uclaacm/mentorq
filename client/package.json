@@ -6,7 +6,9 @@
         "react-router-dom": "^4.1.1",
         "redux": "^3.7.2",
         "material-ui": "^0.20.0",
-        "react-redux": "^5.0.6"
+        "react-redux": "^5.0.6",
+        "redux-socket.io": "^1.4.0",
+        "socket.io-client": "^2.0.4"
     },
     "devDependencies": {
         "react-scripts": "0.9.5"

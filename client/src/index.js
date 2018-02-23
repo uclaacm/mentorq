@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import reducers from './reducers';
+import reducers from './reducers/index.js';
 import App from './App.jsx';
 
 let socket = io('http://localhost:3000');
