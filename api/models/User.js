@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 // User Schema Definition
 var userSchema = new mongoose.Schema({
 	name: {type : String, required : true},
-	isAdmin: Boolean,
-	isMentor: Boolean,
+	isAdmin: {type: Boolean,default:false},
+	isMentor: {type: Boolean,default:false},
 	skills: [String]	,
 	googleID: { type : String , unique : true, required : true }
 });
@@ -22,12 +22,12 @@ var userSchema = new mongoose.Schema({
  *     .then(user => console.log(user))
  *     .catch(error => console.error(error));
  */
+ 
+var User;
 
 userSchema.statics.create = function(name, GoogleID) {
 	var user = new this({
 		name: name,
-		isAdmin: false,
-		isMentor: false,
 		skills:[],
 		googleID: GoogleID
 	});
@@ -43,21 +43,22 @@ userSchema.statics.create = function(name, GoogleID) {
 userSchema.statics.read = function(GoogleID)
 {
 	return new Promise((resolve , reject) => {
-		mongoose.model('User', userSchema).findOne({googleID: GoogleID}, (err,user)=>{
+		User.findOne({googleID: GoogleID}, (err,user)=>{
 			if(err) reject(err);
 			else resolve(user);
 		});
 	});
-}
+};
 
 userSchema.statics.delete = function(GoogleID)
 {
 	return new Promise((resolve, reject)=>{
-		mongoose.model('User', userSchema).findOne({googleID: GoogleID}).remove((err,offer)=>{
+		User.findOne({googleID: GoogleID}).remove((err,offer)=>{
 			if(err) reject(err);
+			resolve(offer);
 		});
 	});
-}
+};
 
 
 // Static: User.doSomething
@@ -66,74 +67,69 @@ userSchema.statics.delete = function(GoogleID)
 // user.doSomething()
 
 
-userSchema.methods.setisAdminTo = function(becomeAdmin)
+userSchema.methods.setAdminStatus = function(adminStatus)
 {
-	this.isAdmin = becomeAdmin;
-	console.log('set user name:' + this.name + ' isAdmin to ' + becomeAdmin);
+	this.isAdmin = adminStatus;
 	
 	return new Promise((resolve, reject)=>{
-		this.save((error, changedUser) => {
+		this.save((error, user) => {
 			if(error) reject(error);
-			else resolve(changedUser);
-			});
-		});
-}
-
-
-userSchema.methods.setisMentorTo = function(becomeMentor)
-{
-	this.isMentor = becomeMentor;
-	console.log('set user name: '+this.name+' isMentor to '+becomeMentor);
-
-	return new Promise((resolve,reject)=>{
-		this.save((err, changedUser)=>{
-			if(err) reject(err);
-			else resolve(changedUser);
+			resolve(user);
 		});
 	});
-}
+};
+
+
+userSchema.methods.setMentorStatus = function(mentorStatus)
+{
+	this.isMentor = mentorStatus;
+
+	return new Promise((resolve,reject)=>{
+		this.save((err, user)=>{
+			if(err) reject(err);
+			else resolve(user);
+		});
+	});
+};
 
 userSchema.methods.addSkill = function(skill)
 {
-	//check whether skill exists, should i throw err, if yes how?
-	var exists = false;
-	for(var i = 0; i < this.skills.length; i++)
-	{	
-		if(this.skills[i]===skill){
-			exists = true;
-			break;
-		}
-	}
-	if(!exists){
-		this.skills.push(skill);
-		console.log('skill: '+skill+' added')
+	//skill does not exist if index is -1;
+	//skill exists already if index is >=0;
+	const index = this.skills.indexOf(skill);
+
+	if(index >=0 ){
+		return new Promise(new Error('skill: '+skill+' already exists !'));
 	}
 
+	this.skills.push(skill);
+
 	return new Promise((resolve, reject)=>{
-		this.save((err,skillfulUser)=>{
+		this.save((err,user)=>{
 			if(err) reject(err);
-			else resolve(skillfulUser);
+			else resolve(user);
 		});
 	});
-}
+};
 
 userSchema.methods.removeSkill = function(skill)
 {
-	//assume the skill does exist
-	this.skills.pop(skill);
-	console.log('skill: '+skill+' removed')
+	const index = this.skills.indexOf(skill);
+
+	if(index < 0 ){
+		return new Promise(new Error('skill: '+skill+' does not exists !'));
+	}
+
+	this.skills.splice(index,1);
+
 	return new Promise((resolve,reject)=>{
-		this.save((err,notSkillfulUser)=>{
+		this.save((err,user)=>{
 			if(err) reject(err);
-			else resolve(notSkillfulUser);
+			else resolve(user);
 		});
 	});
-}
+};
 
+User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', userSchema);
-
-
-
-
-
+module.exports = User;
