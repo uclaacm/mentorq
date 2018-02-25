@@ -10,14 +10,15 @@ var userSchema = new mongoose.Schema({
 	isAdmin: {type: Boolean , default: false},
 	isMentor: {type: Boolean , default: false},
 	skills: [String],
-	googleID: {type: String , unique: true, required: true}
+	googleId: {type: String , unique: true, required: true}
 });
 
 // User Schema Methods
 
 /**
  * Creates and saves a User object in the database
- * @param {string} user's name, {string} user's GoogleID (as hash)
+ * @param {string} user's name
+ * @param {string} user's GoogleID (as hash)
  * @returns {User} newly saved User object
  * @example
  * User.create('Joe Bruin', 'someGoogleIdHash')
@@ -29,7 +30,7 @@ userSchema.statics.create = function(name, googleId) {
 	var user = new this({
 		name: name,
 		skills: [],
-		googleID: googleId
+		googleId: googleId
 	});
 
 	return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ userSchema.statics.create = function(name, googleId) {
 
 userSchema.statics.read = function(googleId) {
 	return new Promise((resolve , reject) => {
-		User.findOne({googleID: googleId}, (err, user) => {
+		User.findOne({googleId: googleId}, (err, user) => {
 			if (err) reject(err);
 			else resolve(user);
 		});
@@ -70,7 +71,7 @@ userSchema.statics.read = function(googleId) {
 
 userSchema.statics.delete = function(googleId) {
 	return new Promise((resolve, reject) => {
-		User.findOne({googleID: googleId}).remove((err, offer) => {
+		User.findOne({googleId: googleId}).remove((err, offer) => {
 			if(err) reject(err);
 			else resolve(offer);
 		});
@@ -83,9 +84,7 @@ userSchema.statics.delete = function(googleId) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => {
- *	        user.setAdminStatus(true);
- *     })
+ *     .then(user => user.setAdminStatus(true))
  *	   .catch(error => console.error(error));
  */
 
@@ -106,9 +105,7 @@ userSchema.methods.setAdminStatus = function(adminStatus) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => {
- *	        user.setMentorStatus(true);
- *     })
+ *     .then(user => user.setMentorStatus(true))
  *	   .catch(error => console.error(error));
  */
 
@@ -131,9 +128,7 @@ userSchema.methods.setMentorStatus = function(mentorStatus) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => {
- *	        user.addSkill('python');
- *     })
+ *     .then(user => user.addSkill('python'))
  *	   .catch(error => console.error(error));
  */
 
@@ -164,9 +159,7 @@ userSchema.methods.addSkill = function(skill) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => {
- *	        user.removeSkill('python');
- *     })
+ *     .then(user => user.removeSkill('python'))
  *	   .catch(error => console.error(error));
  */
 
