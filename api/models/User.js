@@ -84,7 +84,7 @@ userSchema.statics.delete = function(googleId) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user =>  return user.setAdminStatus(true))
+ *     .then(user =>  user.setAdminStatus(true))
  *	   .catch(error => console.error(error));
  */
 
@@ -105,7 +105,7 @@ userSchema.methods.setAdminStatus = function(adminStatus) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => return user.setMentorStatus(true))
+ *     .then(user => user.setMentorStatus(true))
  *	   .catch(error => console.error(error));
  */
 
@@ -128,7 +128,7 @@ userSchema.methods.setMentorStatus = function(mentorStatus) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => return user.addSkill('python'))
+ *     .then(user => user.addSkill('python'))
  *	   .catch(error => console.error(error));
  */
 
@@ -159,7 +159,7 @@ userSchema.methods.addSkill = function(skill) {
  * @returns {User} changed user object
  * @example
  * User.read('someGoogleIdHash')
- *     .then(user => return user.removeSkill('python'))
+ *     .then(user => user.removeSkill('python'))
  *	   .catch(error => console.error(error));
  */
 
