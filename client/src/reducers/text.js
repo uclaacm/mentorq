@@ -7,9 +7,8 @@ var TextReducer = (state = {
 			...state,
 			text: action.text
 		};
-	default: {
+	default: 
 		return state;
-	}
 	}
 };
 
