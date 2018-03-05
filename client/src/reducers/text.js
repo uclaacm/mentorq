@@ -1,5 +1,5 @@
 var TextReducer = (state = {
-	text: 'abc'
+	text: null
 }, action) => {
 	switch (action.type) {
 	case 'ADD_TEXT':

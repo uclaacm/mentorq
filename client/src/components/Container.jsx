@@ -11,7 +11,6 @@ class Container extends Component {
 		return (
 			<div className="container">
 				<Nav />	
-				<p></p>
 			</div>
 		);
 	}

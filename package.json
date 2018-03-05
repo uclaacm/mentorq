@@ -8,7 +8,7 @@
     "eslint-plugin-react": "^7.6.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,5 @@
   "bugs": {
     "url": "https://github.com/uclaacm/mentorq/issues"
   },
-  "homepage": "https://github.com/uclaacm/mentorq#readme",
-  "dependencies": {
-    "redux-socket.io": "^1.4.0",
-    "socket.io-client": "^2.0.4"
-  }
+  "homepage": "https://github.com/uclaacm/mentorq#readme"
 }
