@@ -6,9 +6,9 @@ const app = express();
 const server = http.createServer(app);
 const socket_io = require('socket.io');
 
-//const config = require('./config');
+const config = require('./config');
 
-server.listen(8080);
+server.listen(config.server.port);
 var io = socket_io();
 
 io.attach(server);
@@ -28,7 +28,3 @@ require('./models');
 // Set up router endpoints
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
-
-// server.listen(config.server.port, () => {
-// 	console.log('Listening on port ' + config.server.port);
-// });

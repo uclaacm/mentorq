@@ -13,7 +13,6 @@ let socket = io('http://localhost:8080');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
 let store = applyMiddleware(socketIoMiddleware)(createStore)(reducers);
-store.dispatch({type: 'socket/hello', data: 'Hello!'});
 
 const router = (
 	<MuiThemeProvider>
