@@ -15,6 +15,7 @@ class App extends Component {
 			<div className='App'>
 				<Switch>
 					<Route path='/login' component={Login} />
+					<Route path='/' component={Container} />
 					<Redirect to='/' />
 				</Switch>
 			</div>
