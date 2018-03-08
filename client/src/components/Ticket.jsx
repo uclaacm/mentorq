@@ -12,21 +12,22 @@ class Ticket extends Component {
 			<Card>
 				<CardHeader title = "Username"
 					subtitle="When request was submitted"/>
-				<CardText style = "color:red;">
-					Issue <br/>
-					Location <br/>
-					Contact Number<br/>
+				<CardText>
+					<p>Issue </p>
+					<p>Location </p>
+					<p>Contact Number</p>
 				</CardText>
 				<CardActions>
-
-					<RaisedButton label="REOPEN TICKET"
-						backgroundColor="#F48FB1"/>
-					<br />
-					<br />
-					<RaisedButton label="MARK AS COMPLETE"
-						backgroundColor="#7E57C2"/>
-
-					<br />
+					<p>
+						<RaisedButton label="REOPEN TICKET"
+							backgroundColor="#FF8A65"/>
+					</p>
+					
+					<p>
+						<RaisedButton label="MARK AS COMPLETE"
+							backgroundColor="#4DD0E1"/>
+					</p>
+				
 
 					
 				</CardActions>
