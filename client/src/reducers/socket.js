@@ -1,9 +1,11 @@
-var SocketReducer = (state, action) => {
+var SocketReducer = (state = {
+	message: null
+}, action) => {
 	switch (action.type) {
 	case 'SOCKET_ACTION':
 		return {
 			...state,
-			message: action.data	
+			message: action.message	
 		};
 	default:
 		return state;

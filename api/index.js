@@ -15,9 +15,9 @@ io.attach(server);
 io.on('connection', function(socket){
 	console.log('Socket connected: ' + socket.id);
 	socket.on('action', (action) => {
-		if(action.type === 'server/hello'){
-			console.log('Got hello data!', action.data);
-			socket.emit('action', {type:'socket', data:'good day!'});
+		if(action.type === 'socket/hello'){
+			console.log('Got hello data!', action.message);
+			socket.emit('action', {type:'message', message:'good day!'});
 		}
 	});
 });
@@ -28,3 +28,5 @@ require('./models');
 // Set up router endpoints
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
+const socketRouter = require('./routes/socket');
+app.use('/socket', socketRouter);
