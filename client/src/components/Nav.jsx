@@ -12,6 +12,7 @@ class Nav extends Component {
 				cursor: 'pointer',
 			}
 		};
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleClick() {
@@ -23,7 +24,7 @@ class Nav extends Component {
 			<AppBar
 				className="Nav"
 				title={<span style={this.styles.title}>MentorQ</span>}
-				onTitleClick={this.handleClick.bind(this)}
+				onTitleClick={this.handleClick}
 				iconClassNameRight="muidocs-icon-navigation-expand-more"
 				iconElementRight={<FlatButton label="Login" />}
 			/>
