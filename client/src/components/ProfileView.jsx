@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardTitle} from 'material-ui/Card';
+import {Card, CardTitle, CardActions} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
@@ -19,9 +19,11 @@ class ProfileView extends Component {
 					<TextField hintText="Phone"
 						fullWidth={true}/><br />
 					<CardTitle>Skills</CardTitle>
-					<RaisedButton label="Save Profile"
-						backgroundColor="#32cd32"
-						labelColor="#ffffff"/>
+					<CardActions>
+						<RaisedButton label="Save Profile"
+							backgroundColor="#32cd32"
+							labelColor="#ffffff"/>
+					</CardActions>
 				</Card>
 			</div> 
 		);
