@@ -1,11 +1,22 @@
 'use strict';
 
-const express = require('express');
-let router = express.Router();
+module.exports = function (server) {
+	const io = require('socket.io').listen(server);
+	const socketController = require('../controllers/SocketController');
 
-const socketController = require('../controllers/SocketController');
+	io.on('connection', (socket) => {
+		socketController.connect(socket);
 
-router.get('/', socketController.index);
-router.get('/test', socketController.test);
+		socket.on('disconnect', socketController.disconnect);
 
-module.exports = router;
+		socket.on('action', (action) => {
+			switch (action.type) {
+			case 'socket/test':
+				socketController.test(action.message);
+				break;
+			default:
+				break;
+			}
+		});
+	});
+};

@@ -1,14 +1,22 @@
 'use strict';
 
-function index(req, res) {
-	res.json('/ endpoint hit');
+function connect(socket) {
+	console.log('A user connected');
+	this.socket = socket;
 }
 
-function test(req, res) {
-	res.json('/test endpoint hit');
+function disconnect() {
+	console.log('A user disconnected');
+	this.socket = null;
+}
+
+function test(message) {
+	console.log('Server received from client socket: ', message);
+	this.socket.emit('action', { type: 'SOCKET_TEST', message: 'Hello from server!' });
 }
 
 module.exports = {
-	index: index,
-	test: test
+	connect,
+	disconnect,
+	test
 };
