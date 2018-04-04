@@ -10,7 +10,12 @@ function test(req, res) {
 	res.json('/test endpoint hit');
 }
 
+function current(req, res) {
+	res.json(req.user);
+}
+
 module.exports = {
-	index: index,
-	test: test
+	index,
+	test,
+	current
 };
