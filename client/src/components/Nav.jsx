@@ -18,7 +18,6 @@ class Nav extends Component {
 			<AppBar
 				className="Nav"
 				title={<span style={this.styles.title}>MentorQ</span>}
-				iconClassNameRight="muidocs-icon-navigation-expand-more"
 				iconElementRight={<FlatButton label="Login" href="http://localhost:8080/auth/google" />}
 			/>
 		);
