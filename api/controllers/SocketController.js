@@ -3,6 +3,7 @@
 function connect(socket) {
 	console.log('A user connected');
 	this.socket = socket;
+
 }
 
 function disconnect() {
