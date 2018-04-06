@@ -17,7 +17,7 @@ app.use(cors({
 
 // Set up router endpoints
 const authRouter = require('./routes/auth')(app);
-app.use('/jauth', authRouter);
+app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 require('./routes/socket')(server);
