@@ -10,4 +10,5 @@ router.get('/', userController.index);
 router.get('/test', userController.test);
 router.get('/current', authController.isAuthenticated, userController.current);
 router.get('/numberOfActiveMentors', userController.numberOfActiveMentors);
+
 module.exports = router;

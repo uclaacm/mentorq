@@ -17,7 +17,7 @@ function current(req, res) {
 function numberOfActiveMentors(req, res) {
 	var sess = req.sessionStore.sessions;
 	var numMentors = 0;
-	console.log(sess);
+
 	for(var connection in sess){
 		var connectionSess = JSON.parse(sess[connection]);
 		var userObj = connectionSess['passport'];
