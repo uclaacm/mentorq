@@ -9,6 +9,6 @@ const authController = require('../controllers/AuthController');
 router.get('/', userController.index);
 router.get('/test', userController.test);
 router.get('/current', authController.isAuthenticated, userController.current);
-router.get('/numberOfActiveMentors', userController.numberOfActiveMentors);
+router.get('/mentors/active', userController.activeMentors);
 
 module.exports = router;

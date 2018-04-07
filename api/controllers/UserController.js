@@ -14,27 +14,26 @@ function current(req, res) {
 	res.json(req.user);
 }
 
-function numberOfActiveMentors(req, res) {
+function activeMentors(req, res) {
 	var sess = req.sessionStore.sessions;
-	var numMentors = 0;
+	var activeMentors = [];
 
 	for(var connection in sess){
 		var connectionSess = JSON.parse(sess[connection]);
 		var userObj = connectionSess['passport'];
 
-		if (userObj) {	// if user is not logged in, won't check info
-			console.log(userObj['user']['name']);
-			console.log(userObj['user']['isMentor']);
-			if(userObj['user']['isMentor'])
-				numMentors++;
+		if (userObj && userObj['user']['isMentor']) {	// if user is not logged in, won't check info
+			activeMentors.push(userObj['user']);
 		}
 	}
-	res.json(numMentors);
+	res.json(activeMentors);
 }
+
+
 
 module.exports = {
 	index,
 	test,
 	current,
-	numberOfActiveMentors
+	activeMentors
 };
