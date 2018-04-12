@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 var Ticket;
 
 var ticketSchema = Schema({
-	requestor: {type: Schema.type.ObjectId, ref: 'User', required: true},
-	mentor: {type: Schema.type.ObjectId, ref: 'User'},
+	requestor: {type: Schema.ObjectId, ref: 'User', required: true},
+	mentor: {type: Schema.ObjectId, ref: 'User'},
 	timeFiled: {type: Date, required: true},
 	problem: {type: String, required: true},
 	comments: String,
