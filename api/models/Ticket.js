@@ -9,18 +9,17 @@ var ticketSchema = Schema({
 	requestor: {type: Schema.ObjectId, ref: 'User', required: true},
 	mentor: {type: Schema.ObjectId, ref: 'User'},
 	timeFiled: {type: Date, required: true},
-	problem: {type: String, required: true},
-	comments: String,
+	description: {type: String, required: true},
 	tableNum: {type: String, required: true},
 	isActive: {type: Boolean, default: true},
 	isResolved: {type: Boolean, default: false}
 });
 
-ticketSchema.statics.create = function(requestor, problem, tableNum) {
+ticketSchema.statics.create = function(requestor, description, tableNum) {
 	var ticket = new this({
 		requestor: requestor,
 		timeFiled: Date.now,
-		problem: problem,
+		description: description,
 		tableNum: tableNum
 	});
     
@@ -28,17 +27,6 @@ ticketSchema.statics.create = function(requestor, problem, tableNum) {
 		ticket.save((error, newTicket) => {
 			if (error) reject(error);
 			else resolve(newTicket);
-		});
-	});
-};
-
-ticketSchema.statics.addComments = function(comments) {
-	this.comments = comments;
-
-	return new Promise((resolve, reject) => {
-		this.save((error, ticket) => {
-			if (error) reject(error);
-			else resolve(ticket);
 		});
 	});
 };
