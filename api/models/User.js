@@ -61,6 +61,29 @@ userSchema.statics.read = function(googleId) {
 };
 
 /**
+ * Read and Retrieve all User objects from the database
+ * @returns {JavaScript Object} key: googleId, val: User Object
+ * @example
+ * User.readAll()
+ *     .then(userDict => console.log(userDict))
+ *     .catch(error => console.error(error));
+ */
+
+userSchema.statics.readAll = function(){
+	return new Promise((resolve, reject) => {
+		User.find({}, (err, users) => {
+			if(err) reject(err);
+			var userDict = {};
+
+			users.forEach(function(user){
+				userDict[user.googleId] = user;
+			});
+			resolve(userDict);
+		});
+	});
+};
+
+/**
  * Delete a User object from the database
  * @param {string} user's googleID (as hash)
  * @returns {void} nothing
