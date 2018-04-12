@@ -66,6 +66,6 @@ ticketSchema.statics.resolve = function() {
 	});
 };
 
-Ticket = mongoose.model('Ticker', ticketSchema);
+Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = Ticket;
