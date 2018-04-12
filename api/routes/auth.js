@@ -1,12 +1,13 @@
 'use strict';
-module.exports = function (app) {
-	const express = require('express');
-	let router = express.Router();
-	const passport = require('passport');
-	var GoogleStrategy = require('passport-google-oauth20').Strategy;
-	const session = require('express-session');
+const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-	const User = require('../models/User');
+const User = require('../models/User');
+
+module.exports = function (app) {
+	const router = express.Router();
 
 	// Initialize user session
 	app.use(session({
