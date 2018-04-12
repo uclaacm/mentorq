@@ -20,6 +20,8 @@ const authRouter = require('./routes/auth')(app);
 app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
+const ticketRouter = require('./routes/ticket');
+app.use('/ticket', ticketRouter);
 require('./routes/socket')(server);
 
 server.listen(config.server.port, () => {
