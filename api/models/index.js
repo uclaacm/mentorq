@@ -23,5 +23,5 @@ mongoose.connection.on('error', (err) => {
 
 module.exports = {
 	User: require('./User'),
-	Ticket: require('.Ticket')
+	Ticket: require('./Ticket')
 };  
