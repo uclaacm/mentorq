@@ -20,7 +20,8 @@ const authRouter = require('./routes/auth')(app);
 app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
-require('./routes/socket')(server);
+const io = require('./routes/socket')(server);
+app.set('socketio',io);
 
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);

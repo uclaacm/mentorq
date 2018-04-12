@@ -15,10 +15,28 @@ function current(req, res) {
 }
 
 function activeMentors(req, res) {
+	const io = req.app.get('socketio');
+
+	const rootNamespace = io.sockets;
+
+	const connectedSockets = rootNamespace.connected;
+
+	const activeMentors = [];
+
+	for (const socketID in connectedSockets) {
+		const socket = connectedSockets[socketID];
+		const { client } = socket; // https://socket.io/docs/server-api/#socket-client
+		const req = client.request; // https://socket.io/docs/server-api/#client-request
+
+		console.log(req);
+		// Now you can access the req.session object you were looking for
+		// in the first place.
+	}
+	/*		Galen's old method
 	var sess = req.sessionStore.sessions;
-	var activeMentors = [];
 
 	for(var connection in sess){
+		console.log(sess[connection]);
 		var connectionSess = JSON.parse(sess[connection]);
 		var userObj = connectionSess['passport'];
 
@@ -26,6 +44,7 @@ function activeMentors(req, res) {
 			activeMentors.push(userObj['user']);
 		}
 	}
+	*/
 	res.json(activeMentors);
 }
 
