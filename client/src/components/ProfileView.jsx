@@ -8,7 +8,9 @@ class ProfileView extends Component {
 	constructor(props){
 		super(props);
 		this.state = {name: '', phone: '', email: '', skillsInput: '',
-			skills: [{key: 0, label: 'Java'}, {key: 1, label: 'Unity 3D'}, {key: 3, label: 'React'}]};
+			skills: [{key: 0, label: 'Java'}, 
+				{key: 1, label: 'Unity 3D'}, 
+				{key: 3, label: 'React'}]};
 		this.styles = {
 			chip: {
 				margin: 4,
