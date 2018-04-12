@@ -14,19 +14,21 @@ function current(req, res) {
 	res.json(req.user);
 }
 
-function allUsers(req, res){
-	User.readAll()
-		.then(userDict => {
-			res.json(userDict);
+function getAll(req, res){
+	User.getAll()
+		.then(users => {
+			res.json(users);
 		})
-		.catch(err => console.error(err));
+		.catch(err => {
+			console.error(err);
+			res.status(500);
+		});
 
-	res.status(500);
 }
 
 module.exports = {
 	index,
 	test,
 	current,
-	allUsers
+	getAll
 };

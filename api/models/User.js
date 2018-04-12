@@ -69,16 +69,11 @@ userSchema.statics.read = function(googleId) {
  *     .catch(error => console.error(error));
  */
 
-userSchema.statics.readAll = function(){
+userSchema.statics.getAll= function(){
 	return new Promise((resolve, reject) => {
 		User.find({}, (err, users) => {
 			if(err) reject(err);
-			var userDict = {};
-
-			users.forEach(function(user){
-				userDict[user.googleId] = user;
-			});
-			resolve(userDict);
+			resolve(users);
 		});
 	});
 };
