@@ -20,8 +20,10 @@ const authRouter = require('./routes/auth')(app);
 app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
-const io = require('./routes/socket')(server);
-app.set('socketio',io);
+const ticketRouter = require('./routes/ticket');
+app.use('/ticket', ticketRouter);
+const socketio = require('./routes/socket')(server);
+app.set('socketio',socketio);
 
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);
