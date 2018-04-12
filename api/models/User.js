@@ -62,14 +62,14 @@ userSchema.statics.read = function(googleId) {
 
 /**
  * Read and Retrieve all User objects from the database
- * @returns {JavaScript Object} key: googleId, val: User Object
+ * @returns [User] an array of User objects
  * @example
- * User.readAll()
+ * User.getAll()
  *     .then(userDict => console.log(userDict))
  *     .catch(error => console.error(error));
  */
 
-userSchema.statics.getAll= function(){
+userSchema.statics.getAll = function(){
 	return new Promise((resolve, reject) => {
 		User.find({}, (err, users) => {
 			if(err) reject(err);
