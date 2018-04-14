@@ -2,10 +2,6 @@
 
 const User = require('../models/User'); // eslint-disable-line
 
-function index(req, res) {
-	res.json('/ endpoint hit');
-}
-
 function test(req, res) {
 	res.json('/test endpoint hit');
 }
@@ -14,8 +10,20 @@ function current(req, res) {
 	res.json(req.user);
 }
 
+function getAll(req, res){
+	User.getAll()
+		.then(users => {
+			res.json(users);
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({ err: err.message });
+		});
+
+}
+
 module.exports = {
-	index,
 	test,
-	current
+	current,
+	getAll
 };
