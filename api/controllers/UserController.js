@@ -12,21 +12,18 @@ function current(req, res) {
 
 function activeMentors(req, res) {
 	const io = req.app.get('socketio');
-
 	const rootNamespace = io.sockets;
-
 	const connectedSockets = rootNamespace.connected;
-
 	const activeMentors = [];
 
 	for (const socketID in connectedSockets) {
 		const socket = connectedSockets[socketID];
 		const { client } = socket;
 		const req = client.request;
-		const passport = req.session.passport;
+		const { passport } = req.session;
 
 		if (passport) {
-			const user = passport.user;
+			const { user } = passport;
 			if (user.isMentor) {
 				activeMentors.push(user);
 			}
