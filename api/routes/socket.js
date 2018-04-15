@@ -24,10 +24,6 @@ module.exports = function (app, server) {
 				break;
 			}
 		});
-		/*
-		socket.on('activeMentor', () => {
-			this.socket.emit('activeMentor', { message: "db3141"});
-		});*/
 	});
 	return io;
 };
