@@ -61,6 +61,24 @@ userSchema.statics.read = function(googleId) {
 };
 
 /**
+ * Read and Retrieve all User objects from the database
+ * @returns {User[]} an array of User objects
+ * @example
+ * User.getAll()
+ *     .then(users => console.log(users))
+ *     .catch(error => console.error(error));
+ */
+
+userSchema.statics.getAll = function(){
+	return new Promise((resolve, reject) => {
+		User.find({}, (err, users) => {
+			if (err) reject(err);
+			resolve(users);
+		});
+	});
+};
+
+/**
  * Delete a User object from the database
  * @param {string} user's googleID (as hash)
  * @returns {void} nothing
