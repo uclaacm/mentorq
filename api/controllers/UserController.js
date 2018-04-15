@@ -10,6 +10,28 @@ function current(req, res) {
 	res.json(req.user);
 }
 
+function activeMentors(req, res) {
+	const io = req.app.get('socketio');
+	const rootNamespace = io.sockets;
+	const connectedSockets = rootNamespace.connected;
+	const activeMentors = [];
+
+	for (const socketID in connectedSockets) {
+		const socket = connectedSockets[socketID];
+		const { client } = socket;
+		const req = client.request;
+		const { passport } = req.session;
+
+		if (passport) {
+			const { user } = passport;
+			if (user.isMentor) {
+				activeMentors.push(user);
+			}
+		}
+	}
+	res.json(activeMentors);
+}
+
 function getAll(req, res){
 	User.getAll()
 		.then(users => {
@@ -25,5 +47,6 @@ function getAll(req, res){
 module.exports = {
 	test,
 	current,
+	activeMentors,
 	getAll
 };

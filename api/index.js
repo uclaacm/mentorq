@@ -16,13 +16,17 @@ app.use(cors({
 }));
 
 // Set up router endpoints
-const authRouter = require('./routes/auth')(app);
+const sessionMiddleware = require('./routes/session');
+app.use(sessionMiddleware);
+app.set('sessionMiddleware', sessionMiddleware);
+const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 const ticketRouter = require('./routes/ticket');
 app.use('/ticket', ticketRouter);
-require('./routes/socket')(server);
+const socketio = require('./routes/socket')(app, server);
+app.set('socketio', socketio);
 
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);
