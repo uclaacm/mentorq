@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Ticket from './Ticket';
+import { Ticket } from '..';
 
 class TicketList extends Component {
 	constructor(props) {
