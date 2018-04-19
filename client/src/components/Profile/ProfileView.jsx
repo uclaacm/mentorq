@@ -52,13 +52,13 @@ class ProfileView extends Component {
 			this.setState({skillsInput: newValue});
 	}
 	
-	handleClick() {
+	handleClick(event) {
 		event.preventDefault();			
 		alert('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
 		//TODO: Send info to server
 	}
 
-	handleAddSkillClick() {
+	handleAddSkillClick(event) {
 		event.preventDefault();
 		let list = this.state.skills;
 		list.push({label: this.state.skillsInput});
@@ -87,7 +87,7 @@ class ProfileView extends Component {
 		return (
 			<div>
 				<h1 style={this.styles.title}>Your Account</h1>
-				<Card class="card small">
+				<Card className="card small">
 					<CardTitle>Name</CardTitle>
 					<TextField hintText="Name" 
 						fullWidth={true}
