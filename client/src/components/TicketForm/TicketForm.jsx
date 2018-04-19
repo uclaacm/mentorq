@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardHeader, CardActions } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 class TicketForm extends Component {
 	render() {
@@ -29,7 +29,7 @@ class TicketForm extends Component {
 					</form>
 				</CardText>
 				<CardActions>
-					<RaisedButton label="HELP ME!" />
+					<FlatButton label="Help me!" primary={true} fullWidth={true} />
 				</CardActions>
 			</Card>
 		);
