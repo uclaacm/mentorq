@@ -8,9 +8,9 @@ class ProfileView extends Component {
 	constructor(props){
 		super(props);
 		this.state = {name: '', phone: '', email: '', skillsInput: '',
-			skills: [{key: 0, label: 'Java'}, 
-				{key: 1, label: 'Unity 3D'}, 
-				{key: 3, label: 'React'}]};
+			skills: [{label: 'Java'}, 
+				{label: 'Unity 3D'}, 
+				{label: 'React'}]};
 		this.styles = {
 			chip: {
 				margin: 4,
@@ -48,8 +48,8 @@ class ProfileView extends Component {
 			this.setState({email: newValue});
 		else if(event.target.id === 'phone')
 			this.setState({phone: newValue});
-		//else if(event.target.id === 'newSkill')
-		//this.setState({skillsInput: newValue});
+		else if(event.target.id === 'newSkill')
+			this.setState({skillsInput: newValue});
 	}
 	
 	handleClick() {
@@ -59,8 +59,11 @@ class ProfileView extends Component {
 	}
 
 	handleAddSkillClick() {
-		//this.setState({skills: {key: 5, label: this.state.skillsInput}})
-		alert('Added new skill: ');
+		event.preventDefault();
+		let list = this.state.skills;
+		list.push({label: this.state.skillsInput});
+		this.setState({skills: list});
+		alert('Added new skill: '+this.state.skillsInput);
 	}
 
 	handleRequestDelete(key) {
@@ -102,8 +105,10 @@ class ProfileView extends Component {
 						id="phone"/><br />
 					<CardTitle>Skills</CardTitle>
 					<div style={this.styles.inputSkills}>
-						<TextField id="newSkill" hintText="node.js, ruby, python, machine learning, etc."
-							fullWidth={true}/> <br />
+						<TextField id="newSkill" 
+							hintText="node.js, ruby, python, machine learning, etc."
+							fullWidth={true}
+							onChange={this.handleTextChange}/> <br />
 						<RaisedButton label="Add Skill"
 							style={this.styles.submitSkills}
 							onClick={this.handleAddSkillClick}/>
