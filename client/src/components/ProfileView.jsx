@@ -69,10 +69,10 @@ class ProfileView extends Component {
 	}
 
 	handleRequestDelete(key) {
-		this.skills = this.state.skills;
-		const chipToDelete = this.skills.map((chip) => chip.key).indexOf(key);
-		this.skills.splice(chipToDelete, 1);
-		this.setState({skills: this.skills});
+		let updatedSkills = this.state.skills;
+		const chipToDelete = updatedSkills.map((chip) => chip.key).indexOf(key);
+		updatedSkills.splice(chipToDelete, 1);
+		this.setState({skills: updatedSkills});
 	}
 
 	renderChip(data) {
@@ -94,23 +94,23 @@ class ProfileView extends Component {
 					<TextField hintText="Name" 
 						fullWidth={true}
 						onChange={this.handleTextChange}
-						id="name"/><br />
+						id="name"/>
 					<CardTitle>Email</CardTitle>
 					<TextField hintText="Email"
 						onChange={this.handleTextChange}
 						fullWidth={true}
-						id="email"/><br />
+						id="email"/>
 					<CardTitle>Phone</CardTitle>
 					<TextField hintText="Phone"
 						fullWidth={true} 
 						onChange={this.handleTextChange}
-						id="phone"/><br />
+						id="phone"/>
 					<CardTitle>Skills</CardTitle>
 					<div style={this.styles.inputSkills}>
 						<TextField id="newSkill" 
 							hintText="node.js, ruby, python, machine learning, etc."
 							fullWidth={true}
-							onChange={this.handleTextChange}/> <br />
+							onChange={this.handleTextChange}/>
 						<RaisedButton label="Add Skill"
 							style={this.styles.submitSkills}
 							onClick={this.handleAddSkillClick}/>
