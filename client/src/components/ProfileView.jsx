@@ -31,9 +31,6 @@ class ProfileView extends Component {
 				height: 39,
 			},
 			//TODO: Style title
-			/*title: {
-				font: 'Sriracha',  
-			}*/
 		};
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
