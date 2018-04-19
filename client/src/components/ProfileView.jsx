@@ -39,14 +39,19 @@ class ProfileView extends Component {
 	}
 
 	handleTextChange(event, newValue) {
-		if(event.target.id === 'name')
+		switch(event.target.id){
+		case 'name':
 			this.setState({name: newValue});
-		else if(event.target.id === 'email')
+			break;
+		case 'email':
 			this.setState({email: newValue});
-		else if(event.target.id === 'phone')
+			break;
+		case 'phone':
 			this.setState({phone: newValue});
-		else if(event.target.id === 'newSkill')
+			break;
+		case 'newSkill':
 			this.setState({skillsInput: newValue});
+		}
 	}
 	
 	handleClick() {
