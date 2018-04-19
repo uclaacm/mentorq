@@ -7,16 +7,27 @@ class TicketList extends Component {
 		this.state = {
 			tickets: [],
 		};
-		this.state.tickets.push(<Ticket />);
-		this.state.tickets.push(<Ticket />);
-		this.state.tickets.push(<Ticket />);
-		this.state.tickets.push(<Ticket />);
+
+		for(var i = 0; i < 4; i++){	// TODO: replace hardcode
+			const ticket = {		//		 initialization 
+				username: 'Username',
+				timeSubmitted: 'When request was submitted',
+				issue: 'Issue',
+				location: 'Location',
+				contactInfo: 'Contact Number',
+			};
+			this.state.tickets.push(ticket);
+		}
 	}
 
 	render() {
 		return (
 			<div className="ticketList">
-				{this.state.tickets}
+				{this.state.tickets.map((ticket, index) => {
+					return (
+						<Ticket {...ticket} key={index}/>
+					);
+				})}
 			</div>
 		);
 	}

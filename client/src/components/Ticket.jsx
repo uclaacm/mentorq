@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
 import {Card, CardText, CardHeader, CardActions} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import PropTypes from 'prop-types';
 
 class Ticket extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: 'Username',
-			timeSubmitted: 'When request was submitted',
-			issue: 'Issue',
-			location: 'Location',
-			contactInfo: 'Contact Number',
-			ticketOpen: false
+			ticketOpen: true,
 		};
 		this.reopenTicket = this.reopenTicket.bind(this);
 		this.claimTicket = this.claimTicket.bind(this);
 	}
 
 	reopenTicket() {
-		this.setState(() => {
-			return {ticketOpen: true};
-		});
+		this.setState({ticketOpen: true});
 	}
 
 	claimTicket() {
-		this.setState(() => {
-			return {ticketOpen: false};
-		});
+		this.setState({ticketOpen: false});
 	}
 
 	ticketButtons() {
@@ -36,7 +28,7 @@ class Ticket extends Component {
 					<p>
 						<RaisedButton label="CLAIM TICKET"
 							backgroundColor="#FF8A65" 
-							onClick = {this.claimTicket}/>
+							onClick={this.claimTicket}/>
 					</p>
 				</CardActions>
 			);
@@ -47,7 +39,7 @@ class Ticket extends Component {
 					<p>
 						<RaisedButton label="REOPEN TICKET"
 							backgroundColor="#FF8A65" 
-							onClick = {this.reopenTicket}/>
+							onClick={this.reopenTicket}/>
 					</p>
 					
 					<p>
@@ -63,12 +55,12 @@ class Ticket extends Component {
 	{
 		return(
 			<Card>
-				<CardHeader title = {this.state.username}
-					subtitle={this.state.timeSubmitted}/>
+				<CardHeader title={this.props.username}
+					subtitle={this.props.timeSubmitted}/>
 				<CardText>
-					<p>{this.state.issue} </p>
-					<p>{this.state.location} </p>
-					<p>{this.state.contactInfo}</p>
+					<p>{this.props.issue} </p>
+					<p>{this.props.location} </p>
+					<p>{this.props.contactInfo}</p>
 				</CardText>
 				{this.ticketButtons()}
 			</Card>
@@ -76,4 +68,13 @@ class Ticket extends Component {
 		);
 	}
 }
+
+Ticket.propTypes = {
+	username: PropTypes.string.isRequired,
+	timeSubmitted: PropTypes.string.isRequired,
+	issue: PropTypes.string.isRequired,
+	location: PropTypes.string.isRequired,
+	contactInfo: PropTypes.string.isRequired,
+	key:PropTypes.number.isRequired
+};
 export default Ticket;
