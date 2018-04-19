@@ -10,10 +10,11 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 
 import rootReducer from './reducers/index';
+import config from './config';
 
 const defaultState = {};
 
-let socket = io('http://localhost:8080');
+let socket = io(`http://${config.server.host}:${config.server.port}`);
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
 const store = createStore(rootReducer, defaultState,
