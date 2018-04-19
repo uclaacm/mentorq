@@ -77,4 +77,5 @@ Ticket.propTypes = {
 	contactInfo: PropTypes.string.isRequired,
 	key:PropTypes.number.isRequired
 };
+
 export default Ticket;
