@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import TextReducer from './text.js';
-import SocketReducer from './socket.js';
 
-const reducers = combineReducers({
-	textReducer: TextReducer,
-	socketReducer: SocketReducer
-});
+import UserReducer from './user';
+import SocketReducer from './socket';
 
-export default reducers;
+const rootReducer = combineReducers({ user: UserReducer, socket: SocketReducer });
+
+export default rootReducer;
