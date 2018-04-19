@@ -4,12 +4,21 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
 class TicketForm extends Component {
+	constructor(props) {
+		super(props);
+		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	onSubmit() {
+		console.log('submit');
+	}
+
 	render() {
 		return (
 			<Card>
 				<CardHeader title="How can we help you?" />
 				<CardText>
-					<form>
+					<form onSubmit={this.onSubmit}>
 						<TextField
 							name="description"
 							hintText="Describe your problem"
