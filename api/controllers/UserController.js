@@ -62,19 +62,19 @@ function getConnectedRegistered(req) {
 	const connectedSockets = rootNamespace.connected;
 	let activeUserIds = [];
 
-	return new Promise((resolve, reject) => {
-		for (const socketID in connectedSockets) {
-			const socket = connectedSockets[socketID];
-			const { client } = socket;
-			const req = client.request;
-			const { passport } = req.session;
+	for (const socketID in connectedSockets) {
+		const socket = connectedSockets[socketID];
+		const { client } = socket;
+		const req = client.request;
+		const { passport } = req.session;
 
-			if (passport) {
-				const { user } = passport;
-				activeUserIds.push(user._id);
-			}
+		if (passport) {
+			const { user } = passport;
+			activeUserIds.push(user._id);
 		}
-
+	}
+	
+	return new Promise((resolve, reject) => {
 		Promise.all(activeUserIds.map(id => User.getById(id)))
 			.then(users => resolve(users))
 			.catch(err => reject(err));
