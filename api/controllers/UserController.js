@@ -11,25 +11,19 @@ function current(req, res) {
 }
 
 function activeMentors(req, res) {
-	const io = req.app.get('socketio');
-	const rootNamespace = io.sockets;
-	const connectedSockets = rootNamespace.connected;
-	const activeMentors = [];
-
-	for (const socketID in connectedSockets) {
-		const socket = connectedSockets[socketID];
-		const { client } = socket;
-		const req = client.request;
-		const { passport } = req.session;
-
-		if (passport) {
-			const { user } = passport;
-			if (user.isMentor) {
-				activeMentors.push(user);
+	getConnectedRegistered(req)
+		.then(connectedUsers => {
+			const activeMentors = [];
+			for (const i in connectedUsers) {
+				const user = connectedUsers[i];
+				if (user.isMentor) {
+					activeMentors.push(user);
+				}
 			}
-		}
-	}
-	res.json(activeMentors);
+			return activeMentors;
+		})
+		.then(mentors => res.json(mentors))
+		.catch(err => res.status(500).json({ err: err.message }));
 }
 
 function update(req, res) {
@@ -40,7 +34,7 @@ function update(req, res) {
 			}
 			return user;
 		})
-		.then (user => {
+		.then(user => {
 			if (req.query.admin) {
 				return user.setAdminStatus(req.query.admin);
 			}
@@ -60,6 +54,31 @@ function getAll(req, res) {
 			res.status(500).json({ err: err.message });
 		});
 
+}
+
+function getConnectedRegistered(req) {
+	const io = req.app.get('socketio');
+	const rootNamespace = io.sockets;
+	const connectedSockets = rootNamespace.connected;
+	let activeUserIds = [];
+
+	return new Promise((resolve, reject) => {
+		for (const socketID in connectedSockets) {
+			const socket = connectedSockets[socketID];
+			const { client } = socket;
+			const req = client.request;
+			const { passport } = req.session;
+
+			if (passport) {
+				const { user } = passport;
+				activeUserIds.push(user._id);
+			}
+		}
+
+		Promise.all(activeUserIds.map(id => User.getById(id)))
+			.then(users => resolve(users))
+			.catch(err => reject(err));
+	});
 }
 
 module.exports = {
