@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, TicketList } from '../';
+import { Nav, TicketList, ActiveMentors } from '../';
 import { Route, Switch } from 'react-router-dom';
 
 class Main extends Component {
@@ -11,6 +11,7 @@ class Main extends Component {
 				{/*Alternate pages beneath navbar, based on current route*/}
 				<Switch>
 					<Route path='/ticket' render={() => <TicketList {...this.props} />} />
+					<Route path='/activeMentors' render={() => <ActiveMentors />}/>
 				</Switch>
 			</div>
 		);
