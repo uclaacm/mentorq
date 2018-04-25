@@ -56,16 +56,8 @@ class ProfileView extends Component {
 	
 	handleClick() {
 		event.preventDefault();			
-		alert('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
+		console.log('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
 		//TODO: Send info to server
-	}
-
-	handleAddSkillClick() {
-		event.preventDefault();
-		let list = this.state.skills;
-		list.push({label: this.state.skillsInput});
-		this.setState({skills: list});
-		alert('Added new skill: '+this.state.skillsInput);
 	}
 
 	handleRequestDelete(key) {
@@ -73,6 +65,14 @@ class ProfileView extends Component {
 		const chipToDelete = updatedSkills.map((chip) => chip.key).indexOf(key);
 		updatedSkills.splice(chipToDelete, 1);
 		this.setState({skills: updatedSkills});
+	}
+    
+	handleAddSkillClick() {
+		event.preventDefault();
+		let list = this.state.skills;
+		list.push({label: this.state.skillsInput});
+		this.setState({skills: list});
+		console.log('Added new skill: '+this.state.skillsInput);
 	}
 
 	renderChip(data) {
@@ -85,10 +85,11 @@ class ProfileView extends Component {
 			</Chip>
 		);
 	}
+    
 	render() {
 		return (
 			<div>
-				<h1 style={this.styles.title}>Your Account</h1>
+				<h1>Your Account</h1>
 				<Card class="card small">
 					<CardTitle>Name</CardTitle>
 					<TextField hintText="Name" 
