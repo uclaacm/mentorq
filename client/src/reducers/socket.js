@@ -3,10 +3,9 @@ var SocketReducer = (state = {
 }, action) => {
 	switch (action.type) {
 	case 'SOCKET_TEST':
-		console.log(action.message);
 		return {
 			...state,
-			message: action.message	
+			message: action.message
 		};
 	default:
 		return state;
