@@ -61,6 +61,25 @@ userSchema.statics.read = function(googleId) {
 };
 
 /**
+ * Read and Retrieve a User object from the database
+ * @param {string} user's MongoDB ID
+ * @returns {User} one User object with matching ID
+ * @example
+ * User.getById('someId')
+ *     .then(user => console.log(user))
+ *     .catch(error => console.error(error));
+ */
+
+userSchema.statics.getById = function (id) {
+	return new Promise((resolve, reject) => {
+		User.findById(id, (err, user) => {
+			if (err) reject(err);
+			else resolve(user);
+		});
+	});
+};
+
+/**
  * Read and Retrieve all User objects from the database
  * @returns {User[]} an array of User objects
  * @example

@@ -32,7 +32,25 @@ function activeMentors(req, res) {
 	res.json(activeMentors);
 }
 
-function getAll(req, res){
+function update(req, res) {
+	User.getById(req.params.id)
+		.then(user => {
+			if (req.query.mentor) {
+				return user.setMentorStatus(req.query.mentor);
+			}
+			return user;
+		})
+		.then (user => {
+			if (req.query.admin) {
+				return user.setAdminStatus(req.query.admin);
+			}
+			return user;
+		})
+		.then(user => res.json(user))
+		.catch(err => res.status(500).json({ err: err.message }));
+}
+
+function getAll(req, res) {
 	User.getAll()
 		.then(users => {
 			res.json(users);
@@ -48,5 +66,6 @@ module.exports = {
 	test,
 	current,
 	activeMentors,
-	getAll
+	getAll,
+	update
 };
