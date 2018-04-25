@@ -7,10 +7,16 @@ import Chip from 'material-ui/Chip';
 class ProfileView extends Component {
 	constructor(props){
 		super(props);
-		this.state = {name: '', phone: '', email: '', skillsInput: '',
-			skills: [{label: 'Java'}, 
+		this.state = {
+			name: '',
+			phone: '', 
+			email: '', 
+			skillsInput: '',
+			skills: [
+				{label: 'Java'}, 
 				{label: 'Unity 3D'}, 
-				{label: 'React'}]};
+				{label: 'React'}
+			]};
 		this.styles = {
 			chip: {
 				margin: 4,
@@ -61,7 +67,7 @@ class ProfileView extends Component {
 	}
 
 	handleRequestDelete(key) {
-		let updatedSkills = this.state.skills;
+		const updatedSkills = this.state.skills;
 		const chipToDelete = updatedSkills.map((chip) => chip.key).indexOf(key);
 		updatedSkills.splice(chipToDelete, 1);
 		this.setState({skills: updatedSkills});
@@ -69,7 +75,7 @@ class ProfileView extends Component {
     
 	handleAddSkillClick() {
 		event.preventDefault();
-		let list = this.state.skills;
+		const list = this.state.skills;
 		list.push({label: this.state.skillsInput});
 		this.setState({skills: list});
 		console.log('Added new skill: '+this.state.skillsInput);
