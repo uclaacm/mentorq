@@ -7,10 +7,16 @@ import Chip from 'material-ui/Chip';
 class ProfileView extends Component {
 	constructor(props){
 		super(props);
-		this.state = {name: '', phone: '', email: '', skillsInput: '',
-			skills: [{label: 'Java'}, 
+		this.state = {
+			name: '',
+			phone: '', 
+			email: '', 
+			skillsInput: '',
+			skills: [
+				{label: 'Java'}, 
 				{label: 'Unity 3D'}, 
-				{label: 'React'}]};
+				{label: 'React'}
+			]};
 		this.styles = {
 			chip: {
 				margin: 4,
@@ -31,9 +37,6 @@ class ProfileView extends Component {
 				height: 39,
 			},
 			//TODO: Style title
-			/*title: {
-				font: 'Sriracha',  
-			}*/
 		};
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
@@ -42,35 +45,40 @@ class ProfileView extends Component {
 	}
 
 	handleTextChange(event, newValue) {
-		if(event.target.id === 'name')
+		switch(event.target.id){
+		case 'name':
 			this.setState({name: newValue});
-		else if(event.target.id === 'email')
+			break;
+		case 'email':
 			this.setState({email: newValue});
-		else if(event.target.id === 'phone')
+			break;
+		case 'phone':
 			this.setState({phone: newValue});
-		else if(event.target.id === 'newSkill')
+			break;
+		case 'newSkill':
 			this.setState({skillsInput: newValue});
+		}
 	}
 	
-	handleClick(event) {
+	handleClick() {
 		event.preventDefault();			
-		alert('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
+		console.log('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
 		//TODO: Send info to server
 	}
 
-	handleAddSkillClick(event) {
+	handleRequestDelete(key) {
+		const updatedSkills = this.state.skills;
+		const chipToDelete = updatedSkills.map((chip) => chip.key).indexOf(key);
+		updatedSkills.splice(chipToDelete, 1);
+		this.setState({skills: updatedSkills});
+	}
+    
+	handleAddSkillClick() {
 		event.preventDefault();
-		let list = this.state.skills;
+		const list = this.state.skills;
 		list.push({label: this.state.skillsInput});
 		this.setState({skills: list});
-		alert('Added new skill: '+this.state.skillsInput);
-	}
-
-	handleRequestDelete(key) {
-		this.skills = this.state.skills;
-		const chipToDelete = this.skills.map((chip) => chip.key).indexOf(key);
-		this.skills.splice(chipToDelete, 1);
-		this.setState({skills: this.skills});
+		console.log('Added new skill: '+this.state.skillsInput);
 	}
 
 	renderChip(data) {
@@ -83,32 +91,33 @@ class ProfileView extends Component {
 			</Chip>
 		);
 	}
+    
 	render() {
 		return (
 			<div>
-				<h1 style={this.styles.title}>Your Account</h1>
-				<Card className="card small">
+				<h1>Your Account</h1>
+				<Card class="card small">
 					<CardTitle>Name</CardTitle>
 					<TextField hintText="Name" 
 						fullWidth={true}
 						onChange={this.handleTextChange}
-						id="name"/><br />
+						id="name"/>
 					<CardTitle>Email</CardTitle>
 					<TextField hintText="Email"
 						onChange={this.handleTextChange}
 						fullWidth={true}
-						id="email"/><br />
+						id="email"/>
 					<CardTitle>Phone</CardTitle>
 					<TextField hintText="Phone"
 						fullWidth={true} 
 						onChange={this.handleTextChange}
-						id="phone"/><br />
+						id="phone"/>
 					<CardTitle>Skills</CardTitle>
 					<div style={this.styles.inputSkills}>
 						<TextField id="newSkill" 
 							hintText="node.js, ruby, python, machine learning, etc."
 							fullWidth={true}
-							onChange={this.handleTextChange}/> <br />
+							onChange={this.handleTextChange}/>
 						<RaisedButton label="Add Skill"
 							style={this.styles.submitSkills}
 							onClick={this.handleAddSkillClick}/>
