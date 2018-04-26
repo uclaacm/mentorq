@@ -14,8 +14,7 @@ function activeMentors(req, res) {
 	getConnectedRegistered(req)
 		.then(connectedUsers => {
 			const activeMentors = [];
-			for (const i in connectedUsers) {
-				const user = connectedUsers[i];
+			for (const user of connectedUsers) {
 				if (user.isMentor) {
 					activeMentors.push(user);
 				}
@@ -74,11 +73,7 @@ function getConnectedRegistered(req) {
 		}
 	}
 	
-	return new Promise((resolve, reject) => {
-		Promise.all(activeUserIds.map(id => User.getById(id)))
-			.then(users => resolve(users))
-			.catch(err => reject(err));
-	});
+	return Promise.all(activeUserIds.map(id => User.getById(id)));
 }
 
 module.exports = {
