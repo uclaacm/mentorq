@@ -8,6 +8,7 @@ import {
 } from 'material-ui/Table';
 import Chip from 'material-ui/Chip';
 import FlatButton from 'material-ui/FlatButton';
+import './AdminPanel.css';
 
 class AdminPanel extends Component {
 	constructor(props) {
