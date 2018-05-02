@@ -23,7 +23,7 @@ class ActiveMentors extends Component {
 			<Card>
 				<CardText>
 					<p>
-						<FontIcon className="material-icons" style={iconStyles}>lens</FontIcon>
+						<FontIcon className='material-icons' style={iconStyles}>lens</FontIcon>
 						<strong>{` `}{this.state.numActive}</strong>
 						{`${this.state.numActive > 1 ?' mentors':' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
