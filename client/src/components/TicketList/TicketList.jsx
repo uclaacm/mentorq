@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Ticket } from '..';
 
 class TicketList extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			tickets: [],
+	static get propTypes() {
+		return {
+			socket: PropTypes.Object.isRequired
 		};
-
-		for(var i = 0; i < 4; i++){	// TODO: replace hardcode
-			const ticket = {		//		 initialization 
-				username: 'Username',
-				timeSubmitted: 'When request was submitted',
-				issue: 'Issue',
-				location: 'Location',
-				contactInfo: 'Contact Number',
-			};
-			this.state.tickets.push(ticket);
-		}
 	}
 
 	render() {
 		return (
 			<div className="ticketList">
-				{this.state.tickets.map((ticket, index) => {
+				{this.props.socket.tickets.map((ticket, index) => {
 					return (
 						<Ticket {...ticket} key={index}/>
 					);

@@ -1,6 +1,13 @@
 import * as api from '../api';
 
 /**
+ * @description Pings the socket to broadcast a new ticket
+ */
+export function submitTicket(ticket) {
+	return (dispatch) => dispatch({ type: 'socket/ticket/new', ticket });
+}
+
+/**
  * @description Calls the API method to get username and update store
  */
 export function getTest(cb) {
@@ -12,6 +19,9 @@ export function getTest(cb) {
 	};
 }
 
+/**
+ * @description Pings the socket method socket/test
+ */
 export function socketTest(message) {
     return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
