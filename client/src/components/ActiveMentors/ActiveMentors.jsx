@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {Card, CardText} from 'material-ui/Card';
+import FontIcon from 'material-ui/FontIcon';
+import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 const iconStyles = {
-	fontSize: 14,
+	fontSize: 16,
 	color:'#4CAF50',
-
-};
+	display: `inline-flex`,
+	verticalAlign: `top`,
+}
 
 class ActiveMentors extends Component {
 	constructor(props){
@@ -21,8 +24,8 @@ class ActiveMentors extends Component {
 			<Card>
 				<CardText>
 					<p>
-						<span style={iconStyles}>⬤ </span>
-						<strong> {this.state.numActive}</strong>
+						<FontIcon className="material-icons" style={iconStyles}>lens</FontIcon>
+						<strong>{` `}{this.state.numActive}</strong>
 						{`${this.state.numActive > 1 ?' mentors':' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
 					</p>
