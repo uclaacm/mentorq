@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
+import AdminPanel from './AdminPanel';
 
 class Container extends Component {
 	constructor(props) {
@@ -10,7 +11,8 @@ class Container extends Component {
 	render() {
 		return (
 			<div className="container">
-				<Nav />	
+				<Nav />
+				<AdminPanel />
 			</div>
 		);
 	}
