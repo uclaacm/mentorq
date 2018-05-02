@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Card, CardText} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
-import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 const iconStyles = {
 	fontSize: 16,
