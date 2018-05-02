@@ -60,7 +60,7 @@ class ProfileView extends Component {
 		}
 	}
 	
-	handleClick() {
+	handleClick(event) {
 		event.preventDefault();			
 		console.log('Info was submitted: name: '+this.state.name+' phone: '+this.state.phone+' email: '+this.state.email);
 		//TODO: Send info to server
@@ -73,7 +73,7 @@ class ProfileView extends Component {
 		this.setState({skills: updatedSkills});
 	}
     
-	handleAddSkillClick() {
+	handleAddSkillClick(event) {
 		event.preventDefault();
 		const list = this.state.skills;
 		list.push({label: this.state.skillsInput});
