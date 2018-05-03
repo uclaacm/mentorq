@@ -24,20 +24,6 @@ class Login extends Component {
 	render(){
 		return(
 			<div>
-				<TextField 	
-				floatingLabelText='Username'
-				onChange={(event, newValue)=>this.setState({username:newValue})}
-				hintText='Username'
-				fullWidth={true}/>
-				<br/>
-				<TextField 	
-				floatingLabelText='Password'
-				onChange={(event, newValue)=>this.setState({password:newValue})}
-				hintText='Password'	
-				type='password'
-				fullWidth={true}/>
-				<br/>
-				<RaisedButton label='LOGIN' fullWidth={true}/>
 				<RaisedButton label='LOGIN WITH GOOGLE' fullWidth={true} icon={googleIcon} labelStyle={googleLoginButtonStyle}/>
 			</div>
 		);
