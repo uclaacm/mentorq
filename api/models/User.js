@@ -21,9 +21,8 @@ var userSchema = new mongoose.Schema({
  * @param {string} user's GoogleID (as hash)
  * @returns {User} newly saved User object
  * @example
- * User.create('Joe Bruin', 'someGoogleIdHash')
- *     .then(user => console.log(user))
- *     .catch(error => console.error(error));
+ * const user = await User.create('Joe Bruin', 'someGoogleIdHash');
+ * console.log(user);
  */
 
 userSchema.statics.create = function(name, googleId) {
@@ -46,9 +45,8 @@ userSchema.statics.create = function(name, googleId) {
  * @param {string} user's googleID (as hash)
  * @returns {User} one User object with matching ID
  * @example
- * User.read('someGoogleIdHash')
- *     .then(user => console.log(user))
- *     .catch(error => console.error(error));
+ * const user = await User.read('someGoogleIdHash');
+ * console.log(user);
  */
 
 userSchema.statics.read = function(googleId) {
@@ -65,9 +63,8 @@ userSchema.statics.read = function(googleId) {
  * @param {string} user's MongoDB ID
  * @returns {User} one User object with matching ID
  * @example
- * User.getById('someId')
- *     .then(user => console.log(user))
- *     .catch(error => console.error(error));
+ * const user = await User.getById('someId');
+ * console.log(user);
  */
 
 userSchema.statics.getById = function (id) {
@@ -83,9 +80,8 @@ userSchema.statics.getById = function (id) {
  * Read and Retrieve all User objects from the database
  * @returns {User[]} an array of User objects
  * @example
- * User.getAll()
- *     .then(users => console.log(users))
- *     .catch(error => console.error(error));
+ * const users = await User.getAll();
+ * console.log(users);
  */
 
 userSchema.statics.getAll = function(){
@@ -102,8 +98,7 @@ userSchema.statics.getAll = function(){
  * @param {string} user's googleID (as hash)
  * @returns {void} nothing
  * @example
- * User.delete('someGoogleIdHash')
- *     .catch(error => console.error(error));
+ * await User.delete('someGoogleIdHash');
  */
 
 userSchema.statics.delete = function(googleId) {
@@ -120,9 +115,8 @@ userSchema.statics.delete = function(googleId) {
  * @param {Boolean} User's new isAdmin status
  * @returns {User} changed user object
  * @example
- * User.read('someGoogleIdHash')
- *     .then(user =>  user.setAdminStatus(true))
- *	   .catch(error => console.error(error));
+ * const user = await User.read('someGoogleIdHash');
+ * await user.setAdminStatus(true);
  */
 
 userSchema.methods.setAdminStatus = function(adminStatus) {
@@ -141,9 +135,8 @@ userSchema.methods.setAdminStatus = function(adminStatus) {
  * @param {Boolean} User's new isMentor status
  * @returns {User} changed user object
  * @example
- * User.read('someGoogleIdHash')
- *     .then(user => user.setMentorStatus(true))
- *	   .catch(error => console.error(error));
+ * const user = await User.read('someGoogleIdHash');
+ * await user.setMentorStatus(true);
  */
 
 userSchema.methods.setMentorStatus = function(mentorStatus) {
@@ -164,9 +157,8 @@ userSchema.methods.setMentorStatus = function(mentorStatus) {
  * @param {string} User's new skill
  * @returns {User} changed user object
  * @example
- * User.read('someGoogleIdHash')
- *     .then(user => user.addSkill('python'))
- *	   .catch(error => console.error(error));
+ * const user = await User.read('someGoogleIdHash');
+ * await user.addSkill('python');
  */
 
 userSchema.methods.addSkill = function(skill) {
@@ -195,9 +187,8 @@ userSchema.methods.addSkill = function(skill) {
  * @param {string} skill to remove from the User object
  * @returns {User} changed user object
  * @example
- * User.read('someGoogleIdHash')
- *     .then(user => user.removeSkill('python'))
- *	   .catch(error => console.error(error));
+ * const user = await User.read('someGoogleIdHash');
+ * await user.removeSkill('python');
  */
 
 userSchema.methods.removeSkill = function(skill) {
