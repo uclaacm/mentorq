@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const googleIcon = (
@@ -9,16 +8,12 @@ const googleIcon = (
 );
 
 const googleLoginButtonStyle = {
-	verticalAlign: `middle`,
-}
+	verticalAlign: 'middle',
+};
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			username: '',
-			password:'',
-		};
 	}
 
 	render(){
