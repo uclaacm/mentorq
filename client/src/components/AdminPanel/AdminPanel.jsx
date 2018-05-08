@@ -55,7 +55,7 @@ class AdminPanel extends Component {
 						<TableHeaderColumn style={styles['.headerRow th']}>Name</TableHeaderColumn>
 						<TableHeaderColumn style={styles['.headerRow th']}>Email</TableHeaderColumn>
 						<TableHeaderColumn style={styles['.headerRow th']}>Phone</TableHeaderColumn>
-						<TableHeaderColumn style={{...styles['.headerRow th'],... styles['.skillCol']}}>Skills</TableHeaderColumn>
+						<TableHeaderColumn style={{...styles['.headerRow th'],...styles['.skillCol']}}>Skills</TableHeaderColumn>
 						<TableHeaderColumn style={styles['.headerRow th']}></TableHeaderColumn>
 					</TableRow>
 					<TableRow>
