@@ -10,56 +10,51 @@ function current(req, res) {
 	res.json(req.user);
 }
 
-function activeMentors(req, res) {
-	getConnectedRegistered(req)
-		.then(connectedUsers => {
-			const activeMentors = [];
-			for (const user of connectedUsers) {
-				if (user.isMentor) {
-					activeMentors.push(user);
-				}
+async function activeMentors(req, res, next) {
+	try {
+		const connectedUsers = await getConnectedRegistered(req);
+		const activeMentors = [];
+		for (const user of connectedUsers) {
+			if (user.isMentor) {
+				activeMentors.push(user);
 			}
-			return activeMentors;
-		})
-		.then(mentors => res.json(mentors))
-		.catch(err => res.status(500).json({ err: err.message }));
+		}
+		res.json(activeMentors);
+	} catch (err) {
+		next(err);
+	}
 }
 
-function update(req, res) {
-	User.getById(req.params.id)
-		.then(user => {
-			if (req.query.mentor) {
-				return user.setMentorStatus(req.query.mentor);
-			}
-			return user;
-		})
-		.then(user => {
-			if (req.query.admin) {
-				return user.setAdminStatus(req.query.admin);
-			}
-			return user;
-		})
-		.then(user => res.json(user))
-		.catch(err => res.status(500).json({ err: err.message }));
+async function update(req, res, next) {
+	try {
+		const user = await User.getById(req.params.id);
+		const { mentor, admin } = req.query;
+		if (mentor !== undefined) {
+			await user.setMentorStatus(Boolean(mentor));
+		}
+		if (admin !== undefined) {
+			await user.setAdminStatus(Boolean(admin));
+		}
+		res.json(user);
+	} catch (err) {
+		next(err);
+	}
 }
 
-function getAll(req, res) {
-	User.getAll()
-		.then(users => {
-			res.json(users);
-		})
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({ err: err.message });
-		});
-
+async function getAll(req, res, next) {
+	try {
+		const users = await User.getAll();
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
 }
 
-function getConnectedRegistered(req) {
+async function getConnectedRegistered(req) {
 	const io = req.app.get('socketio');
 	const rootNamespace = io.sockets;
 	const connectedSockets = rootNamespace.connected;
-	let activeUserIds = [];
+	const activeUserIds = [];
 
 	for (const socketID in connectedSockets) {
 		const socket = connectedSockets[socketID];
