@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, CardText} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
+import axios from 'axios';
 
 const iconStyles = {
 	fontSize: 16,
@@ -16,6 +17,16 @@ class ActiveMentors extends Component {
 			numActive: 0,
 			waitMinute: 100,
 		};
+		axios.get('http://localhost:8080/user/mentors/active')
+			.then(response => {
+				console.log(response.data);
+				this.setState({numActive: response.data.length});
+			})
+			.catch(err => {
+				console.log(err);
+			});
+
+
 	}
 
 	render() {
