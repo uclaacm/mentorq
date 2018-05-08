@@ -12,6 +12,7 @@ import './TicketForm.css';
 class TicketForm extends Component {
 	constructor(props) {
 		super(props);
+		console.log(props);
 		this.state = {
 			description: {
 				value: '',

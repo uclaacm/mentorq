@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {Card, CardText} from 'material-ui/Card';
-import FontIcon from 'material-ui/FontIcon';
+import Card, { CardContent } from 'material-ui/Card';
+import { Lens } from '@material-ui/icons';
 
 const iconStyles = {
 	fontSize: 16,
-	color:'#4CAF50',
-	display: `inline-flex`,
-	verticalAlign: `top`,
-}
+	color: '#4CAF50',
+	display: 'inline-flex',
+	verticalAlign: 'top',
+};
 
 class ActiveMentors extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			numActive: 0,
@@ -19,16 +19,16 @@ class ActiveMentors extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<Card>
-				<CardText>
+				<CardContent>
 					<p>
-						<FontIcon className='material-icons' style={iconStyles}>lens</FontIcon>
-						<strong>{` `}{this.state.numActive}</strong>
-						{`${this.state.numActive > 1 ?' mentors':' mentor'}
+						<Lens style={iconStyles} />
+						<strong>{' '}{this.state.numActive}</strong>
+						{`${this.state.numActive > 1 ? ' mentors' : ' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
 					</p>
-				</CardText>
+				</CardContent>
 			</Card>
 		);
 	}
