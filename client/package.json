@@ -1,7 +1,6 @@
 {
   "name": "mentorq-client",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "material-ui": "^0.20.0",
@@ -20,6 +19,8 @@
   "devDependencies": {
     "react-scripts": "1.0.5"
   },
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

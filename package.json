@@ -15,7 +15,8 @@
     "url": "git+https://github.com/uclaacm/mentorq.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "private": true,
   "bugs": {
     "url": "https://github.com/uclaacm/mentorq/issues"
   },
