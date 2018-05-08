@@ -22,7 +22,7 @@ class Nav extends Component {
 		return (
 			<AppBar position="static">
 				<Toolbar>
-					<a href="http://www.localhost:8080/auth/google" className="toolbar-button">
+					<a href="http://localhost:8080/auth/google" className="toolbar-button">
 						<IconButton color="inherit" aria-label="Login">
 							<AccountCircle />
 						</IconButton>

@@ -96,7 +96,7 @@ class ProfileView extends Component {
 
 		// TODO: Send info to server
 		if (name && email) {
-			console.log('Info was submitted: name: ' + name + ' phone: ' + phone + ' email: ' + email);
+			console.log(`Info was submitted: name: ${name} phone: ${phone} email: ${email}`);
 		}
 	}
 
