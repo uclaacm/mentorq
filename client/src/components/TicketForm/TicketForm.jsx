@@ -29,8 +29,8 @@ class TicketForm extends Component {
 
 	static get propTypes() {
 		return {
-			submitTicket: PropTypes.function.isRequired,
-			socket: PropTypes.Object.isRequired
+			submitTicket: PropTypes.func.isRequired,
+			socket: PropTypes.object.isRequired
 		};
 	}
 
