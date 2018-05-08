@@ -1,7 +1,7 @@
-var SocketReducer = (state = {
+export default function SocketReducer(state = {
 	message: null,
 	tickets: []
-}, action) => {
+}, action) {
 	switch (action.type) {
 	case 'SOCKET_TEST':
 		return {
@@ -9,7 +9,7 @@ var SocketReducer = (state = {
 			message: action.message
 		};
 	case 'SOCKET_NEW_TICKET': {
-		let newTicket = action.ticket;
+		const newTicket = action.ticket;
 		newTicket.timestamp = new Date(newTicket.timestamp);
 		return {
 			...state,
@@ -19,6 +19,4 @@ var SocketReducer = (state = {
 	default:
 		return state;
 	}
-};
-
-export default SocketReducer;
+}

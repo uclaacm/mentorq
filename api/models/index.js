@@ -1,13 +1,16 @@
 'use strict';
 
-// Bring Mongoose into the app 
+// Bring Mongoose into the app
 const mongoose = require('mongoose');
 const config = require('../config');
 
-// Build the connection string 
+const User = require('./User');
+const Ticket = require('./Ticket');
+
+// Build the connection string
 const dbURI = config.database.uri;
 
-// Create the database connection 
+// Create the database connection
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
@@ -17,11 +20,11 @@ mongoose.connection.on('connected', () => {
 });
 
 // If the connection throws an error
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on('error', err => {
 	console.log('Mongoose default connection error: ' + err);
 });
 
 module.exports = {
-	User: require('./User'),
-	Ticket: require('./Ticket')
-};  
+	User,
+	Ticket
+};

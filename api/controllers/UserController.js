@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require('../models/User'); // eslint-disable-line
+const User = require('../models/User');
 
 function test(req, res) {
 	res.json('/test endpoint hit');
@@ -10,7 +10,7 @@ function current(req, res) {
 	res.json(req.user);
 }
 
-async function activeMentors(req, res, next) {
+async function getActiveMentors(req, res, next) {
 	try {
 		const connectedUsers = await getConnectedRegistered(req);
 		const activeMentors = [];
@@ -50,7 +50,7 @@ async function getAll(req, res, next) {
 	}
 }
 
-async function getConnectedRegistered(req) {
+function getConnectedRegistered(req) {
 	const io = req.app.get('socketio');
 	const rootNamespace = io.sockets;
 	const connectedSockets = rootNamespace.connected;
@@ -59,22 +59,22 @@ async function getConnectedRegistered(req) {
 	for (const socketID in connectedSockets) {
 		const socket = connectedSockets[socketID];
 		const { client } = socket;
-		const req = client.request;
-		const { passport } = req.session;
+		const clientReq = client.request;
+		const { passport } = clientReq.session;
 
 		if (passport) {
 			const { user } = passport;
 			activeUserIds.push(user._id);
 		}
 	}
-	
+
 	return Promise.all(activeUserIds.map(id => User.getById(id)));
 }
 
 module.exports = {
 	test,
 	current,
-	activeMentors,
+	getActiveMentors,
 	getAll,
 	update
 };

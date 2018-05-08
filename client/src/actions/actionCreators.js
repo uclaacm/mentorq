@@ -4,7 +4,7 @@ import * as api from '../api';
  * @description Pings the socket to broadcast a new ticket
  */
 export function submitTicket(ticket) {
-	return (dispatch) => dispatch({ type: 'socket/ticket/new', ticket });
+	return dispatch => dispatch({ type: 'socket/ticket/new', ticket });
 }
 
 /**
@@ -14,7 +14,11 @@ export function getTest(cb) {
     return (dispatch, prevState) => { // eslint-disable-line
 		api.getTest()
 			.then(response => dispatch({ type: 'USER_TEST', test: response }))
-			.then(() => { if (cb) cb(); })
+			.then(() => {
+				if (cb) {
+					cb();
+				}
+			})
 			.catch(error => console.error('Error in getTest: ' + error));
 	};
 }

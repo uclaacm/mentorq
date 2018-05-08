@@ -6,7 +6,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
-const router = express.Router();
+const router = new express.Router();
 
 // Initialize user session
 router.use(session({
@@ -20,9 +20,11 @@ router.use(passport.session());
 let secret;
 try {
 	// Obtained from https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing
+	// eslint-disable-next-line global-require
 	secret = require('../config/secret');
 } catch (e) {
-	throw `${e}\n*** You are missing the Google OAuth API usage keys. Please go to https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing, download secret.json, and move it into api/config/`;
+	console.error('*** You are missing the Google OAuth API usage keys. Please go to https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing, download secret.json, and move it into api/config/');
+	throw e;
 }
 
 if (secret) {
@@ -44,11 +46,11 @@ if (secret) {
 	}));
 }
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
 	done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user, done) => {
 	done(null, user);
 });
 

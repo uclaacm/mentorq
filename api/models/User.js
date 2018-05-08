@@ -2,15 +2,15 @@
 
 const mongoose = require('mongoose');
 
-var User;
+let User;
 
 // User Schema Definition
-var userSchema = new mongoose.Schema({
-	name: {type: String , required: true},
-	isAdmin: {type: Boolean , default: false},
-	isMentor: {type: Boolean , default: false},
+const userSchema = new mongoose.Schema({
+	name: { type: String, required: true },
+	isAdmin: { type: Boolean, default: false },
+	isMentor: { type: Boolean, default: false },
 	skills: [String],
-	googleId: {type: String , unique: true, required: true}
+	googleId: { type: String, unique: true, required: true }
 });
 
 // User Schema Methods
@@ -25,17 +25,20 @@ var userSchema = new mongoose.Schema({
  * console.log(user);
  */
 
-userSchema.statics.create = function(name, googleId) {
-	var user = new this({
-		name: name,
+userSchema.statics.create = function (name, googleId) {
+	const user = new this({
+		name,
 		skills: [],
-		googleId: googleId
+		googleId
 	});
 
 	return new Promise((resolve, reject) => {
 		user.save((error, newUser) => {
-			if (error) reject(error);
-			else resolve(newUser);
+			if (error) {
+				reject(error);
+			} else {
+				resolve(newUser);
+			}
 		});
 	});
 };
@@ -49,11 +52,14 @@ userSchema.statics.create = function(name, googleId) {
  * console.log(user);
  */
 
-userSchema.statics.read = function(googleId) {
-	return new Promise((resolve , reject) => {
-		User.findOne({googleId: googleId}, (err, user) => {
-			if (err) reject(err);
-			else resolve(user);
+userSchema.statics.read = function (googleId) {
+	return new Promise((resolve, reject) => {
+		User.findOne({ googleId }, (err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };
@@ -70,8 +76,11 @@ userSchema.statics.read = function(googleId) {
 userSchema.statics.getById = function (id) {
 	return new Promise((resolve, reject) => {
 		User.findById(id, (err, user) => {
-			if (err) reject(err);
-			else resolve(user);
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };
@@ -84,10 +93,12 @@ userSchema.statics.getById = function (id) {
  * console.log(users);
  */
 
-userSchema.statics.getAll = function(){
+userSchema.statics.getAll = function () {
 	return new Promise((resolve, reject) => {
 		User.find({}, (err, users) => {
-			if (err) reject(err);
+			if (err) {
+				reject(err);
+			}
 			resolve(users);
 		});
 	});
@@ -101,11 +112,14 @@ userSchema.statics.getAll = function(){
  * await User.delete('someGoogleIdHash');
  */
 
-userSchema.statics.delete = function(googleId) {
+userSchema.statics.delete = function (googleId) {
 	return new Promise((resolve, reject) => {
-		User.findOne({googleId: googleId}).remove((err, offer) => {
-			if(err) reject(err);
-			else resolve(offer);
+		User.findOne({ googleId }).remove((err, offer) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(offer);
+			}
 		});
 	});
 };
@@ -119,13 +133,16 @@ userSchema.statics.delete = function(googleId) {
  * await user.setAdminStatus(true);
  */
 
-userSchema.methods.setAdminStatus = function(adminStatus) {
+userSchema.methods.setAdminStatus = function (adminStatus) {
 	this.isAdmin = adminStatus;
-	
+
 	return new Promise((resolve, reject) => {
 		this.save((error, user) => {
-			if(error) reject(error);
-			else resolve(user);
+			if (error) {
+				reject(error);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };
@@ -139,20 +156,23 @@ userSchema.methods.setAdminStatus = function(adminStatus) {
  * await user.setMentorStatus(true);
  */
 
-userSchema.methods.setMentorStatus = function(mentorStatus) {
+userSchema.methods.setMentorStatus = function (mentorStatus) {
 	this.isMentor = mentorStatus;
 
 	return new Promise((resolve, reject) => {
 		this.save((err, user) => {
-			if(err) reject(err);
-			else resolve(user);
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };
 
 /**
  * Add a new skill to the User object
- * If attempt to add a skill that already exists, 
+ * If attempt to add a skill that already exists,
  * an error will be thrown
  * @param {string} User's new skill
  * @returns {User} changed user object
@@ -161,28 +181,31 @@ userSchema.methods.setMentorStatus = function(mentorStatus) {
  * await user.addSkill('python');
  */
 
-userSchema.methods.addSkill = function(skill) {
+userSchema.methods.addSkill = function (skill) {
 	// skill does not exist if index is -1;
 	// skill exists already if index is >=0;
 	const index = this.skills.indexOf(skill);
 
-	if (index >= 0){
-		return new Promise(new Error('skill: '+ skill +' already exists!'));
+	if (index >= 0) {
+		return new Promise(new Error('skill: ' + skill + ' already exists!'));
 	}
 
 	this.skills.push(skill);
 
 	return new Promise((resolve, reject) => {
 		this.save((err, user) => {
-			if (err) reject(err);
-			else resolve(user);
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };
 
 /**
  * Remove a skill from the User object
- * If attempt to remove a skill that does not exists, 
+ * If attempt to remove a skill that does not exists,
  * an error will be thrown
  * @param {string} skill to remove from the User object
  * @returns {User} changed user object
@@ -191,19 +214,22 @@ userSchema.methods.addSkill = function(skill) {
  * await user.removeSkill('python');
  */
 
-userSchema.methods.removeSkill = function(skill) {
+userSchema.methods.removeSkill = function (skill) {
 	const index = this.skills.indexOf(skill);
 
-	if (index < 0){
-		return new Promise(new Error('skill: '+ skill +' does not exists!'));
+	if (index < 0) {
+		return new Promise(new Error('skill: ' + skill + ' does not exists!'));
 	}
 
 	this.skills.splice(index, 1);
 
 	return new Promise((resolve, reject) => {
 		this.save((err, user) => {
-			if (err) reject(err);
-			else resolve(user);
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
 		});
 	});
 };

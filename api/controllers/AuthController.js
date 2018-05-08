@@ -4,10 +4,11 @@ function isAuthenticated(req, res, next) {
 	// Check the user is logged in
 	// If a user isn't logged in, then redirect them somewhere
 	if (req.user) {
-		return next();
+		next();
+		return;
 	}
-    
-	req.session.returnTo = req.originalUrl; 
+
+	req.session.returnTo = req.originalUrl;
 	res.redirect('/auth/google');
 }
 
