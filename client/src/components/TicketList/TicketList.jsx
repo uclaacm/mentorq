@@ -6,7 +6,7 @@ import { Ticket } from '..';
 class TicketList extends Component {
 	static get propTypes() {
 		return {
-			socket: PropTypes.Object.isRequired
+			socket: PropTypes.object.isRequired
 		};
 	}
 
