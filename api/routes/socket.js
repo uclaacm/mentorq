@@ -20,6 +20,9 @@ module.exports = function (app, server) {
 			case 'socket/test':
 				socketController.test(action.message);
 				break;
+			case 'socket/ticket/new':
+				socketController.addTicket(action.ticket);
+				break;
 			default:
 				break;
 			}

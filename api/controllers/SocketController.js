@@ -15,8 +15,13 @@ function test(message) {
 	this.socket.emit('action', { type: 'SOCKET_TEST', message: 'Hello from server!' });
 }
 
+function addTicket(ticket) {
+	this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', ticket });
+}
+
 module.exports = {
 	connect,
 	disconnect,
-	test
+	test,
+	addTicket
 };
