@@ -1,29 +1,29 @@
 .adminPanel {
-    table-layout: auto !important;
+    table-layout: auto;
 }
 
 .headerRow th, td.nameCol {
-    font-weight: bold !important;
-    color: black !important;
+    font-weight: bold;
+    color: black;
 }
 
 .editButtons {
-    margin-right: 5px !important;
+    margin-right: 5px;
 }
 
 .editButtons div span {
-    text-transform: capitalize !important;
+    text-transform: capitalize;
 }
 
 td:nth-child(5), th:nth-child(5) {
-    height: auto !important;
-    overflow: auto !important;
-    white-space: normal !important;
+    height: auto;
+    overflow: auto;
+    white-space: normal;
 }
 
 .skillChip {
-    border-radius: 0.5em !important;
-    background-color: #e8e8e8 !important;
-    display: inline-block !important;
-    margin: 0px 5px 5px 0px !important;
+    border-radius: 0.5em;
+    background-color: #e8e8e8;
+    display: inline-block;
+    margin: 0px 5px 5px 0px;
 }

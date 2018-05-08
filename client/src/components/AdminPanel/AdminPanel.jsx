@@ -8,53 +8,82 @@ import {
 } from 'material-ui/Table';
 import Chip from 'material-ui/Chip';
 import FlatButton from 'material-ui/FlatButton';
-import './AdminPanel.css';
+
+var styles = {
+	'.adminPanel': {
+		'tableLayout': 'auto'
+	},
+	'.headerRow th': {
+		'fontWeight': 'bold',
+		'color': 'black'
+	},
+	'td.nameCol' : {
+		'fontWeight': 'bold',
+		'color': 'black'
+	},
+	'.statusButtons': {
+		'marginRight': '5px',
+		'color': 'white',
+		'backgroundColor': '#007FD6'
+	},
+	'.editButton': {
+		'marginRight': '5px',
+		'color': '#5A5A5A',
+		'backgroundColor': '#E0E1E2'
+	},
+	'.skillCol': {
+		'height': 'auto',
+		'overflow': 'auto',
+		'whiteSpace': 'normal'
+	},
+	'.skillChip': {
+		'borderRadius': '0.5em',
+		'backgroundColor': '#e8e8e8',
+		'display': 'inline-block',
+		'margin': '0px 5px 5px 0px'
+	}
+};
 
 class AdminPanel extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-        
-	}
     
 	render() {
 		return (
-			<Table className="adminPanel" selectable={false}>
+			<Table selectable={false} style={styles['.adminPanel']}>
 				<TableBody displayRowCheckbox={false}>
-					<TableRow className="headerRow">
-						<TableHeaderColumn>Username</TableHeaderColumn>
-						<TableHeaderColumn>Name</TableHeaderColumn>
-						<TableHeaderColumn>Email</TableHeaderColumn>
-						<TableHeaderColumn>Phone</TableHeaderColumn>
-						<TableHeaderColumn>Skills</TableHeaderColumn>
-						<TableHeaderColumn></TableHeaderColumn>
+					<TableRow>
+						<TableHeaderColumn style={styles['.headerRow th']}>Username</TableHeaderColumn>
+						<TableHeaderColumn style={styles['.headerRow th']}>Name</TableHeaderColumn>
+						<TableHeaderColumn style={styles['.headerRow th']}>Email</TableHeaderColumn>
+						<TableHeaderColumn style={styles['.headerRow th']}>Phone</TableHeaderColumn>
+						<TableHeaderColumn style={{...styles['.headerRow th'],... styles['.skillCol']}}>Skills</TableHeaderColumn>
+						<TableHeaderColumn style={styles['.headerRow th']}></TableHeaderColumn>
 					</TableRow>
 					<TableRow>
 						<TableRowColumn>admin</TableRowColumn>
-						<TableRowColumn className="nameCol">Admin</TableRowColumn>
+						<TableRowColumn style={styles['td.nameCol']}>Admin</TableRowColumn>
 						<TableRowColumn>admin@example.com</TableRowColumn>
 						<TableRowColumn>(xxx) xxx-xxxx</TableRowColumn>
-						<TableRowColumn>
-							<Chip className="skillChip">
+						<TableRowColumn style={styles['.skillCol']}>
+							<Chip style={styles['.skillChip']}>
                                 javascript
 							</Chip>
-							<Chip className="skillChip">
+							<Chip style={styles['.skillChip']}>
                                 web development
 							</Chip>
-							<Chip className="skillChip">
+							<Chip style={styles['.skillChip']}>
                                 web development
 							</Chip>
-							<Chip className="skillChip">
+							<Chip style={styles['.skillChip']}>
                                 web development
 							</Chip>
-							<Chip className="skillChip">
+							<Chip style={styles['.skillChip']}>
                                 node.js
 							</Chip>
 						</TableRowColumn>
 						<TableRowColumn>
-							<FlatButton label="Mentor" backgroundColor="#007FD6" className="editButtons" style={{ color: 'white'}}/>
-							<FlatButton label="Admin" backgroundColor="#007FD6" className="editButtons" style={{ color: 'white'}}/>
-							<FlatButton label="Edit" backgroundColor="#E0E1E2" className="editButtons" style={{ color: '#5A5A5A'}}/>
+							<FlatButton label="Mentor" style={styles['.statusButtons']}/>
+							<FlatButton label="Admin" style={styles['.statusButtons']}/>
+							<FlatButton label="Edit" style={styles['.editButton']}/>
 						</TableRowColumn>
 					</TableRow>
 				</TableBody>
