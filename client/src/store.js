@@ -14,17 +14,20 @@ import config from './config';
 
 const defaultState = {};
 
-let socket = io(`http://${config.server.host}:${config.server.port}`);
-let socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
+const socket = io(`http://${config.server.host}:${config.server.port}`);
+const socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
-const store = createStore(rootReducer, defaultState,
+const store = createStore(
+	rootReducer, defaultState,
 	composeWithDevTools(
 		applyMiddleware(thunk),
 		applyMiddleware(socketIoMiddleware)
-	));
+	)
+);
 
 if (module.hot) {
-	module.hot.accept('./reducers/',() => {
+	module.hot.accept('./reducers/', () => {
+		// eslint-disable-next-line global-require
 		const nextRootReducer = require('./reducers/index').default;
 		store.replaceReducer(nextRootReducer);
 	});

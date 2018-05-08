@@ -1,7 +1,5 @@
 'use strict';
 
-const Ticket = require('../models/Ticket'); // eslint-disable-line
-
 function index(req, res) {
 	res.json('/ endpoint hit');
 }

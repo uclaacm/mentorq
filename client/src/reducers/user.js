@@ -1,4 +1,4 @@
-function UserReducer(state = {}, action) {
+export default function UserReducer(state = {}, action) {
 	switch (action.type) {
 	case 'USER_TEST':
 		return {
@@ -9,5 +9,3 @@ function UserReducer(state = {}, action) {
 		return state;
 	}
 }
-
-export default UserReducer;
