@@ -57,6 +57,9 @@ class ProfileView extends Component {
 			break;
 		case 'newSkill':
 			this.setState({skillsInput: newValue});
+			break;
+		default:
+			break;
 		}
 	}
 	

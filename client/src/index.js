@@ -13,15 +13,13 @@ import { App } from './components';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css'; // Our own main stylesheet
 
-const router = (
+const router =
 	<MuiThemeProvider>
 		<Provider store={store}>
 			<BrowserRouter>
 				<App />
 			</BrowserRouter>
 		</Provider>
-	</MuiThemeProvider>
-);
-
+	</MuiThemeProvider>;
 ReactDOM.render(router, document.getElementById('root'));
 registerServiceWorker();

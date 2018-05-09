@@ -1,8 +1,9 @@
 'use strict';
+
 const express = require('express');
 const passport = require('passport');
 
-const router = express.Router();
+const router = new express.Router();
 
 // TODO: Create controller to handle passport things
 router.get('/google', passport.authenticate('google', {
@@ -12,7 +13,8 @@ router.get('/google', passport.authenticate('google', {
 	failureFlash: true
 }));
 
-router.get('/google/callback',
+router.get(
+	'/google/callback',
 	passport.authenticate('google', { failureRedirect: '/auth/google' }),
 	(req, res) => {
 		res.redirect(req.session.returnTo || 'http://localhost:3000');

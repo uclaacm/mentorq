@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardText, CardHeader, CardActions } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import PropTypes from 'prop-types';
 
 const DEFAULT_ERROR_MESSAGE = 'This field is required';
 
@@ -26,6 +27,13 @@ class TicketForm extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	static get propTypes() {
+		return {
+			submitTicket: PropTypes.func.isRequired,
+			socket: PropTypes.object.isRequired
+		};
+	}
+
 	handleChange(e) {
 		this.setState({
 			[e.target.name]: {
@@ -37,8 +45,12 @@ class TicketForm extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
+
+		const description = this.state.description.value;
+		const location = this.state.location.value;
+		const contact = this.state.contact.value;
 		
-		if (!this.state.description.value) {
+		if (!description) {
 			this.setState({
 				description: {
 					...this.state.description,
@@ -47,7 +59,7 @@ class TicketForm extends Component {
 			});
 		}
 
-		if (!this.state.location.value) {
+		if (!location) {
 			this.setState({
 				location: {
 					...this.state.location,
@@ -56,7 +68,7 @@ class TicketForm extends Component {
 			});
 		}
 
-		if (!this.state.contact.value) {
+		if (!contact) {
 			this.setState({
 				contact: {
 					...this.state.contact,
@@ -66,7 +78,14 @@ class TicketForm extends Component {
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
-			// TODO: Submit ticket to backend
+			// TODO: Fetch for current user's name
+			this.props.submitTicket({
+				name: '',
+				timestamp: new Date(),
+				description: this.state.description.value,
+				location: this.state.location.value,
+				contact: this.state.contact.value
+			});
 		}
 	}
 

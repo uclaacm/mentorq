@@ -28,6 +28,13 @@ app.use('/ticket', ticketRouter);
 const socketio = require('./routes/socket')(app, server);
 app.set('socketio', socketio);
 
+// Express forces us to have four parameters for the error handler, even if
+// some of them are unused.
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+	res.status(500).json({ err: err.message });
+});
+
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);
 });

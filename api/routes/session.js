@@ -6,7 +6,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
-const router = express.Router();
+const router = new express.Router();
 
 // Initialize user session
 router.use(session({
@@ -20,9 +20,11 @@ router.use(passport.session());
 let secret;
 try {
 	// Obtained from https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing
+	// eslint-disable-next-line global-require
 	secret = require('../config/secret');
 } catch (e) {
-	throw `${e}\n*** You are missing the Google OAuth API usage keys. Please go to https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing, download secret.json, and move it into api/config/`;
+	console.error('*** You are missing the Google OAuth API usage keys. Please go to https://drive.google.com/file/d/1-04r3tR3cNEnvbyHNnlRCGEFav08kpx7/view?usp=sharing, download secret.json, and move it into api/config/');
+	throw e;
 }
 
 if (secret) {
@@ -30,25 +32,25 @@ if (secret) {
 		clientID: secret.web.client_id,
 		clientSecret: secret.web.client_secret,
 		callbackURL: '/auth/google/callback'
-	}, function (token, tokenSecret, profile, done) {
-		User.read(profile.id).then(user => {
+	}, async (token, tokenSecret, profile, done) => {
+		try {
+			let user = await User.read(profile.id);
 			if (!user) {
-				User.create(profile.displayName, profile.id).then(user => {
-					// TODO: redirect to user to profile page
-					return done(null, user);
-				});
-			} else {
-				return done(null, user);
+				user = await User.create(profile.displayName, profile.id);
+				// TODO: redirect to user to profile page
 			}
-		});
+			done(null, user);
+		} catch (err) {
+			done(err);
+		}
 	}));
 }
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
 	done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user, done) => {
 	done(null, user);
 });
 

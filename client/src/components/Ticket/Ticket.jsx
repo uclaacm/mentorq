@@ -15,11 +15,11 @@ class Ticket extends Component {
 
 	static get propTypes() {
 		return {
-			username: PropTypes.string.isRequired,
-			timeSubmitted: PropTypes.string.isRequired,
-			issue: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			timestamp: PropTypes.instanceOf(Date).isRequired,
+			description: PropTypes.string.isRequired,
 			location: PropTypes.string.isRequired,
-			contactInfo: PropTypes.string.isRequired
+			contact: PropTypes.string.isRequired
 		};
 	}
 
@@ -61,12 +61,12 @@ class Ticket extends Component {
 	render() {
 		return (
 			<Card>
-				<CardHeader title={this.props.username}
-					subtitle={this.props.timeSubmitted} />
+				<CardHeader title={this.props.name}
+					subtitle={this.props.timestamp.toString()} />
 				<CardText>
-					<p>{this.props.issue} </p>
+					<p>{this.props.description} </p>
 					<p>{this.props.location} </p>
-					<p>{this.props.contactInfo}</p>
+					<p>{this.props.contact}</p>
 				</CardText>
 				{this.ticketButtons()}
 			</Card>
