@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Card, CardText} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
-import axios from 'axios';
 
 const iconStyles = {
 	fontSize: 16,
@@ -13,11 +12,10 @@ const iconStyles = {
 class ActiveMentors extends Component {
 	constructor(props){
 		super(props);
+		this.props.getActiveMentors();
 		this.state = {
-			numActive: 0,
 			waitMinute: 100,
 		};
-		console.log('in ActiveMentors, props:', this.props);
 	}
 
 	render() {
@@ -26,8 +24,8 @@ class ActiveMentors extends Component {
 				<CardText>
 					<p>
 						<FontIcon className='material-icons' style={iconStyles}>lens</FontIcon>
-						<strong>{` `}{this.state.numActive}</strong>
-						{`${this.state.numActive > 1 ?' mentors':' mentor'}
+						<strong>{` `}{this.props.user.mentors.length}</strong>
+						{`${this.props.user.mentors.length > 1 ?' mentors':' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
 					</p>
 				</CardText>

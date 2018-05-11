@@ -1,4 +1,4 @@
-export default function UserReducer(state = {}, action) {
+function UserReducer(state = { mentors:[] }, action) {
 	switch (action.type) {
 	case 'USER_TEST':
 		return {
