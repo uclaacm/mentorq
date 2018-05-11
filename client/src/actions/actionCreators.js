@@ -38,7 +38,7 @@ export function socketTest(message) {
 export function getActiveMentors() {
 	return (dispatch, prevState) => {
 		api.getActiveMentors()
-		.then(response => dispatch({ type: 'GET_ACTIVE_MENTORS', mentors: response })
-		.catch(error => console.error('Error in getActiveMentors: ' + error));
+			.then(response => dispatch({ type: 'GET_ACTIVE_MENTORS', mentors: response })
+			.catch(error => console.error('Error in getActiveMentors: ' + error));
 	};
 }
