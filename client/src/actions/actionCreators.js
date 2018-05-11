@@ -36,7 +36,7 @@ export function socketTest(message) {
  * @description Calls the API method to get all active mentors user object
  */
 export function getActiveMentors() {
-	return (dispatch, prevState) => {
+	return (dispatch, prevState) => { // eslint-disable-line
 		api.getActiveMentors()
 			.then(response => dispatch({ type: 'GET_ACTIVE_MENTORS', mentors: response }))
 			.catch(error => console.error('Error in getActiveMentors: ' + error));
