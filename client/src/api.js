@@ -10,3 +10,7 @@ const serverBaseURL = `http://${config.server.host}:${config.server.port}`;
 export function getTest() {
 	return get(`${serverBaseURL}/user/test`);
 }
+
+export function getActiveMentors() {
+	return get(`${serverBaseURL}/user/mentors/active`);
+}

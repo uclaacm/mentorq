@@ -5,6 +5,11 @@ export default function UserReducer(state = {}, action) {
 			...state,
 			test: action.test
 		};
+	case 'GET_ACTIVE_MENTORS':
+		return {
+			...state,
+			mentors: action.mentors
+		};
 	default:
 		return state;
 	}
