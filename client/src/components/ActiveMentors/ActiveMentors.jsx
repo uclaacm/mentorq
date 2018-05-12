@@ -12,20 +12,21 @@ const iconStyles = {
 class ActiveMentors extends Component {
 	constructor(props){
 		super(props);
-		this.props.getActiveMentors();
 		this.state = {
 			waitMinute: 100,
 		};
+		this.props.getActiveMentors();
 	}
 
 	render() {
+		const numActive = this.props.user.mentors.length;
 		return(
 			<Card>
 				<CardText>
 					<p>
 						<FontIcon className='material-icons' style={iconStyles}>lens</FontIcon>
-						<strong>{` `}{this.props.user.mentors.length}</strong>
-						{`${this.props.user.mentors.length > 1 ?' mentors':' mentor'}
+						<strong>{` `}{numActive}</strong>
+						{`${numActive > 1 ?' mentors':' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
 					</p>
 				</CardText>
