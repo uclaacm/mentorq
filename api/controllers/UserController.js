@@ -19,6 +19,7 @@ async function getActiveMentors(req, res, next) {
 				activeMentors.push(user);
 			}
 		}
+		console.log(activeMentors);
 		res.json(activeMentors);
 	} catch (err) {
 		next(err);
@@ -54,7 +55,7 @@ function getConnectedRegistered(req) {
 	const io = req.app.get('socketio');
 	const rootNamespace = io.sockets;
 	const connectedSockets = rootNamespace.connected;
-	const activeUserIds = [];
+	const activeUserIds = new Set();
 
 	for (const socketID in connectedSockets) {
 		const socket = connectedSockets[socketID];
@@ -64,11 +65,11 @@ function getConnectedRegistered(req) {
 
 		if (passport) {
 			const { user } = passport;
-			activeUserIds.push(user._id);
+			activeUserIds.add(user._id);
 		}
 	}
 
-	return Promise.all(activeUserIds.map(id => User.getById(id)));
+	return Promise.all([...activeUserIds].map(id => User.getById(id)));
 }
 
 module.exports = {
