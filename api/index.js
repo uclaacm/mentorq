@@ -8,7 +8,7 @@ const cors = require('cors');
 const config = require('./config');
 
 // Connect to database
-require('./models');
+const { User } = require('./models');
 
 app.use(cors({
 	credentials: true,
@@ -34,6 +34,14 @@ app.set('socketio', socketio);
 app.use((err, req, res, next) => {
 	res.status(500).json({ err: err.message });
 });
+
+User.create('Joe Bruin', 'bleh6')
+	.then(user => {
+		console.log(user);
+		return user.updateName('Connie');
+	})
+	.then(user => console.log(user))
+	.catch(error => console.error(error));
 
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);

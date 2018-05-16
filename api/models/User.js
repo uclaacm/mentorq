@@ -234,6 +234,27 @@ userSchema.methods.removeSkill = function (skill) {
 	});
 };
 
+/*
+ * Update name for the User object
+ * @param {string} name to update the User object
+ * @returns {User} changed user object
+ */
+
+userSchema.methods.updateName = function (name) {
+	this.name = name;
+
+	return new Promise((resolve, reject) => {
+		this.save((err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
+		});
+	});
+};
+
+
 User = mongoose.model('User', userSchema);
 
 module.exports = User;
