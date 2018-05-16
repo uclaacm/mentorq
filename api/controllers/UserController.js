@@ -19,7 +19,6 @@ async function getActiveMentors(req, res, next) {
 				activeMentors.push(user);
 			}
 		}
-		console.log(activeMentors);
 		res.json(activeMentors);
 	} catch (err) {
 		next(err);
