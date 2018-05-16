@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import { AccountCircle } from '@material-ui/icons';
+
+import './Nav.css';
 
 class Nav extends Component {
 	constructor(props) {
@@ -15,11 +20,19 @@ class Nav extends Component {
 
 	render() {
 		return (
-			<AppBar
-				className="Nav"
-				title={<span style={this.styles.title}>MentorQ</span>}
-				iconElementRight={<FlatButton label="Login" href="http://localhost:8080/auth/google" />}
-			/>
+			<AppBar position="static">
+				<Toolbar>
+					<a href="http://localhost:8080/auth/google" className="toolbar-button">
+						<IconButton color="inherit" aria-label="Login">
+							<AccountCircle />
+						</IconButton>
+					</a>
+					<Typography variant="title" color="inherit">
+						MentorQ
+					</Typography>
+
+				</Toolbar>
+			</AppBar>
 		);
 	}
 
