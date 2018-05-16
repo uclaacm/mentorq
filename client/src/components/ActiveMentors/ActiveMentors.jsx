@@ -13,19 +13,20 @@ class ActiveMentors extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			numActive: 0,
 			waitMinute: 100,
 		};
+		this.props.getActiveMentors();
 	}
 
 	render() {
-		return (
+		const numActive = this.props.user.mentors.length;
+		return(
 			<Card>
 				<CardContent>
 					<p>
-						<Lens style={iconStyles} />
-						<strong>{' '}{this.state.numActive}</strong>
-						{`${this.state.numActive > 1 ? ' mentors' : ' mentor'}
+						<FontIcon className='material-icons' style={iconStyles}>lens</FontIcon>
+						<strong>{` `}{numActive}</strong>
+						{`${numActive > 1 ?' mentors':' mentor'}
 						online. Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
 					</p>
 				</CardContent>
