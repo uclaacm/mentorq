@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardHeader, CardActions } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 
 class Ticket extends Component {
@@ -31,13 +32,13 @@ class Ticket extends Component {
 		this.setState({ ticketOpen: false });
 	}
 
-	ticketButtons() {
+	renderButtons() {
 		if (this.state.ticketOpen) {
 			return (
 				<CardActions>
-					<RaisedButton label="CLAIM TICKET"
-						backgroundColor="#FF8A65"
-						onClick={this.claimTicket} />
+					<Button onClick={this.claimTicket}>
+						CLAIM TICKET
+					</Button>
 				</CardActions>
 			);
 		}
@@ -45,13 +46,12 @@ class Ticket extends Component {
 			return (
 				<CardActions>
 					<div>
-						<RaisedButton label="REOPEN TICKET"
-							backgroundColor="#FF8A65"
-							onClick={this.reopenTicket} />
+						<Button onClick={this.reopenTicket}>
+							REOPEN TICKET
+						</Button>
 					</div>
 					<div>
-						<RaisedButton label="MARK AS COMPLETE"
-							backgroundColor="#4DD0E1" />
+						<Button>MARK AS COMPLETE</Button>
 					</div>
 				</CardActions>
 			);
@@ -61,14 +61,20 @@ class Ticket extends Component {
 	render() {
 		return (
 			<Card>
-				<CardHeader title={this.props.name}
-					subtitle={this.props.timestamp.toString()} />
-				<CardText>
+				<CardContent>
+					<Typography gutterBottom variant="headline" component="h2">
+						{this.props.name}
+					</Typography>
+					<Typography gutterBottom variant="subheading">
+						{this.props.timestamp.toString()}
+					</Typography>
+
 					<p>{this.props.description} </p>
 					<p>{this.props.location} </p>
 					<p>{this.props.contact}</p>
-				</CardText>
-				{this.ticketButtons()}
+				</CardContent>
+
+				{this.renderButtons()}
 			</Card>
 
 		);
