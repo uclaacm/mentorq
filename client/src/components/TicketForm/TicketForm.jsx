@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
-import PropTypes from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { Code, LocationOn, Phone } from '@material-ui/icons';
-import { InputAdornment } from 'material-ui/Input';
+import PropTypes from 'prop-types';
 
 import './TicketForm.css';
 
@@ -25,7 +27,7 @@ class TicketForm extends Component {
 			contact: {
 				value: '',
 				error: false
-			},
+			}
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -53,7 +55,7 @@ class TicketForm extends Component {
 		const description = this.state.description.value;
 		const location = this.state.location.value;
 		const contact = this.state.contact.value;
-		
+
 		if (!description) {
 			this.setState({
 				description: {
@@ -112,11 +114,11 @@ class TicketForm extends Component {
 								onChange={this.handleChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<Code />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 						</div>
@@ -131,11 +133,11 @@ class TicketForm extends Component {
 								onChange={this.handleChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<LocationOn />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 						</div>
@@ -150,11 +152,11 @@ class TicketForm extends Component {
 								onChange={this.handleChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<Phone />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 						</div>
