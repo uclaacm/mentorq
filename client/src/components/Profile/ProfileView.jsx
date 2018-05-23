@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import Chip from 'material-ui/Chip';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Chip from '@material-ui/core/Chip';
 import { PermIdentity, Phone, Email, Web } from '@material-ui/icons';
-import { InputAdornment } from 'material-ui/Input';
 
 class ProfileView extends Component {
 	constructor(props) {
@@ -35,24 +37,24 @@ class ProfileView extends Component {
 		};
 		this.styles = {
 			chip: {
-				margin: 4,
+				margin: 4
 			},
 			wrapper: {
 				display: 'flex',
-				flexWrap: 'wrap',
+				flexWrap: 'wrap'
 			},
 			inputSkills: {
 				position: 'relative',
-				display: 'flex',
+				display: 'flex'
 			},
 			submitSkills: {
 				position: 'absolute',
 				right: 10,
 				top: 0,
 				width: 120,
-				height: 39,
-			},
-			//TODO: Style title
+				height: 39
+			}
+			// TODO: Style title
 		};
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.saveProfile = this.saveProfile.bind(this);
@@ -102,7 +104,7 @@ class ProfileView extends Component {
 
 	deleteSkill(key) {
 		const updatedSkills = this.state.skills;
-		const chipToDelete = updatedSkills.map((chip) => chip.key).indexOf(key);
+		const chipToDelete = updatedSkills.map(chip => chip.key).indexOf(key);
 		updatedSkills.splice(chipToDelete, 1);
 		this.setState({ skills: updatedSkills });
 	}
@@ -144,11 +146,11 @@ class ProfileView extends Component {
 								onChange={this.handleTextChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<PermIdentity />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 							<TextField
@@ -161,11 +163,11 @@ class ProfileView extends Component {
 								onChange={this.handleTextChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<Email />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 							<TextField
@@ -176,11 +178,11 @@ class ProfileView extends Component {
 								onChange={this.handleTextChange}
 								fullWidth={true}
 								InputProps={{
-									startAdornment: (
+									startAdornment:
 										<InputAdornment position="start">
 											<Phone />
 										</InputAdornment>
-									),
+
 								}}
 							/>
 
@@ -194,11 +196,11 @@ class ProfileView extends Component {
 									onChange={this.handleTextChange}
 									fullWidth={true}
 									InputProps={{
-										startAdornment: (
+										startAdornment:
 											<InputAdornment position="start">
 												<Web />
 											</InputAdornment>
-										),
+
 									}}
 								/>
 								<Button style={this.styles.submitSkills} onClick={this.addSkill}>
@@ -213,8 +215,7 @@ class ProfileView extends Component {
 										onDelete={() => this.deleteSkill(i)}
 										style={this.styles.chip}
 										label={skill.label}
-									/>
-								)}
+									/>)}
 							</div>
 
 							<Button onClick={this.onSubmit} fullWidth={true} style={{ display: 'none' }}>x</Button>

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 class Ticket extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ticketOpen: true,
+			ticketOpen: true
 		};
 		this.reopenTicket = this.reopenTicket.bind(this);
 		this.claimTicket = this.claimTicket.bind(this);
@@ -42,20 +44,19 @@ class Ticket extends Component {
 				</CardActions>
 			);
 		}
-		else {
-			return (
-				<CardActions>
-					<div>
-						<Button onClick={this.reopenTicket}>
+
+		return (
+			<CardActions>
+				<div>
+					<Button onClick={this.reopenTicket}>
 							REOPEN TICKET
-						</Button>
-					</div>
-					<div>
-						<Button>MARK AS COMPLETE</Button>
-					</div>
-				</CardActions>
-			);
-		}
+					</Button>
+				</div>
+				<div>
+					<Button>MARK AS COMPLETE</Button>
+				</div>
+			</CardActions>
+		);
 	}
 
 	render() {
