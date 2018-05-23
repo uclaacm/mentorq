@@ -11,9 +11,9 @@ export default function UserReducer(state = { mentors: [] }, action) {
 		return [
 			...state,
 			{
-                current: action.user
-            }
-        ];
+				current: action.user
+			}
+		];
 	case 'GET_ACTIVE_MENTORS':
 		return {
 			...state,
