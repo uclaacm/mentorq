@@ -12,9 +12,9 @@ services:
       - "8080:8080"
     links:
       - db_mongo
-  web_client:
-    build: ./client
-    ports:
-      - "3000:3000"
-    links:
-      - api
+  # web_client:
+  #   build: ./client
+  #   ports:
+  #     - "3000:3000"
+  #   links:
+  #     - api

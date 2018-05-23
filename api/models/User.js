@@ -248,6 +248,7 @@ userSchema.methods.updateName = function (name) {
 			if (err) {
 				reject(err);
 			} else {
+				console.log(user);
 				resolve(user);
 			}
 		});

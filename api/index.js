@@ -35,12 +35,11 @@ app.use((err, req, res, next) => {
 	res.status(500).json({ err: err.message });
 });
 
-User.create('Joe Bruin', 'bleh6')
+User.create('Joe Bruin', 'bleh9')
 	.then(user => {
 		console.log(user);
 		return user.updateName('Connie');
 	})
-	.then(user => console.log(user))
 	.catch(error => console.error(error));
 
 server.listen(config.server.port, () => {
