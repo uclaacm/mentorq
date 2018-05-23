@@ -1,111 +1,168 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardHeader, CardActions } from 'material-ui/Card';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import PropTypes from 'prop-types';
+import { Code, LocationOn, Phone } from '@material-ui/icons';
+import { InputAdornment } from 'material-ui/Input';
 
-const DEFAULT_ERROR_MESSAGE = 'This field is required';
+import './TicketForm.css';
 
 class TicketForm extends Component {
 	constructor(props) {
 		super(props);
+		console.log(props);
 		this.state = {
 			description: {
 				value: '',
-				errorMsg: ''
+				error: false
 			},
 			location: {
 				value: '',
-				errorMsg: ''
+				error: false
 			},
 			contact: {
 				value: '',
-				errorMsg: ''
+				error: false
 			},
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	static get propTypes() {
+		return {
+			submitTicket: PropTypes.func.isRequired,
+			socket: PropTypes.object.isRequired
+		};
+	}
+
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: {
+			[e.target.id]: {
 				value: e.target.value,
-				errorMsg: e.target.value.length > 0 ? '' : DEFAULT_ERROR_MESSAGE
+				error: !e.target.value
 			}
 		});
 	}
 
 	onSubmit(e) {
 		e.preventDefault();
+
+		const description = this.state.description.value;
+		const location = this.state.location.value;
+		const contact = this.state.contact.value;
 		
-		if (!this.state.description.value) {
+		if (!description) {
 			this.setState({
 				description: {
 					...this.state.description,
-					errorMsg: DEFAULT_ERROR_MESSAGE
+					error: true
 				}
 			});
 		}
 
-		if (!this.state.location.value) {
+		if (!location) {
 			this.setState({
 				location: {
 					...this.state.location,
-					errorMsg: DEFAULT_ERROR_MESSAGE
+					error: true
 				}
 			});
 		}
 
-		if (!this.state.contact.value) {
+		if (!contact) {
 			this.setState({
 				contact: {
 					...this.state.contact,
-					errorMsg: DEFAULT_ERROR_MESSAGE
+					error: true
 				}
 			});
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
-			// TODO: Submit ticket to backend
+			// TODO: Fetch for current user's name
+			this.props.submitTicket({
+				name: '',
+				timestamp: new Date(),
+				description: this.state.description.value,
+				location: this.state.location.value,
+				contact: this.state.contact.value
+			});
 		}
 	}
 
 	render() {
 		return (
 			<Card>
-				<CardHeader title="How can we help you?" />
-				<CardText>
+				<CardContent>
+					<Typography gutterBottom variant="headline" component="h2">
+						How can we help you?
+					</Typography>
 					<form onSubmit={this.onSubmit}>
-						<TextField
-							name="description"
-							hintText="Describe your problem"
-							floatingLabelText="I need help with..."
-							errorText={this.state.description.errorMsg}
-							fullWidth={true}
-							onChange={this.handleChange} />
-						<TextField
-							name="location"
-							hintText="where are you? table number?"
-							floatingLabelText="You can find me at..."
-							errorText={this.state.location.errorMsg}
-							fullWidth={true} 
-							onChange={this.handleChange} />
-						<TextField
-							name="contact"
-							hintText="cell phone #"
-							floatingLabelText="You can contact me through..."
-							errorText={this.state.contact.errorMsg}
-							fullWidth={true} 
-							onChange={this.handleChange} />
-						<button type="submit" style={{ display: 'none' }}></button>
+						<div className="field">
+							<TextField
+								required
+								id="description"
+								label="I need help with..."
+								placeholder="Describe your problem"
+								value={this.state.description.value}
+								error={this.state.description.error}
+								onChange={this.handleChange}
+								fullWidth={true}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<Code />
+										</InputAdornment>
+									),
+								}}
+							/>
+						</div>
+						<div className="field">
+							<TextField
+								required
+								id="location"
+								label="You can find me at..."
+								placeholder="where are you? table number?"
+								value={this.state.location.value}
+								error={this.state.location.error}
+								onChange={this.handleChange}
+								fullWidth={true}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<LocationOn />
+										</InputAdornment>
+									),
+								}}
+							/>
+						</div>
+						<div className="field">
+							<TextField
+								required
+								id="contact"
+								label="You can contact me through..."
+								placeholder="cell phone #"
+								value={this.state.contact.value}
+								error={this.state.contact.error}
+								onChange={this.handleChange}
+								fullWidth={true}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<Phone />
+										</InputAdornment>
+									),
+								}}
+							/>
+						</div>
+						<Button onClick={this.onSubmit} fullWidth={true} style={{ display: 'none' }}>x</Button>
 					</form>
-				</CardText>
+				</CardContent>
 				<CardActions>
-					<FlatButton 
-						label="Help me!" 
-						onClick={this.onSubmit}
-						primary={true} 
-						fullWidth={true} />
+					<Button onClick={this.onSubmit} fullWidth={true}>Help me!</Button>
 				</CardActions>
 			</Card>
 		);

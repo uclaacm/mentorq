@@ -5,4 +5,6 @@ export { default as ProfileView } from './Profile/ProfileView';
 export { default as TicketList } from './TicketList/TicketList';
 export { default as HomeContainer } from './HomeContainer/HomeContainer';
 export { default as TicketForm } from './TicketForm/TicketForm';
+export { default as ActiveMentors } from './ActiveMentors/ActiveMentors';
+export { default as Login } from './Login/Login';
 export { default as AdminPanel } from './AdminPanel/AdminPanel';

@@ -10,7 +10,6 @@ export function get(url) {
 		withCredentials: true
 	})
 		.then(response => {
-			console.log(response);
 			return response.data;
 		})
 		.catch((error) => Promise.reject(`GET ${url} failed: ${error}`));
@@ -25,5 +24,6 @@ export function get(url) {
 export function post(url, requestBody) {
 	return axios.post(url, requestBody)
 		.then(response => response.data)
-		.catch((error) => Promise.reject(`POST ${url} failed: ${error}`));
+		// eslint-disable-next-line prefer-promise-reject-errors
+		.catch(error => Promise.reject(`POST ${url} failed: ${error}`));
 }
