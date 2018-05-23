@@ -6,8 +6,13 @@ import axios from 'axios';
  * @returns {Promise}
  */
 export function get(url) {
-	return axios.get(url)
-		.then(response => response.data)
+	return axios.get(url, {
+		withCredentials: true
+	})
+		.then(response => {
+			console.log(response);
+			return response.data;
+		})
 		.catch((error) => Promise.reject(`GET ${url} failed: ${error}`));
 }
 

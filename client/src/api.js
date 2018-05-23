@@ -10,3 +10,11 @@ const serverBaseURL = `http://${config.server.host}:${config.server.port}`;
 export function getTest() {
 	return get(`${serverBaseURL}/user/test`);
 }
+
+/**
+ * @description Makes server request for current user
+ * @returns {JSON} current user in JSON format
+ */
+export function getCurrentUser() {
+	return get(`${serverBaseURL}/user/current`);
+}

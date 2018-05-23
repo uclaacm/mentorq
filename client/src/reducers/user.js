@@ -5,6 +5,11 @@ function UserReducer(state = {}, action) {
 			...state,
 			test: action.test
 		};
+	case 'GET_CURRENT_USER':
+		return {
+			...state,
+			current: action.user
+		};
 	default:
 		return state;
 	}
