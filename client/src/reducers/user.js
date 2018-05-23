@@ -1,14 +1,19 @@
 export default function UserReducer(state = { mentors: [] }, action) {
 	switch (action.type) {
 	case 'USER_TEST':
-		return {
+		return [
 			...state,
-			test: action.test
-		};
+			{
+				test: action.test
+			}
+		];
 	case 'GET_CURRENT_USER':
-		return {
+		return [
 			...state,
-			current: action.user
+			{
+                current: action.user
+            }
+        ];
 	case 'GET_ACTIVE_MENTORS':
 		return {
 			...state,

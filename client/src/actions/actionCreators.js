@@ -11,7 +11,6 @@ export function submitTicket(ticket) {
  * @description Calls the API method to get username and update store
  */
 export function getTest(cb) {
-	console.log('get test called');
     return (dispatch, prevState) => { // eslint-disable-line
 		api.getTest()
 			.then(response => dispatch({ type: 'USER_TEST', test: response }))
