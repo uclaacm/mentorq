@@ -16,12 +16,12 @@ const ticketSchema = new Schema({
 
 /**
  * Creates and saves a Ticket object in the database
- * @param {string(UserID)} requestorId
- * @param {string} description 
- * @param {string} tableNum 
- * @param {string} contactInfo
+ * @param {string(UserID)} requestorId the Id of the user who created the ticket
+ * @param {string} description description of the issue
+ * @param {string} tableNum table number of the requestor
+ * @param {string} contactInfo contact information (email/phone) of requestor
  */
-ticketSchema.statics.create = function (requestorId, description, tableNum, contact) {
+ticketSchema.statics.create = function (requestorId, description, tableNum, contactInfo) {
 	const ticket = new this({
 		requestorId,
 		timeFiled: Date.now,
