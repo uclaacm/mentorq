@@ -23,9 +23,16 @@ export function getTest(cb) {
 	};
 }
 
-/**
- * @description Pings the socket method socket/test
- */
+
+export function getCurrentUser() {
+	return (dispatch, prevState) => { // eslint-disable-line
+		api.getCurrentUser()
+			.then(response => {
+				dispatch({ type: 'GET_CURRENT_USER', current: response });
+			});
+	};
+}
+
 export function socketTest(message) {
     return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
