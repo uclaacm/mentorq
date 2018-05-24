@@ -18,7 +18,7 @@ class Ticket extends Component {
 
 	static get propTypes() {
 		return {
-			requestor: PropTypes.string.isRequired,
+			requestorId: PropTypes.string.isRequired,
 			timeFiled: PropTypes.instanceOf(Date).isRequired,
 			description: PropTypes.string.isRequired,
 			tableNum: PropTypes.string.isRequired,

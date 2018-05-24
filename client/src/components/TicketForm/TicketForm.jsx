@@ -85,7 +85,7 @@ class TicketForm extends Component {
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
 			this.props.submitTicket({
-				requestor: 'dummyUserID',	// TODO: fetch the user ID
+				requestorId: 'dummyUserID',	// TODO: fetch the user ID
 				description: this.state.description.value,
 				tableNum: this.state.location.value,
 				contact: this.state.contact.value
