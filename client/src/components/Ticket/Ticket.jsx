@@ -18,11 +18,11 @@ class Ticket extends Component {
 
 	static get propTypes() {
 		return {
-			name: PropTypes.string.isRequired,
-			timestamp: PropTypes.instanceOf(Date).isRequired,
+			requestorId: PropTypes.string.isRequired,
+			timeFiled: PropTypes.instanceOf(Date).isRequired,
 			description: PropTypes.string.isRequired,
-			location: PropTypes.string.isRequired,
-			contact: PropTypes.string.isRequired
+			tableNum: PropTypes.string.isRequired,
+			contactInfo: PropTypes.string.isRequired
 		};
 	}
 
@@ -74,7 +74,6 @@ class Ticket extends Component {
 					<p>{this.props.location} </p>
 					<p>{this.props.contact}</p>
 				</CardContent>
-
 				{this.renderButtons()}
 			</Card>
 

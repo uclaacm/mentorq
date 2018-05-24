@@ -84,13 +84,11 @@ class TicketForm extends Component {
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
-			// TODO: Fetch for current user's name
 			this.props.submitTicket({
-				name: '',
-				timestamp: new Date(),
+				requestorId: 'dummyUserID',	// TODO: fetch the user ID
 				description: this.state.description.value,
-				location: this.state.location.value,
-				contact: this.state.contact.value
+				tableNum: this.state.location.value,
+				contactInfo: this.state.contact.value
 			});
 		}
 	}
