@@ -28,7 +28,7 @@ export function getCurrentUser() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getCurrentUser()
 			.then(response => {
-				dispatch({ type: 'GET_CURRENT_USER', current: response });
+				dispatch({ type: 'SET_CURRENT_USER', currentUser: response });
 			});
 	};
 }

@@ -16,7 +16,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	dispatch(actionCreators.getTest());
 	return bindActionCreators(actionCreators, dispatch);
 }
 
