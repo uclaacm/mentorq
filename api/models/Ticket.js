@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ticketSchema = new Schema({
-	requestor: { type: Schema.ObjectId, ref: 'User', required: true },
+	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
 	mentor: { type: Schema.ObjectId, ref: 'User' },
 	contact: { type: String, required: false },
 	timeFiled: { type: Date, required: true },
@@ -16,14 +16,14 @@ const ticketSchema = new Schema({
 
 /**
  * Creates and saves a Ticket object in the database
- * @param {string(UserID)} requestor 
+ * @param {string(UserID)} requestorId
  * @param {string} description 
  * @param {string} tableNum 
  * @param {string} contact 
  */
-ticketSchema.statics.create = function (requestor, description, tableNum, contact) {
+ticketSchema.statics.create = function (requestorId, description, tableNum, contact) {
 	const ticket = new this({
-		requestor,
+		requestorId,
 		timeFiled: Date.now,
 		description,
 		tableNum,

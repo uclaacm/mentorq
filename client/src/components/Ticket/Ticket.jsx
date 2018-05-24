@@ -74,11 +74,6 @@ class Ticket extends Component {
 					<p>{this.props.location} </p>
 					<p>{this.props.contact}</p>
 				</CardContent>
-				<CardActions>
-					<div>
-						<Button>Delete</Button>
-					</div>
-				</CardActions>
 				{this.renderButtons()}
 			</Card>
 
