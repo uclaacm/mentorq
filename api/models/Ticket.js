@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const ticketSchema = new Schema({
 	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
 	mentor: { type: Schema.ObjectId, ref: 'User' },
-	contact: { type: String, required: false },
+	contactInfo: { type: String, required: false },
 	timeFiled: { type: Date, required: true },
 	description: { type: String, required: true },
 	tableNum: { type: String, required: true },
@@ -19,7 +19,7 @@ const ticketSchema = new Schema({
  * @param {string(UserID)} requestorId
  * @param {string} description 
  * @param {string} tableNum 
- * @param {string} contact 
+ * @param {string} contactInfo
  */
 ticketSchema.statics.create = function (requestorId, description, tableNum, contact) {
 	const ticket = new this({
@@ -27,7 +27,7 @@ ticketSchema.statics.create = function (requestorId, description, tableNum, cont
 		timeFiled: Date.now,
 		description,
 		tableNum,
-		contact
+		contactInfo
 	});
 
 	return new Promise((resolve, reject) => {

@@ -22,7 +22,7 @@ class Ticket extends Component {
 			timeFiled: PropTypes.instanceOf(Date).isRequired,
 			description: PropTypes.string.isRequired,
 			tableNum: PropTypes.string.isRequired,
-			contact: PropTypes.string.isRequired
+			contactInfo: PropTypes.string.isRequired
 		};
 	}
 

@@ -88,7 +88,7 @@ class TicketForm extends Component {
 				requestorId: 'dummyUserID',	// TODO: fetch the user ID
 				description: this.state.description.value,
 				tableNum: this.state.location.value,
-				contact: this.state.contact.value
+				contactInfo: this.state.contact.value
 			});
 		}
 	}
