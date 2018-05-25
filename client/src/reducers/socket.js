@@ -9,8 +9,8 @@ export default function SocketReducer(state = {
 			message: action.message
 		};
 	case 'SOCKET_NEW_TICKET': {
-		const newTicket = action.ticket;
-		newTicket.timestamp = new Date(newTicket.timestamp);
+		const newTicket = action.newTicket;
+		newTicket.timeFiled = new Date(newTicket.timeFiled);
 		return {
 			...state,
 			tickets: [...state.tickets, newTicket]

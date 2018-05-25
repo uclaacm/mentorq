@@ -24,7 +24,7 @@ const ticketSchema = new Schema({
 ticketSchema.statics.create = function (requestorId, description, tableNum, contactInfo) {
 	const ticket = new this({
 		requestorId,
-		timeFiled: Date.now,
+		timeFiled: new Date(),
 		description,
 		tableNum,
 		contactInfo
