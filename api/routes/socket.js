@@ -23,7 +23,12 @@ module.exports = function (app, server) {
 				socketController.test(action.message);
 				break;
 			case 'socket/ticket/new':
-				socketController.addTicket(action.ticket);
+				try{
+					socketController.addTicket(action.ticket);
+				} catch (error) {
+					console.error(error);
+					this.socket.emit('action', { type: 'SOCKET_ERROR', error });
+				}
 				break;
 			default:
 				break;

@@ -14,7 +14,6 @@ import './TicketForm.css';
 class TicketForm extends Component {
 	constructor(props) {
 		super(props);
-		console.log(props);
 		this.state = {
 			description: {
 				value: '',
@@ -84,8 +83,12 @@ class TicketForm extends Component {
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
+			this.props.getCurrentUser();
+			if (! this.props.user.currentUser){
+				return;
+			}
 			this.props.submitTicket({
-				requestorId: '5af12d0e2e439d0010e8d3e4',	// TODO: fetch the user ID
+				requestorId: this.props.user.currentUser._id,
 				description: this.state.description.value,
 				tableNum: this.state.location.value,
 				contactInfo: this.state.contact.value

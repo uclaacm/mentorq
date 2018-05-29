@@ -19,13 +19,9 @@ function test(message) {
 
 async function addTicket(ticket) {
 	const { requestorId, description, tableNum, contactInfo } = ticket;
-	try{
-		const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
-		this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', newTicket: newTicket });
-	}
-	catch(err) {
-		done(err);
-	}
+	const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
+	console.log(newTicket);
+	this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', newTicket });
 }
 
 module.exports = {

@@ -6,7 +6,7 @@ import axios from 'axios';
  * @returns {Promise}
  */
 export function get(url) {
-	return axios.get(url)
+	return axios.get(url, {withCredentials: true})
 		.then(response => response.data)
 		// eslint-disable-next-line prefer-promise-reject-errors
 		.catch(error => Promise.reject(`GET ${url} failed: ${error}`));
