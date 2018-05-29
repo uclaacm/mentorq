@@ -9,15 +9,15 @@ export default function SocketReducer(state = {
 			message: action.message
 		};
 	case 'SOCKET_NEW_TICKET': {
-		const newTicket = action.newTicket;
-		const ticketWithDate = { ...newTicket, timeFiled: new Date(newTicket.timeFiled) };
+		const { timeFiled } = action.newTicket;
+		const ticketWithDate = { ...action.newTicket, timeFiled: new Date(timeFiled) };
 		return {
 			...state,
-			tickets: [...state.tickets, newTicket]
+			tickets: [...state.tickets, ticketWithDate]
 		};
 	}
 	case 'SOCKET_ERROR': {
-		const error = action.error;
+		const error = { ...action.error };
 		console.error(error);
 		break;
 	}
