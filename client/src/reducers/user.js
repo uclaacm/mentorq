@@ -19,7 +19,7 @@ export default function UserReducer(state = { mentors: [], current: null }, acti
 		}
 		return {
 			...state,
-			current: action.currentUser
+			current: action.current
 		};
 	default:
 		return state;
