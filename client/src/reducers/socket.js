@@ -20,7 +20,7 @@ export default function SocketReducer(state = {
 		return {
 			...state,
 			errorMsg: { ...action.error }
-		}
+		};
 	}
 	default:
 		return state;
