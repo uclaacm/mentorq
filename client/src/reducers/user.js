@@ -11,15 +11,9 @@ export default function UserReducer(state = { mentors: [], current: null }, acti
 			mentors: action.mentors
 		};
 	case 'SET_CURRENT_USER':
-		if (action.current === '') {
-			return {
-				...state,
-				current: null
-			};
-		}
 		return {
 			...state,
-			current: action.current
+			current: action.current === '' ? null: action.current
 		};
 	default:
 		return state;
