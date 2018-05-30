@@ -83,8 +83,8 @@ class TicketForm extends Component {
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
-			this.props.getCurrentUser();
-			if (! this.props.user.currentUser){
+			this.props.getCurrentUser();		// TODO: in future commit, this should be removed
+			if (! this.props.user.currentUser){	// when login is correctly implemented 
 				return;
 			}
 			this.props.submitTicket({

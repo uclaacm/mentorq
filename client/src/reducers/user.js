@@ -1,4 +1,4 @@
-export default function UserReducer(state = { mentors: [], currentUser: null }, action) {
+export default function UserReducer(state = { mentors: [], current: null }, action) {
 	switch (action.type) {
 	case 'USER_TEST':
 		return {
@@ -11,15 +11,15 @@ export default function UserReducer(state = { mentors: [], currentUser: null }, 
 			mentors: action.mentors
 		};
 	case 'SET_CURRENT_USER':
-		if (action.currentUser === '') {
+		if (action.current === '') {
 			return {
 				...state,
-				currentUser: null
+				current: null
 			};
 		}
 		return {
 			...state,
-			currentUser: action.currentUser
+			current: action.currentUser
 		};
 	default:
 		return state;
