@@ -19,7 +19,7 @@ export default function SocketReducer(state = {
 	case 'SOCKET_ERROR': {
 		return {
 			...state,
-			errorMsg: { ...action.error };
+			errorMsg: { ...action.error }
 		}
 	}
 	default:
