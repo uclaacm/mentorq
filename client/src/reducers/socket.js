@@ -17,9 +17,10 @@ export default function SocketReducer(state = {
 		};
 	}
 	case 'SOCKET_ERROR': {
-		const error = { ...action.error };
-		console.error(error);
-		break;
+		return {
+			...state,
+			errorMsg: { ...action.error };
+		}
 	}
 	default:
 		return state;
