@@ -54,15 +54,15 @@ class Ticket extends Component {
 			<Card>
 				<CardContent>
 					<Typography gutterBottom variant="headline" component="h2">
-						{this.props.name}
+						{this.props.requestorId}
 					</Typography>
 					<Typography gutterBottom variant="subheading">
 						{this.props.timestamp.toString()}
 					</Typography>
 
 					<p>{this.props.description} </p>
-					<p>{this.props.location} </p>
-					<p>{this.props.contact}</p>
+					<p>{this.props.tableNum} </p>
+					<p>{this.props.contactInfo}</p>
 				</CardContent>
 				{this.renderButtons()}
 			</Card>
@@ -72,11 +72,11 @@ class Ticket extends Component {
 }
 
 Ticket.propTypes = {
-	name: PropTypes.string.isRequired,
+	requestorId: PropTypes.string.isRequired,
 	timestamp: PropTypes.instanceOf(Date).isRequired,
 	description: PropTypes.string.isRequired,
-	location: PropTypes.string.isRequired,
-	contact: PropTypes.string.isRequired
+	tableNum: PropTypes.string.isRequired,
+	contactInfo: PropTypes.string.isRequired
 };
 
 export default Ticket;
