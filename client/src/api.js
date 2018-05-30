@@ -18,3 +18,11 @@ export function getTest() {
 export function getActiveMentors() {
 	return get(`${serverBaseURL}/user/mentors/active`);
 }
+
+/**
+ * @description Makes server request for current user
+ * @returns {JSON} current user in JSON format
+ */
+export function getCurrentUser() {
+	return get(`${serverBaseURL}/user/current`);
+}

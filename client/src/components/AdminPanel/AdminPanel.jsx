@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Table';
-import Chip from 'material-ui/Chip';
-import Button from 'material-ui/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 
 class AdminPanel extends Component {
 	render() {
