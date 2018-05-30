@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { TicketForm } from '..';
+import PropTypes from 'prop-types';
+
+import { TicketForm, SplashPage } from '..';
 
 class HomeContainer extends Component {
 	render() {
-		return(
-			<TicketForm {...this.props} />
+		return (
+			this.props.user.current ? <TicketForm {...this.props} /> : <SplashPage />
 		);
 	}
 }
+
+HomeContainer.propTypes = {
+	user: PropTypes.object.isRequired
+};
+
 export default HomeContainer;

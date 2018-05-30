@@ -8,3 +8,4 @@ export { default as TicketForm } from './TicketForm/TicketForm';
 export { default as ActiveMentors } from './ActiveMentors/ActiveMentors';
 export { default as Login } from './Login/Login';
 export { default as AdminPanel } from './AdminPanel/AdminPanel';
+export { default as SplashPage } from './SplashPage/SplashPage';
