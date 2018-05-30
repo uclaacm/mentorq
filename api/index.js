@@ -35,10 +35,10 @@ app.use((err, req, res, next) => {
 	res.status(500).json({ err: err.message });
 });
 
-User.create('Joe Bruin', 'bleh9')
+User.create('Joe Bruin', 'email', 'bleh17')
 	.then(user => {
 		console.log(user);
-		return user.updateName('Connie');
+		return user.updateEmail('no');
 	})
 	.catch(error => console.error(error));
 
