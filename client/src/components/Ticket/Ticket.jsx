@@ -16,16 +16,6 @@ class Ticket extends Component {
 		this.claimTicket = this.claimTicket.bind(this);
 	}
 
-	static get propTypes() {
-		return {
-			requestorId: PropTypes.string.isRequired,
-			timeFiled: PropTypes.instanceOf(Date).isRequired,
-			description: PropTypes.string.isRequired,
-			tableNum: PropTypes.string.isRequired,
-			contactInfo: PropTypes.string.isRequired
-		};
-	}
-
 	reopenTicket() {
 		this.setState({ ticketOpen: true });
 	}
@@ -49,7 +39,7 @@ class Ticket extends Component {
 			<CardActions>
 				<div>
 					<Button onClick={this.reopenTicket}>
-							REOPEN TICKET
+						REOPEN TICKET
 					</Button>
 				</div>
 				<div>
@@ -80,5 +70,13 @@ class Ticket extends Component {
 		);
 	}
 }
+
+Ticket.propTypes = {
+	name: PropTypes.string.isRequired,
+	timestamp: PropTypes.instanceOf(Date).isRequired,
+	description: PropTypes.string.isRequired,
+	location: PropTypes.string.isRequired,
+	contact: PropTypes.string.isRequired
+};
 
 export default Ticket;
