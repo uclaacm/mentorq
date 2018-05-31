@@ -32,13 +32,6 @@ class TicketForm extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	static get propTypes() {
-		return {
-			submitTicket: PropTypes.func.isRequired,
-			socket: PropTypes.object.isRequired
-		};
-	}
-
 	handleChange(e) {
 		this.setState({
 			[e.target.id]: {
@@ -171,5 +164,10 @@ class TicketForm extends Component {
 		);
 	}
 }
+
+TicketForm.propTypes = {
+	submitTicket: PropTypes.func.isRequired,
+	socket: PropTypes.object.isRequired
+};
 
 export default TicketForm;
