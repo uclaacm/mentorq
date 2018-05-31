@@ -20,13 +20,6 @@ class ActiveMentors extends Component {
 		this.props.getActiveMentors();
 	}
 
-	static get propTypes() {
-		return {
-			user: PropTypes.object.isRequired,
-			getActiveMentors: PropTypes.func.isRequired
-		};
-	}
-
 	render() {
 		const numActive = this.props.user.mentors.length;
 		return (
@@ -43,5 +36,10 @@ class ActiveMentors extends Component {
 		);
 	}
 }
+
+ActiveMentors.propTypes = {
+	user: PropTypes.object.isRequired,
+	getActiveMentors: PropTypes.func.isRequired
+};
 
 export default ActiveMentors;
