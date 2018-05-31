@@ -14,7 +14,6 @@ import './TicketForm.css';
 class TicketForm extends Component {
 	constructor(props) {
 		super(props);
-		console.log(props);
 		this.state = {
 			description: {
 				value: '',
@@ -31,13 +30,6 @@ class TicketForm extends Component {
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
-
-	static get propTypes() {
-		return {
-			submitTicket: PropTypes.func.isRequired,
-			socket: PropTypes.object.isRequired
-		};
 	}
 
 	handleChange(e) {
@@ -168,5 +160,10 @@ class TicketForm extends Component {
 		);
 	}
 }
+
+TicketForm.propTypes = {
+	submitTicket: PropTypes.func.isRequired,
+	socket: PropTypes.object.isRequired
+};
 
 export default TicketForm;
