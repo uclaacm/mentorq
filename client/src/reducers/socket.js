@@ -16,12 +16,6 @@ export default function SocketReducer(state = {
 			tickets: [...state.tickets, ticketWithDate]
 		};
 	}
-	case 'SOCKET_ERROR': {
-		return {
-			...state,
-			errorMsg: { ...action.error }
-		};
-	}
 	default:
 		return state;
 	}
