@@ -1,5 +1,7 @@
 'use strict';
 
+const Ticket = require('../models/Ticket');
+
 function connect(socket) {
 	console.log('A user connected');
 	this.socket = socket;
@@ -15,8 +17,10 @@ function test(message) {
 	this.socket.emit('action', { type: 'SOCKET_TEST', message: 'Hello from server!' });
 }
 
-function addTicket(ticket) {
-	this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', ticket });
+async function addTicket(ticket) {
+	const { requestorId, description, tableNum, contactInfo } = ticket;
+	const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
+	this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', newTicket });
 }
 
 module.exports = {
