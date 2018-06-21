@@ -20,7 +20,7 @@ module.exports = {
 		"react"
 	],
 	"rules": {
-		"no-console": "off",
+		"no-console": "error",
 
 		// Possible errors
 		"for-direction": "error",

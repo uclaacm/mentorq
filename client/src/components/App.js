@@ -11,7 +11,6 @@ import Main from './Main/Main';
 
 // These are the properties we'll automatically pass to Main
 function mapStateToProps(state) {
-	console.log('Redux Store: ' + JSON.stringify(state));
 	return state;
 }
 
