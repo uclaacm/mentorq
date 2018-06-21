@@ -20,14 +20,13 @@ module.exports = {
 		"react"
 	],
 	"rules": {
-		"no-console": "off",
-
 		// Possible errors
 		"for-direction": "error",
 		"getter-return": "error",
 		"no-await-in-loop": "error",
 		"no-compare-neg-zero": "error",
 		"no-cond-assign": ["error", "except-parens"],
+		"no-console": "error",
 		"no-constant-condition": ["error", { "checkLoops": false }],
 		"no-control-regex": "off",
 		"no-debugger": "error",

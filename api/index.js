@@ -36,5 +36,6 @@ app.use((err, req, res, next) => {
 });
 
 server.listen(config.server.port, () => {
+	// eslint-disable-next-line no-console
 	console.log('Listening on port ' + config.server.port);
 });
