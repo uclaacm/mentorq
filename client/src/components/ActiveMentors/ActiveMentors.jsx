@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Card, { CardContent } from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { Lens } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 
