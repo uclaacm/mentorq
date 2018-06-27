@@ -7,6 +7,7 @@ const server = http.createServer(app);
 const cors = require('cors');
 const config = require('./config');
 
+// Connect to database
 require('./models');
 
 app.use(cors({
