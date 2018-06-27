@@ -7,9 +7,6 @@ const server = http.createServer(app);
 const cors = require('cors');
 const config = require('./config');
 
-// Connect to database
-const { User } = require('./models');
-
 app.use(cors({
 	credentials: true,
 	origin: true
@@ -34,13 +31,6 @@ app.set('socketio', socketio);
 app.use((err, req, res, next) => {
 	res.status(500).json({ err: err.message });
 });
-
-User.create('Joe Bruin', 'email', 'bleh17')
-	.then(user => {
-		console.log(user);
-		return user.updateEmail('no');
-	})
-	.catch(error => console.error(error));
 
 server.listen(config.server.port, () => {
 	console.log('Listening on port ' + config.server.port);

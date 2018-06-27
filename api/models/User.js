@@ -7,7 +7,7 @@ let User;
 // User Schema Definition
 const userSchema = new mongoose.Schema({
 	name: { type: String, required: true },
-	email: { type: String, default: '', required: true },
+	email: { type: String, required: true },
 	isAdmin: { type: Boolean, default: false },
 	isMentor: { type: Boolean, default: false },
 	skills: [String],
