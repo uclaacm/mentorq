@@ -7,7 +7,7 @@ const ticketSchema = new Schema({
 	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
 	mentor: { type: Schema.ObjectId, ref: 'User' },
 	contactInfo: { type: String, required: false },
-	timeFiled: { type: Date, required: true },
+	timeFiled: { type: Number, required: true },
 	description: { type: String, required: true },
 	tableNum: { type: String, required: true },
 	isActive: { type: Boolean, default: true },
@@ -24,7 +24,7 @@ const ticketSchema = new Schema({
 ticketSchema.statics.create = function (requestorId, description, tableNum, contactInfo) {
 	const ticket = new this({
 		requestorId,
-		timeFiled: Date.now,
+		timeFiled: Date.now(),
 		description,
 		tableNum,
 		contactInfo

@@ -14,7 +14,6 @@ import './TicketForm.css';
 class TicketForm extends Component {
 	constructor(props) {
 		super(props);
-		console.log(props);
 		this.state = {
 			description: {
 				value: '',
@@ -31,13 +30,6 @@ class TicketForm extends Component {
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
-
-	static get propTypes() {
-		return {
-			submitTicket: PropTypes.func.isRequired,
-			socket: PropTypes.object.isRequired
-		};
 	}
 
 	handleChange(e) {
@@ -84,8 +76,12 @@ class TicketForm extends Component {
 		}
 
 		if (this.state.description.value && this.state.location.value && this.state.contact.value) {
+			this.props.getCurrentUser();		// TODO: in future commit, this should be removed
+			if (!this.props.user.current) {	// when login is correctly implemented 
+				return;
+			}
 			this.props.submitTicket({
-				requestorId: 'dummyUserID',	// TODO: fetch the user ID
+				requestorId: this.props.user.current._id,
 				description: this.state.description.value,
 				tableNum: this.state.location.value,
 				contactInfo: this.state.contact.value
@@ -168,5 +164,10 @@ class TicketForm extends Component {
 		);
 	}
 }
+
+TicketForm.propTypes = {
+	submitTicket: PropTypes.func.isRequired,
+	socket: PropTypes.object.isRequired
+};
 
 export default TicketForm;

@@ -16,16 +16,6 @@ class Ticket extends Component {
 		this.claimTicket = this.claimTicket.bind(this);
 	}
 
-	static get propTypes() {
-		return {
-			requestorId: PropTypes.string.isRequired,
-			timeFiled: PropTypes.instanceOf(Date).isRequired,
-			description: PropTypes.string.isRequired,
-			tableNum: PropTypes.string.isRequired,
-			contactInfo: PropTypes.string.isRequired
-		};
-	}
-
 	reopenTicket() {
 		this.setState({ ticketOpen: true });
 	}
@@ -49,7 +39,7 @@ class Ticket extends Component {
 			<CardActions>
 				<div>
 					<Button onClick={this.reopenTicket}>
-							REOPEN TICKET
+						REOPEN TICKET
 					</Button>
 				</div>
 				<div>
@@ -64,15 +54,15 @@ class Ticket extends Component {
 			<Card>
 				<CardContent>
 					<Typography gutterBottom variant="headline" component="h2">
-						{this.props.name}
+						{this.props.requestorId}
 					</Typography>
 					<Typography gutterBottom variant="subheading">
 						{this.props.timestamp.toString()}
 					</Typography>
 
 					<p>{this.props.description} </p>
-					<p>{this.props.location} </p>
-					<p>{this.props.contact}</p>
+					<p>{this.props.tableNum} </p>
+					<p>{this.props.contactInfo}</p>
 				</CardContent>
 				{this.renderButtons()}
 			</Card>
@@ -80,5 +70,13 @@ class Ticket extends Component {
 		);
 	}
 }
+
+Ticket.propTypes = {
+	requestorId: PropTypes.string.isRequired,
+	timestamp: PropTypes.instanceOf(Date).isRequired,
+	description: PropTypes.string.isRequired,
+	tableNum: PropTypes.string.isRequired,
+	contactInfo: PropTypes.string.isRequired
+};
 
 export default Ticket;
