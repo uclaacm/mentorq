@@ -7,6 +7,8 @@ const server = http.createServer(app);
 const cors = require('cors');
 const config = require('./config');
 
+require('./models');
+
 app.use(cors({
 	credentials: true,
 	origin: true
