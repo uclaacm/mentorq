@@ -6,7 +6,7 @@
 		"@material-ui/icons": "^1.0.0-rc.0",
 		"axios": "^0.18.0",
 		"prop-types": "^15.6.2",
-		"react": "^15.5.4",
+		"react": "^16.4.1",
 		"react-dom": "^15.5.4",
 		"react-redux": "^5.0.5",
 		"react-router-dom": "^4.3.1",
