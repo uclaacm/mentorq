@@ -47,6 +47,21 @@ ticketSchema.statics.claim = function (mentor) {
 	});
 };
 
+ticketSchema.statics.unclaim = function () {
+	this.mentor = null;
+	this.isActive = true;
+
+	return new Promise((resolve, reject) => {
+		this.save((error, ticket) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve(ticket);
+			}
+		});
+	});
+};
+
 ticketSchema.statics.resolve = function () {
 	this.isResolved = true;
 
