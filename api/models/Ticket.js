@@ -15,10 +15,21 @@ const ticketSchema = new Schema({
 	isResolved: { type: Boolean, default: false }
 });
 
+/**
+ * Creates and saves a Ticket object in the database
+ * @param {ObjectId} requestor user filing the ticket
+ * @param {string} description description of ticket and problem
+ * @param {string} tableNum number of table at event
+ * @returns {Ticket} newly saved Ticket object
+ * @example
+ * const JoeBruin = await User.getById('#id');
+ * const ticket = await Ticket.create(JoeBruin, "Need help with MongoDB", "13");
+ * console.log(ticket);
+ */
 ticketSchema.statics.create = function (requestor, description, tableNum) {
 	const ticket = new this({
 		requestor,
-		timeFiled: Date.now,
+		timeFiled: Date.now(),
 		description,
 		tableNum
 	});
