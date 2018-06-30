@@ -6,9 +6,10 @@ const { Schema } = mongoose;
 let Ticket;
 
 const ticketSchema = new Schema({
-	requestor: { type: Schema.ObjectId, ref: 'User', required: true },
+	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
 	mentor: { type: Schema.ObjectId, ref: 'User' },
-	timeFiled: { type: Date, required: true },
+	contactInfo: { type: String, required: false },
+	timeFiled: { type: Number, required: true },
 	description: { type: String, required: true },
 	tableNum: { type: String, required: true },
 	isActive: { type: Boolean, default: true },
@@ -20,18 +21,20 @@ const ticketSchema = new Schema({
  * @param {ObjectId} requestor user filing the ticket
  * @param {string} description description of ticket and problem
  * @param {string} tableNum number of table at event
+ * @param {string} contactInfo how to contact the requestor
  * @returns {Ticket} newly saved Ticket object
  * @example
  * const JoeBruin = await User.getById('#id');
  * const ticket = await Ticket.create(JoeBruin, "Need help with MongoDB", "13");
  * console.log(ticket);
  */
-ticketSchema.statics.create = function (requestor, description, tableNum) {
+ticketSchema.statics.create = function (requestor, description, tableNum, contactInfo) {
 	const ticket = new this({
 		requestor,
 		timeFiled: Date.now(),
 		description,
-		tableNum
+		tableNum,
+		contactInfo
 	});
 
 	return new Promise((resolve, reject) => {

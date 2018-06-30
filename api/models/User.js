@@ -7,6 +7,7 @@ let User;
 // User Schema Definition
 const userSchema = new mongoose.Schema({
 	name: { type: String, required: true },
+	email: { type: String, required: true },
 	isAdmin: { type: Boolean, default: false },
 	isMentor: { type: Boolean, default: false },
 	skills: [String],
@@ -18,16 +19,18 @@ const userSchema = new mongoose.Schema({
 /**
  * Creates and saves a User object in the database
  * @param {string} user's name
+ * @param {string} user's email
  * @param {string} user's GoogleID (as hash)
  * @returns {User} newly saved User object
  * @example
- * const user = await User.create('Joe Bruin', 'someGoogleIdHash');
+ * const user = await User.create('Joe Bruin', 'email', 'someGoogleIdHash');
  * console.log(user);
  */
 
-userSchema.statics.create = function (name, googleId) {
+userSchema.statics.create = function (name, email, googleId) {
 	const user = new this({
 		name,
+		email,
 		skills: [],
 		googleId
 	});
@@ -222,6 +225,46 @@ userSchema.methods.removeSkill = function (skill) {
 	}
 
 	this.skills.splice(index, 1);
+
+	return new Promise((resolve, reject) => {
+		this.save((err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
+		});
+	});
+};
+
+/*
+ * Update name for the User object
+ * @param {string} name to update the User object
+ * @returns {User} changed user object
+ */
+
+userSchema.methods.updateName = function (name) {
+	this.name = name;
+
+	return new Promise((resolve, reject) => {
+		this.save((err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
+		});
+	});
+};
+
+/*
+ * Update email for the User object
+ * @param {string} email to update the User object
+ * @returns {User} changed user object
+ */
+
+userSchema.methods.updateEmail = function (email) {
+	this.email = email;
 
 	return new Promise((resolve, reject) => {
 		this.save((err, user) => {
