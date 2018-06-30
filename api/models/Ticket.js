@@ -3,6 +3,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+let Ticket;
+
 const ticketSchema = new Schema({
 	requestor: { type: Schema.ObjectId, ref: 'User', required: true },
 	mentor: { type: Schema.ObjectId, ref: 'User' },
@@ -27,6 +29,27 @@ ticketSchema.statics.create = function (requestor, description, tableNum) {
 				reject(error);
 			} else {
 				resolve(newTicket);
+			}
+		});
+	});
+};
+
+/**
+ * Read and Retrieve a Ticket object from the database
+ * @param {string} ticket's MongoDB ID
+ * @returns {User} one Ticket object with matching ID
+ * @example
+ * const ticket = await Ticket.getById('someId');
+ * console.log(ticket);
+ */
+
+ticketSchema.statics.getById = function (id) {
+	return new Promise((resolve, reject) => {
+		Ticket.findById(id, (err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
 			}
 		});
 	});
@@ -76,6 +99,6 @@ ticketSchema.statics.resolve = function () {
 	});
 };
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = Ticket;
