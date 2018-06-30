@@ -87,6 +87,7 @@ ticketSchema.statics.unclaim = function () {
 
 ticketSchema.statics.resolve = function () {
 	this.isResolved = true;
+	this.isActive = false;
 
 	return new Promise((resolve, reject) => {
 		this.save((error, ticket) => {

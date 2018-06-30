@@ -33,9 +33,20 @@ async function unclaim(req, res) {
 	}
 }
 
+async function resolve(req, res) {
+	try {
+		const ticket = await Ticket.getById(req.params.id);
+		await ticket.resolve();
+		res.json(ticket);
+	} catch (err) {
+		throw err;
+	}
+}
+
 module.exports = {
 	index,
 	test,
 	claim,
-	unclaim
+	unclaim,
+	resolve
 };
