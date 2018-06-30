@@ -11,5 +11,6 @@ router.get('/unclaim/:id', ticketController.unclaim);
 router.get('/resolve/:id', ticketController.resolve);
 
 router.post('/claim/:id', ticketController.claim);
+router.post('/create', ticketController.create);
 
 module.exports = router;
