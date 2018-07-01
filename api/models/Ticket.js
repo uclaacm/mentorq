@@ -18,19 +18,19 @@ const ticketSchema = new Schema({
 
 /**
  * Creates and saves a Ticket object in the database
- * @param {ObjectId} requestor user filing the ticket
- * @param {string} description description of ticket and problem
- * @param {string} tableNum number of table at event
- * @param {string} contactInfo how to contact the requestor
- * @returns {Ticket} newly saved Ticket object
+ * @param {ObjectID} requestorId ID of the user filing the ticket
+ * @param {string} description description of the issue
+ * @param {string} tableNum table number of the requestor
+ * @param {string} contactInfo contact information (email/phone) of requestor
+ * @returns {Promise<Ticket>} promise that resolves to newly saved Ticket object
  * @example
  * const JoeBruin = await User.getById('#id');
  * const ticket = await Ticket.create(JoeBruin, "Need help with MongoDB", "13");
  * console.log(ticket);
  */
-ticketSchema.statics.create = function (requestor, description, tableNum, contactInfo) {
+ticketSchema.statics.create = function (requestorId, description, tableNum, contactInfo) {
 	const ticket = new this({
-		requestor,
+		requestorId,
 		timeFiled: Date.now(),
 		description,
 		tableNum,
