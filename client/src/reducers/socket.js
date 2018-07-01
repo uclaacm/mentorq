@@ -8,33 +8,40 @@ export default function SocketReducer(state = {
 			...state,
 			message: action.message
 		};
-	case 'SOCKET_NEW_TICKET': {
+	case 'SOCKET_TICKET_NEW': {
 		const { timeFiled } = action.newTicket;
-		const ticketWithDate = { ...action.newTicket, timeFiled: new Date(timeFiled) };
+		const ticketWithDate = { ...action.newTicket, mentorName: null, timeFiled: new Date(timeFiled) };
 		return {
 			...state,
-			tickets: [...state.tickets, ticketWithDate]
+			tickets: [ticketWithDate, ...state.tickets]
 		};
 	}
-	case 'SOCKET_CLAIM_TICKET': {
-		const claimedTicket = { ...action.claimedTicket, mentor: action.mentor, isActive: false };
+	case 'SOCKET_TICKET_CLAIMED': {
 		return {
 			...state,
-			tickets: [...state.tickets, claimedTicket]
+			tickets: state.tickets.map(ticket => {
+				if (ticket._id === action.ticketId) {
+					return { ...ticket, mentorName: action.mentorName, isActive: false };
+				}
+				return ticket;
+			})
 		};
 	}
-	case 'SOCKET_UNCLAIM_TICKET': {
-		const unclaimedTicket = { ...action.unclaimedTicket, mentor: null, isActive: true };
+	case 'SOCKET_TICKET_UNCLAIMED': {
 		return {
 			...state,
-			tickets: [...state.tickets, unclaimedTicket]
+			tickets: state.tickets.map(ticket => {
+				if (ticket._id === action.ticketId) {
+					return { ...ticket, mentorName: null, isActive: true };
+				}
+				return ticket;
+			})
 		};
 	}
-	case 'SOCKET_RESOLVE_TICKET': {
-		const resolvedTicket = { ...action.resolvedTicket, isResolved: true, isActive: false };
+	case 'SOCKET_TICKET_RESOLVED': {
 		return {
 			...state,
-			tickets: [...state.tickets, resolvedTicket]
+			tickets: state.tickets.filter(({ _id }) => _id !== action.ticketId)
 		};
 	}
 	default:

@@ -7,6 +7,10 @@ export function submitTicket(ticket) {
 	return dispatch => dispatch({ type: 'socket/ticket/new', ticket });
 }
 
+export function claimTicket(ticketId) {
+	return dispatch => dispatch({ type: 'socket/ticket/claim', ticketId });
+}
+
 /**
  * @description Calls the API method to get username and update store
  */
