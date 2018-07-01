@@ -5,30 +5,29 @@ import PropTypes from 'prop-types';
 import { Nav, TicketList, HomeContainer, ProfileView, ActiveMentors, AdminPanel } from '../';
 
 class Main extends Component {
-	get isSignedIn() {
-		return Boolean(this.props.user.current);
-	}
-
 	render() {
+		const isSignedIn = Boolean(this.props.user.current);
+		const isAdmin = isSignedIn && this.props.user.current.isAdmin;
+
 		return (
 			<div>
-				<Nav {...this.props} />
+				<Nav isSignedIn={isSignedIn} isAdmin={isAdmin} />
 
 				{/* Alternate pages beneath navbar, based on current route*/}
 				<Switch>
 					<Route exact path='/' render={() => <HomeContainer {...this.props} />} />
 
 					<Route path='/profile' render={() =>
-						this.isSignedIn ? <ProfileView {...this.props} /> : <Redirect to='/' />
+						isSignedIn ? <ProfileView {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/tickets' render={() =>
-						this.isSignedIn ? <TicketList {...this.props} /> : <Redirect to='/' />
+						isSignedIn ? <TicketList {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/mentors' render={() =>
-						this.isSignedIn ? <ActiveMentors {...this.props} /> : <Redirect to='/' />
+						isSignedIn ? <ActiveMentors {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/admin' render={() =>
-						this.isSignedIn ? <AdminPanel {... this.props} /> : <Redirect to='/' />
+						isAdmin ? <AdminPanel {... this.props} /> : <Redirect to='/' />
 					} />
 				</Switch>
 			</div>
