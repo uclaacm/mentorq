@@ -37,21 +37,21 @@ export function socketTest(message) {
 	};
 }
 
-export function createTicket(newTicket) {
+export function ticketCreated(newTicket) {
 	return (dispatch, prevState) => { // eslint-disable-line
-		dispatch({ type: 'SOCKET_NEW_TICKET', newTicket });
+		dispatch({ type: 'SOCKET_TICKET_NEW', newTicket });
 	};
 }
 
-export function claimTicket(mentor, claimedTicket) {
+export function ticketClaimed(ticketId, mentorId) {
 	return (dispatch, prevState) => { // eslint-disable-line
-		dispatch({ type: 'SOCKET_CLAIM_TICKET', mentor, claimedTicket });
+		dispatch({ type: 'SOCKET_TICKET_CLAIMED', ticketId, mentorId });
 	};
 }
 
-export function unclaimTicket(unclaimedTicket) {
+export function ticketUnclaimed(ticketId) {
 	return (dispatch, prevState) => { // eslint-disable-line
-		dispatch({ type: 'SOCKET_UNCLAIMED_TICKET', unclaimedTicket });
+		dispatch({ type: 'SOCKET_TICKET_UNCLAIMED', ticketId });
 	};
 }
 
