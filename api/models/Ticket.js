@@ -7,7 +7,7 @@ let Ticket;
 
 const ticketSchema = new Schema({
 	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
-	mentor: { type: Schema.ObjectId, ref: 'User' },
+	mentorId: { type: Schema.ObjectId, ref: 'User' },
 	contactInfo: { type: String, required: false },
 	timeFiled: { type: Number, required: true },
 	description: { type: String, required: true },
@@ -69,8 +69,8 @@ ticketSchema.statics.getById = function (id) {
 	});
 };
 
-ticketSchema.statics.claim = function (mentor) {
-	this.mentor = mentor;
+ticketSchema.statics.claim = function (mentorId) {
+	this.mentorId = mentorId;
 	this.isActive = false;
 
 	return new Promise((resolve, reject) => {
@@ -85,7 +85,7 @@ ticketSchema.statics.claim = function (mentor) {
 };
 
 ticketSchema.statics.unclaim = function () {
-	this.mentor = null;
+	this.mentorId = null;
 	this.isActive = true;
 
 	return new Promise((resolve, reject) => {
