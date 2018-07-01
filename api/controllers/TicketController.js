@@ -1,7 +1,6 @@
 'use strict';
 
 const Ticket = require('../models/Ticket');
-const User = require('../models/User');
 
 function index(req, res) {
 	res.json('/ endpoint hit');
@@ -11,55 +10,33 @@ function test(req, res) {
 	res.json('/test endpoint hit');
 }
 
-async function create(req, res) {
-	res.json('/create endpoint hit');
-	try {
-		const requestor = await User.getById(req.body.user).__id;
-		const { description, tableNum } = req.body.description;
-		const newTicket = await Ticket.create(requestor, description, tableNum);
-		res.json(newTicket);
-	} catch (err) {
-		throw err;
-	}
+async function add(ticket) {
+	const { requestorId, description, tableNum, contactInfo } = ticket;
+	const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
+	this.socket.emit('action', { type: 'SOCKET_NEW_TICKET', newTicket });
 }
 
-async function claim(req, res) {
-	try {
-		const ticket = await Ticket.getById(req.params.id);
-		const mentor = req.query;
-		if (mentor !== undefined) {
-			await ticket.claim(mentor);
-		}
-		res.json(ticket);
-	} catch (err) {
-		throw err;
-	}
+async function claim(req) {
+	const ticket = await Ticket.getById(req.params.id);
+	const claimedTicket = await ticket.claim(req.params.mentor);
+	this.socket.emit('action', { type: 'SOCKET_CLAIM_TICKET', claimedTicket });
+}
+async function unclaim(req) {
+	const ticket = await Ticket.getById(req.params.id);
+	const unclaimedTicket = await ticket.unclaim();
+	this.socket.emit('action', { type: 'SOCKET_UNCLAIM_TICKET', unclaimedTicket });
 }
 
-async function unclaim(req, res) {
-	try {
-		const ticket = await Ticket.getById(req.params.id);
-		await ticket.unclaim();
-		res.json(ticket);
-	} catch (err) {
-		throw err;
-	}
-}
-
-async function resolve(req, res) {
-	try {
-		const ticket = await Ticket.getById(req.params.id);
-		await ticket.resolve();
-		res.json(ticket);
-	} catch (err) {
-		throw err;
-	}
+async function resolve(req) {
+	const ticket = await Ticket.getById(req.params.id);
+	const resolvedTicket = await ticket.resolve();
+	this.socket.emit('action', { type: 'SOCKET_RESOLVE_TICKET', resolvedTicket });
 }
 
 module.exports = {
 	index,
 	test,
-	create,
+	add,
 	claim,
 	unclaim,
 	resolve
