@@ -37,7 +37,7 @@ if (secret) {
 		try {
 			let user = await User.read(profile.id);
 			if (!user) {
-				user = await User.create(profile.displayName, profile.id);
+				user = await User.create(profile.displayName, profile.emails[0].value, profile.id);
 				// TODO: redirect to user to profile page
 			}
 			done(null, user);
