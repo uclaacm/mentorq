@@ -1,13 +1,6 @@
 import * as api from '../api';
 
 /**
- * @description Pings the socket to broadcast a new ticket
- */
-export function submitTicket(ticket) {
-	return dispatch => dispatch({ type: 'socket/ticket/new', ticket });
-}
-
-/**
  * @description Calls the API method to get username and update store
  */
 export function getTest(cb) {
@@ -22,7 +15,6 @@ export function getTest(cb) {
 	};
 }
 
-
 export function getCurrentUser() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getCurrentUser()
@@ -35,6 +27,24 @@ export function getCurrentUser() {
 export function socketTest(message) {
 	return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
+	};
+}
+
+export function createTicket(newTicket) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_NEW_TICKET', newTicket });
+	};
+}
+
+export function claimTicket(mentor, claimedTicket) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_CLAIM_TICKET', mentor, claimedTicket });
+	};
+}
+
+export function unclaimTicket(unclaimedTicket) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_UNCLAIMED_TICKET', unclaimedTicket });
 	};
 }
 

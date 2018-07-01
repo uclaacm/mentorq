@@ -23,7 +23,10 @@ module.exports = function (app, server) {
 				socketController.test(action.message);
 				break;
 			case 'socket/ticket/new':
-				socketController.addTicket(action.ticket).catch(() => {});
+				socketController.addTicket(action.newTicket).catch(() => { });
+				break;
+			case 'socket/ticket/claim/:id':
+				socketController.claimTicket(action.claimedTicket).catch(() => { });
 				break;
 			default:
 				break;
