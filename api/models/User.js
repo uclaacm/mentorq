@@ -299,25 +299,6 @@ userSchema.methods.updatePhone = function (phone) {
 	});
 };
 
-/*
- * Update phone for the User object
- * @param {string} phone to update the User object
- * @returns {User} changed user object
- */
-userSchema.methods.updatePhone = function (phone) {
-	this.phone = phone;
-
-	return new Promise((resolve, reject) => {
-		this.save((err, user) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(user);
-			}
-		});
-	});
-};
-
 User = mongoose.model('User', userSchema);
 
 module.exports = User;
