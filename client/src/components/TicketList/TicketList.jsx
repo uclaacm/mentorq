@@ -7,11 +7,7 @@ class TicketList extends Component {
 	render() {
 		return (
 			<div className="ticketList">
-				{this.props.socket.tickets.map((ticket, index) => {
-					return (
-						<Ticket {...ticket} key={index}/>
-					);
-				})}
+				{this.props.socket.tickets.map(ticket => <Ticket {...ticket} key={ticket._id}/>)}
 			</div>
 		);
 	}

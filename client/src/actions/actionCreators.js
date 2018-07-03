@@ -7,6 +7,10 @@ export function submitTicket(ticket) {
 	return dispatch => dispatch({ type: 'socket/ticket/new', ticket });
 }
 
+export function claimTicket(ticketId) {
+	return dispatch => dispatch({ type: 'socket/ticket/claim', ticketId });
+}
+
 /**
  * @description Calls the API method to get username and update store
  */
@@ -22,7 +26,6 @@ export function getTest(cb) {
 	};
 }
 
-
 export function getCurrentUser() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getCurrentUser()
@@ -33,8 +36,26 @@ export function getCurrentUser() {
 }
 
 export function socketTest(message) {
-    return (dispatch, prevState) => { // eslint-disable-line
+	return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
+	};
+}
+
+export function ticketCreated(newTicket) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_NEW', newTicket });
+	};
+}
+
+export function ticketClaimed(ticketId, mentorId) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_CLAIMED', ticketId, mentorId });
+	};
+}
+
+export function ticketUnclaimed(ticketId) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_UNCLAIMED', ticketId });
 	};
 }
 

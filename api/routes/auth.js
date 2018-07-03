@@ -7,7 +7,7 @@ const router = new express.Router();
 
 // TODO: Create controller to handle passport things
 router.get('/google', passport.authenticate('google', {
-	scope: ['https://www.googleapis.com/auth/plus.login'],
+	scope: ['profile', 'email'],
 	successRedirect: 'http://localhost:3000/',
 	failureRedirect: '/auth/google',
 	failureFlash: true
