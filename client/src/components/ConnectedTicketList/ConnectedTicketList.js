@@ -1,4 +1,3 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
 	claimTicket,
@@ -30,17 +29,13 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
+const ConnectedTicketList = connect(
+	mapStateToProps,
+	{
 		claimTicket,
 		unclaimTicket,
 		resolveTicket
-	}, dispatch);
-}
-
-const ConnectedTicketList = connect(
-	mapStateToProps,
-	mapDispatchToProps
+	}
 )(TicketList);
 
 export default ConnectedTicketList;
