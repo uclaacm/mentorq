@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Nav, TicketList, HomeContainer, ProfileView, ActiveMentors, AdminPanel } from '../';
 
 class Main extends Component {
-	isSignedIn() {
-		return this.props.user.current;
+	get isSignedIn() {
+		return Boolean(this.props.user.current);
 	}
 
 	render() {
@@ -19,16 +19,16 @@ class Main extends Component {
 					<Route exact path='/' render={() => <HomeContainer {...this.props} />} />
 
 					<Route path='/profile' render={() =>
-						this.isSignedIn() ? <ProfileView {...this.props} /> : <Redirect to='/' />
+						this.isSignedIn ? <ProfileView {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/tickets' render={() =>
-						this.isSignedIn() ? <TicketList {...this.props} /> : <Redirect to='/' />
+						this.isSignedIn ? <TicketList {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/mentors' render={() =>
-						this.isSignedIn() ? <ActiveMentors {...this.props} /> : <Redirect to='/' />
+						this.isSignedIn ? <ActiveMentors {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/admin' render={() =>
-						this.isSignedIn() ? <AdminPanel {... this.props} /> : <Redirect to='/' />
+						this.isSignedIn ? <AdminPanel {... this.props} /> : <Redirect to='/' />
 					} />
 				</Switch>
 			</div>

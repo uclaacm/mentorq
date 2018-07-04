@@ -5,7 +5,7 @@ import { Login } from '..';
 class SplashPage extends Component {
 	render() {
 		return (
-			<div className="SplashPage">
+			<div>
 				<Login {...this.props} />
 			</div>
 		);
