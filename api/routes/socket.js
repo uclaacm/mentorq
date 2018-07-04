@@ -28,6 +28,12 @@ module.exports = function (app, server) {
 			case 'socket/ticket/claim':
 				socketController.claimTicket(action.ticketId).catch(() => { });
 				break;
+			case 'socket/ticket/unclaim':
+				socketController.unclaimTicket(action.ticketId).catch(() => { });
+				break;
+			case 'socket/ticket/resolve':
+				socketController.resolveTicket(action.ticketId).catch(() => { });
+				break;
 			default:
 				break;
 			}
