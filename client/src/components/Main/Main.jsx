@@ -2,12 +2,16 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Nav, ConnectedTicketList, HomeContainer, ProfileView, ActiveMentors, AdminPanel } from '../';
+import {
+	Nav,
+	ConnectedTicketList,
+	HomeContainer,
+	ConnectedProfileView,
+	ConnectedActiveMentors,
+	AdminPanel
+} from '../';
 
-function Main(props) {
-	const isSignedIn = Boolean(props.user.current);
-	const isAdmin = isSignedIn && props.user.current.isAdmin;
-
+function Main({ isSignedIn, isAdmin }) {
 	return (
 		<div>
 			<Nav isSignedIn={isSignedIn} isAdmin={isAdmin} />
@@ -17,13 +21,13 @@ function Main(props) {
 				<Route exact path='/' render={() => <HomeContainer isSignedIn={isSignedIn} />} />
 
 				<Route path='/profile' render={() =>
-					isSignedIn ? <ProfileView {...props} /> : <Redirect to='/' />
+					isSignedIn ? <ConnectedProfileView /> : <Redirect to='/' />
 				} />
 				<Route path='/tickets' render={() =>
 					isSignedIn ? <ConnectedTicketList /> : <Redirect to='/' />
 				} />
 				<Route path='/mentors' render={() =>
-					isSignedIn ? <ActiveMentors {...props} /> : <Redirect to='/' />
+					isSignedIn ? <ConnectedActiveMentors /> : <Redirect to='/' />
 				} />
 				<Route path='/admin' render={() =>
 					isAdmin ? <AdminPanel /> : <Redirect to='/' />
@@ -34,7 +38,8 @@ function Main(props) {
 }
 
 Main.propTypes = {
-	user: PropTypes.object.isRequired
+	isSignedIn: PropTypes.bool.isRequired,
+	isAdmin: PropTypes.bool.isRequired
 };
 
 export default Main;
