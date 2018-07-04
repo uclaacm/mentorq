@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { ticketShape } from '../../shapes';
 
 function Ticket({
-	requestorId,
+	requestorName,
 	mentorName,
 	contactInfo,
 	timeFiled,
@@ -44,7 +44,7 @@ function Ticket({
 		<Card>
 			<CardContent>
 				<Typography gutterBottom variant="headline" component="h2">
-					{requestorId}
+					{requestorName}
 				</Typography>
 				<Typography gutterBottom variant="subheading">
 					{timeFiled.toString()}
@@ -63,9 +63,9 @@ function Ticket({
 Ticket.propTypes = {
 	...ticketShape,
 
-	claimTicket: PropTypes.func,
-	unclaimTicket: PropTypes.func,
-	resolveTicket: PropTypes.func
+	claimTicket: PropTypes.func.isRequired,
+	unclaimTicket: PropTypes.func.isRequired,
+	resolveTicket: PropTypes.func.isRequired
 };
 
 export default Ticket;
