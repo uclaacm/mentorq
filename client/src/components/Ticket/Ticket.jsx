@@ -4,7 +4,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+
+import { ticketShape } from '../../shapes';
 
 class Ticket extends Component {
 	constructor(props) {
@@ -57,7 +58,7 @@ class Ticket extends Component {
 						{this.props.requestorId}
 					</Typography>
 					<Typography gutterBottom variant="subheading">
-						{this.props.timestamp.toString()}
+						{this.props.timeFiled.toString()}
 					</Typography>
 
 					<p>{this.props.description} </p>
@@ -72,11 +73,7 @@ class Ticket extends Component {
 }
 
 Ticket.propTypes = {
-	requestorId: PropTypes.string.isRequired,
-	timestamp: PropTypes.instanceOf(Date).isRequired,
-	description: PropTypes.string.isRequired,
-	tableNum: PropTypes.string.isRequired,
-	contactInfo: PropTypes.string.isRequired
+	...ticketShape
 };
 
 export default Ticket;
