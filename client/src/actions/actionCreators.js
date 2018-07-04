@@ -11,6 +11,14 @@ export function claimTicket(ticketId) {
 	return dispatch => dispatch({ type: 'socket/ticket/claim', ticketId });
 }
 
+export function unclaimTicket(ticketId) {
+	return dispatch => dispatch({ type: 'socket/ticket/unclaim', ticketId });
+}
+
+export function resolveTicket(ticketId) {
+	return dispatch => dispatch({ type: 'socket/ticket/resolve', ticketId });
+}
+
 /**
  * @description Calls the API method to get username and update store
  */
