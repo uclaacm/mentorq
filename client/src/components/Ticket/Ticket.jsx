@@ -1,79 +1,71 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 import { ticketShape } from '../../shapes';
 
-class Ticket extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			ticketOpen: true
-		};
-		this.reopenTicket = this.reopenTicket.bind(this);
-		this.claimTicket = this.claimTicket.bind(this);
-	}
+function Ticket({
+	requestorId,
+	mentorName,
+	contactInfo,
+	timeFiled,
+	description,
+	tableNum,
+	isActive,
 
-	reopenTicket() {
-		this.setState({ ticketOpen: true });
-	}
+	claimTicket,
+	unclaimTicket,
+	resolveTicket
+}) {
+	const buttons = isActive ?
+		<CardActions>
+			<Button onClick={claimTicket}>
+				CLAIM TICKET
+			</Button>
+		</CardActions> :
+		<CardActions>
+			<div>
+				<Button onClick={unclaimTicket}>
+					REOPEN TICKET
+				</Button>
+			</div>
+			<div>
+				<Button onClick={resolveTicket}>
+					MARK AS COMPLETE
+				</Button>
+			</div>
+		</CardActions>;
 
-	claimTicket() {
-		this.setState({ ticketOpen: false });
-	}
+	return (
+		<Card>
+			<CardContent>
+				<Typography gutterBottom variant="headline" component="h2">
+					{requestorId}
+				</Typography>
+				<Typography gutterBottom variant="subheading">
+					{timeFiled.toString()}
+				</Typography>
 
-	renderButtons() {
-		if (this.state.ticketOpen) {
-			return (
-				<CardActions>
-					<Button onClick={this.claimTicket}>
-						CLAIM TICKET
-					</Button>
-				</CardActions>
-			);
-		}
-
-		return (
-			<CardActions>
-				<div>
-					<Button onClick={this.reopenTicket}>
-						REOPEN TICKET
-					</Button>
-				</div>
-				<div>
-					<Button>MARK AS COMPLETE</Button>
-				</div>
-			</CardActions>
-		);
-	}
-
-	render() {
-		return (
-			<Card>
-				<CardContent>
-					<Typography gutterBottom variant="headline" component="h2">
-						{this.props.requestorId}
-					</Typography>
-					<Typography gutterBottom variant="subheading">
-						{this.props.timeFiled.toString()}
-					</Typography>
-
-					<p>{this.props.description} </p>
-					<p>{this.props.tableNum} </p>
-					<p>{this.props.contactInfo}</p>
-				</CardContent>
-				{this.renderButtons()}
-			</Card>
-
-		);
-	}
+				<p>{description} </p>
+				<p>{tableNum} </p>
+				<p>{contactInfo}</p>
+				<p>Mentor: {mentorName}</p>
+			</CardContent>
+			{buttons}
+		</Card>
+	);
 }
 
 Ticket.propTypes = {
-	...ticketShape
+	...ticketShape,
+
+	claimTicket: PropTypes.func,
+	unclaimTicket: PropTypes.func,
+	resolveTicket: PropTypes.func
 };
 
 export default Ticket;
