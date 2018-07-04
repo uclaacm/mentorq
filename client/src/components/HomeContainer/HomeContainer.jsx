@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TicketForm, SplashPage } from '..';
+import { ConnectedTicketForm, SplashPage } from '..';
 
-class HomeContainer extends Component {
-	render() {
-		return (
-			this.props.user.current ? <TicketForm {...this.props} /> : <SplashPage />
-		);
+function HomeContainer({ isSignedIn }) {
+	if (!isSignedIn) {
+		return <SplashPage />;
 	}
+	return <ConnectedTicketForm />;
 }
 
 HomeContainer.propTypes = {
-	user: PropTypes.object.isRequired
+	isSignedIn: PropTypes.bool.isRequired
 };
 
 export default HomeContainer;
