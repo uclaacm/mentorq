@@ -59,13 +59,20 @@ class SocketController {
 		const requestorId = this.user._id;
 		const { description, tableNum, contactInfo } = ticket;
 		const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
+		const action = {
+			type: 'SOCKET_TICKET_NEW',
+			newTicket: {
+				...newTicket.toJSON(),
+				requestorName: this.user.name
+			}
+		};
 
 		// Notify admins and mentors that there is now a new ticket.
-		this.io.to('admins').emit('action', { type: 'SOCKET_TICKET_NEW', newTicket });
-		this.io.to('mentors').emit('action', { type: 'SOCKET_TICKET_NEW', newTicket });
+		this.io.to('admins').emit('action', action);
+		this.io.to('mentors').emit('action', action);
 
 		// Also notify the submitter that their new ticket has been acknowledged.
-		this.io.to(requestorId).emit('action', { type: 'SOCKET_TICKET_NEW', newTicket });
+		this.io.to(requestorId).emit('action', action);
 	}
 
 	async claimTicket(ticketId) {
