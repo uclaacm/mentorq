@@ -23,8 +23,6 @@ const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
-const ticketRouter = require('./routes/ticket');
-app.use('/ticket', ticketRouter);
 const socketio = require('./routes/socket')(app, server);
 app.set('socketio', socketio);
 
@@ -36,5 +34,6 @@ app.use((err, req, res, next) => {
 });
 
 server.listen(config.server.port, () => {
+	// eslint-disable-next-line no-console
 	console.log('Listening on port ' + config.server.port);
 });

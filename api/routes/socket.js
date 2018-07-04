@@ -1,7 +1,7 @@
 'use strict';
 
 const socketio = require('socket.io');
-const socketController = require('../controllers/SocketController');
+const SocketController = require('../controllers/SocketController');
 
 module.exports = function (app, server) {
 	const io = socketio.listen(server);
@@ -13,9 +13,9 @@ module.exports = function (app, server) {
 	});
 
 	io.on('connection', socket => {
-		socketController.connect(socket);
+		const socketController = new SocketController(io, socket);
 
-		socket.on('disconnect', socketController.disconnect);
+		socket.on('disconnect', () => socketController.disconnect());
 
 		socket.on('action', action => {
 			switch (action.type) {
@@ -23,7 +23,10 @@ module.exports = function (app, server) {
 				socketController.test(action.message);
 				break;
 			case 'socket/ticket/new':
-				socketController.addTicket(action.ticket);
+				socketController.submitTicket(action.ticket).catch(() => { });
+				break;
+			case 'socket/ticket/claim':
+				socketController.claimTicket(action.ticketId).catch(() => { });
 				break;
 			default:
 				break;

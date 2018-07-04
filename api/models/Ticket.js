@@ -3,11 +3,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+let Ticket;
+
 const ticketSchema = new Schema({
 	requestorId: { type: Schema.ObjectId, ref: 'User', required: true },
-	mentor: { type: Schema.ObjectId, ref: 'User' },
+	mentorId: { type: Schema.ObjectId, ref: 'User' },
 	contactInfo: { type: String, required: false },
-	timeFiled: { type: Date, required: true },
+	timeFiled: { type: Number, required: true },
 	description: { type: String, required: true },
 	tableNum: { type: String, required: true },
 	isActive: { type: Boolean, default: true },
@@ -16,15 +18,20 @@ const ticketSchema = new Schema({
 
 /**
  * Creates and saves a Ticket object in the database
- * @param {string(UserID)} requestorId the Id of the user who created the ticket
+ * @param {ObjectID} requestorId ID of the user filing the ticket
  * @param {string} description description of the issue
  * @param {string} tableNum table number of the requestor
  * @param {string} contactInfo contact information (email/phone) of requestor
+ * @returns {Promise<Ticket>} promise that resolves to newly saved Ticket object
+ * @example
+ * const JoeBruin = await User.getById('#id');
+ * const ticket = await Ticket.create(JoeBruin, "Need help with MongoDB", "13");
+ * console.log(ticket);
  */
 ticketSchema.statics.create = function (requestorId, description, tableNum, contactInfo) {
 	const ticket = new this({
 		requestorId,
-		timeFiled: Date.now,
+		timeFiled: Date.now(),
 		description,
 		tableNum,
 		contactInfo
@@ -41,9 +48,45 @@ ticketSchema.statics.create = function (requestorId, description, tableNum, cont
 	});
 };
 
-ticketSchema.statics.claim = function (mentor) {
-	this.mentor = mentor;
+/**
+ * Read and Retrieve a Ticket object from the database
+ * @param {string} ticket's MongoDB ID
+ * @returns {User} one Ticket object with matching ID
+ * @example
+ * const ticket = await Ticket.getById('someId');
+ * console.log(ticket);
+ */
+
+ticketSchema.statics.getById = function (id) {
+	return new Promise((resolve, reject) => {
+		Ticket.findById(id, (err, user) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(user);
+			}
+		});
+	});
+};
+
+ticketSchema.statics.claim = function (mentorId) {
+	this.mentorId = mentorId;
 	this.isActive = false;
+
+	return new Promise((resolve, reject) => {
+		this.save((error, ticket) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve(ticket);
+			}
+		});
+	});
+};
+
+ticketSchema.statics.unclaim = function () {
+	this.mentorId = null;
+	this.isActive = true;
 
 	return new Promise((resolve, reject) => {
 		this.save((error, ticket) => {
@@ -58,6 +101,7 @@ ticketSchema.statics.claim = function (mentor) {
 
 ticketSchema.statics.resolve = function () {
 	this.isResolved = true;
+	this.isActive = false;
 
 	return new Promise((resolve, reject) => {
 		this.save((error, ticket) => {
@@ -70,6 +114,6 @@ ticketSchema.statics.resolve = function () {
 	});
 };
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = Ticket;

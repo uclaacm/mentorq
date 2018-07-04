@@ -7,35 +7,55 @@ export function submitTicket(ticket) {
 	return dispatch => dispatch({ type: 'socket/ticket/new', ticket });
 }
 
+export function claimTicket(ticketId) {
+	return dispatch => dispatch({ type: 'socket/ticket/claim', ticketId });
+}
+
 /**
  * @description Calls the API method to get username and update store
  */
 export function getTest(cb) {
-    return (dispatch, prevState) => { // eslint-disable-line
+	return (dispatch, prevState) => { // eslint-disable-line
 		api.getTest()
 			.then(response => dispatch({ type: 'USER_TEST', test: response }))
 			.then(() => {
 				if (cb) {
 					cb();
 				}
-			})
-			.catch(error => console.error('Error in getTest: ' + error));
+			});
 	};
 }
-
 
 export function getCurrentUser() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getCurrentUser()
-			.then(currentUser => {
-				dispatch({ type: 'SET_CURRENT_USER', currentUser });
+			.then(current => {
+				dispatch({ type: 'SET_CURRENT_USER', current });
 			});
 	};
 }
 
 export function socketTest(message) {
-    return (dispatch, prevState) => { // eslint-disable-line
+	return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
+	};
+}
+
+export function ticketCreated(newTicket) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_NEW', newTicket });
+	};
+}
+
+export function ticketClaimed(ticketId, mentorId) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_CLAIMED', ticketId, mentorId });
+	};
+}
+
+export function ticketUnclaimed(ticketId) {
+	return (dispatch, prevState) => { // eslint-disable-line
+		dispatch({ type: 'SOCKET_TICKET_UNCLAIMED', ticketId });
 	};
 }
 
@@ -45,7 +65,6 @@ export function socketTest(message) {
 export function getActiveMentors() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getActiveMentors()
-			.then(response => dispatch({ type: 'GET_ACTIVE_MENTORS', mentors: response }))
-			.catch(error => console.error('Error in getActiveMentors: ' + error));
+			.then(response => dispatch({ type: 'GET_ACTIVE_MENTORS', mentors: response }));
 	};
 }
