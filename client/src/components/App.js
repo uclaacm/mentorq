@@ -3,24 +3,17 @@
  * to bind the action creators and datastore to properties in the component
  */
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as actionCreators from '../actions/actionCreators';
 import Main from './Main/Main';
 
 // These are the properties we'll automatically pass to Main
 function mapStateToProps(state) {
-	return state;
+	const isSignedIn = Boolean(state.user.current);
+	const isAdmin = isSignedIn && state.user.current.isAdmin;
+	return { isSignedIn, isAdmin };
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators(actionCreators, dispatch);
-}
-
-const App = withRouter(connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Main));
+const App = withRouter(connect(mapStateToProps)(Main));
 
 export default App;

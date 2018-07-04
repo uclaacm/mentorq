@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Lens } from '@material-ui/icons';
 import PropTypes from 'prop-types';
+
+import { userShape } from '../../shapes';
 
 const iconStyles = {
 	fontSize: 16,
@@ -11,35 +13,41 @@ const iconStyles = {
 	verticalAlign: 'top'
 };
 
-class ActiveMentors extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			waitMinute: 100
-		};
-		this.props.getActiveMentors();
+let initing = true;
+
+function ActiveMentors({
+	mentors,
+	getActiveMentors
+}) {
+	// TODO: Make this live.
+	if (initing) {
+		getActiveMentors();
+		initing = false;
 	}
 
-	render() {
-		const numActive = this.props.user.mentors.length;
-		return (
-			<Card>
-				<CardContent>
-					<p>
-						<Lens style={iconStyles} />
-						<strong>{` ${numActive}`}</strong>
-						{`${numActive > 1 ? ' mentors' : ' mentor'} online. 
-						Estimated wait: `} <strong>{this.state.waitMinute} minutes</strong>
-					</p>
-				</CardContent>
-			</Card>
-		);
-	}
+	const waitMinute = 100; // TODO
+	const numActive = mentors.length;
+	return (
+		<Card>
+			<CardContent>
+				<p>
+					<Lens style={iconStyles} />
+					<strong>{` ${numActive}`}</strong>
+					{`${numActive > 1 ? ' mentors' : ' mentor'} online.
+					Estimated wait: `} <strong>{waitMinute} minutes</strong>
+				</p>
+			</CardContent>
+		</Card>
+	);
 }
 
 ActiveMentors.propTypes = {
-	user: PropTypes.object.isRequired,
+	mentors: PropTypes.arrayOf(PropTypes.shape(userShape).isRequired),
 	getActiveMentors: PropTypes.func.isRequired
+};
+
+ActiveMentors.defaultProps = {
+	mentors: []
 };
 
 export default ActiveMentors;
