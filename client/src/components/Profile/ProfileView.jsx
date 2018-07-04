@@ -98,6 +98,7 @@ class ProfileView extends Component {
 
 		// TODO: Send info to server
 		if (name && email) {
+			// eslint-disable-next-line no-console
 			console.log(`Info was submitted: name: ${name} phone: ${phone} email: ${email}`);
 		}
 	}
