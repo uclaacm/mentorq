@@ -10,18 +10,33 @@ export default function SocketReducer(state = {
 		};
 	case 'SOCKET_TICKET_NEW': {
 		const { timeFiled } = action.newTicket;
-		const ticketWithDate = { ...action.newTicket, mentorName: null, timeFiled: new Date(timeFiled) };
+		const ticketWithDate = {
+			...action.newTicket,
+			mentorName: null, // not in the Ticket model but useful for frontend
+			timeFiled: new Date(timeFiled)
+		};
 		return {
 			...state,
 			tickets: [ticketWithDate, ...state.tickets]
 		};
 	}
 	case 'SOCKET_TICKET_CLAIMED': {
+		const {
+			ticketId,
+			mentorId,
+			mentorName
+		} = action;
+
 		return {
 			...state,
 			tickets: state.tickets.map(ticket => {
-				if (ticket._id === action.ticketId) {
-					return { ...ticket, mentorName: action.mentorName, isActive: false };
+				if (ticket._id === ticketId) {
+					return {
+						...ticket,
+						mentorId,
+						mentorName,
+						isActive: false
+					};
 				}
 				return ticket;
 			})
@@ -32,7 +47,12 @@ export default function SocketReducer(state = {
 			...state,
 			tickets: state.tickets.map(ticket => {
 				if (ticket._id === action.ticketId) {
-					return { ...ticket, mentorName: null, isActive: true };
+					return {
+						...ticket,
+						mentorId: null,
+						mentorName: null,
+						isActive: true
+					};
 				}
 				return ticket;
 			})

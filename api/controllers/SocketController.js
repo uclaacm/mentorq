@@ -80,6 +80,7 @@ class SocketController {
 		const action = {
 			type: 'SOCKET_TICKET_CLAIMED',
 			ticketId,
+			mentorId: this.user._id,
 			mentorName: this.user.name
 		};
 		this.io.to('admins').emit('action', action);
