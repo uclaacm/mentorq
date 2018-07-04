@@ -161,10 +161,7 @@ class TicketForm extends Component {
 }
 
 TicketForm.propTypes = {
-	submitTicket: PropTypes.func.isRequired,
-	getCurrentUser: PropTypes.func.isRequired,
-	socket: PropTypes.object.isRequired,
-	user: PropTypes.string
+	submitTicket: PropTypes.func.isRequired
 };
 
 export default TicketForm;
