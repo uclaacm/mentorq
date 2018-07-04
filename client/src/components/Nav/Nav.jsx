@@ -38,25 +38,27 @@ function Nav({
 }) {
 	const buttons = [];
 	if (isSignedIn) {
-		buttons.push(<PrettyLink component={IconButton} to='/profile' aria-label='Profile'>
-			<AccountCircle />
-		</PrettyLink>);
+		buttons.push(
+			<PrettyLink key='profile' component={IconButton} to='/profile' aria-label='Profile'>
+				<AccountCircle />
+			</PrettyLink>
+		);
 	}
-	buttons.push(<Typography
-		component={Link} to='/'
-		variant='title' color='inherit' className='toolbar-link'>
+	buttons.push(
+		<Typography key='title' component={Link} to='/' variant='title' color='inherit' className='toolbar-link'>
 			MentorQ
-	</Typography>);
+		</Typography>
+	);
 	if (isSignedIn) {
 		buttons.push(
-			<PrettyLink to='/tickets'>Tickets</PrettyLink>,
-			<PrettyLink to='/mentors'>Mentors</PrettyLink>
+			<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>,
+			<PrettyLink key='mentors' to='/mentors'>Mentors</PrettyLink>
 		);
 		if (isAdmin) {
-			buttons.push(<PrettyLink to='/admin'>Admin Panel</PrettyLink>);
+			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
 	} else {
-		buttons.push(<Button href="http://localhost:8080/auth/google" color="inherit">Login</Button>);
+		buttons.push(<Button key='login' href="http://localhost:8080/auth/google" color="inherit">Login</Button>);
 	}
 
 	return (
