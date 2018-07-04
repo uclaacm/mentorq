@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Nav, TicketList, HomeContainer, ProfileView, ActiveMentors, AdminPanel } from '../';
+import { Nav, ConnectedTicketList, HomeContainer, ProfileView, ActiveMentors, AdminPanel } from '../';
 
 class Main extends Component {
 	render() {
@@ -21,7 +21,7 @@ class Main extends Component {
 						isSignedIn ? <ProfileView {...this.props} /> : <Redirect to='/' />
 					} />
 					<Route path='/tickets' render={() =>
-						isSignedIn ? <TicketList {...this.props} /> : <Redirect to='/' />
+						isSignedIn ? <ConnectedTicketList /> : <Redirect to='/' />
 					} />
 					<Route path='/mentors' render={() =>
 						isSignedIn ? <ActiveMentors {...this.props} /> : <Redirect to='/' />
