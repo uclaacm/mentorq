@@ -114,6 +114,48 @@ ticketSchema.statics.resolve = function () {
 	});
 };
 
+ticketSchema.statics.getRelevantTickets = async function (user) {
+	const query = this.find();
+	query.setOptions({ lean: true });
+	query.populate({
+		path: 'requestorId',
+		select: 'name'
+	});
+	query.populate({
+		path: 'mentorId',
+		select: 'name'
+	});
+
+	if (user.isAdmin) {
+		// If the user is an admin, every unresolved ticket is relevant.
+		query.find({ isResolved: false });
+	} else if (user.isMentor) {
+		// If the user is a mentor, all unresolved tickets the user claimed + all
+		// unclaimed tickets are relevant.
+		query.or([{ isResolved: false, mentorId: user._id }, { isActive: true }]);
+	} else {
+		// If the user is neither, all unresolved tickets requested by the student
+		// are relevant.
+		query.find({ isResolved: false, requestorId: user._id });
+	}
+
+	const res = await query.exec();
+	for (const ticket of res) {
+		const requestorId = ticket.requestorId._id;
+		const requestorName = ticket.requestorId.name;
+		ticket.requestorId = requestorId;
+		ticket.requestorName = requestorName;
+
+		if (ticket.mentorId) {
+			const mentorId = ticket.mentorId._id;
+			const mentorName = ticket.mentorId.name;
+			ticket.mentorId = mentorId;
+			ticket.mentorName = mentorName;
+		}
+	}
+	return res;
+};
+
 Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = Ticket;

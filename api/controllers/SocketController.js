@@ -3,6 +3,8 @@
 const Ticket = require('../models/Ticket');
 const User = require('../models/User');
 
+const { getInitialState } = require('./ReduxStateController');
+
 class SocketController {
 	constructor(io, socket) {
 		this.io = io;
@@ -31,6 +33,19 @@ class SocketController {
 
 			// eslint-disable-next-line no-console
 			console.log(`${user.name} connected`);
+
+			(async () => {
+				try {
+					const initialState = await getInitialState(io, user);
+					// Make sure the user hasn't disconnected while we are getting the initial state.
+					if (this.socket) {
+						this.socket.emit('action', { type: 'SOCKET_INITIAL_STATE', initialState });
+					}
+				} catch (err) {
+					// eslint-disable-next-line no-console
+					console.warn(err);
+				}
+			})();
 		} else {
 			this.user = null;
 			// eslint-disable-next-line no-console

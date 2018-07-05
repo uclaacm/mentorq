@@ -19,18 +19,6 @@ export function resolveTicket(ticketId) {
 	return dispatch => dispatch({ type: 'socket/ticket/resolve', ticketId });
 }
 
-/**
- * @description Calls the API method to get username and update store
- */
-export function getCurrentUser() {
-	return (dispatch, prevState) => { // eslint-disable-line
-		api.getCurrentUser()
-			.then(current => {
-				dispatch({ type: 'SET_CURRENT_USER', current });
-			});
-	};
-}
-
 export function socketTest(message) {
 	return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'socket/test', message });
