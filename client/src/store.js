@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
-
-// import the root reducer
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import persistState from 'redux-localstorage';
 
 // import socket.io
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 
+// import the root reducer
 import rootReducer from './reducers/index';
 import { serverBaseURL } from './config';
 
@@ -17,10 +17,12 @@ const socket = io(String(serverBaseURL));
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
 const store = createStore(
-	rootReducer, defaultState,
+	rootReducer,
+	defaultState,
 	composeWithDevTools(
 		applyMiddleware(thunk),
-		applyMiddleware(socketIoMiddleware)
+		applyMiddleware(socketIoMiddleware),
+		persistState()
 	)
 );
 

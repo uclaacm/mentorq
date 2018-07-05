@@ -33,24 +33,24 @@ class SocketController {
 
 			// eslint-disable-next-line no-console
 			console.log(`${user.name} connected`);
-
-			(async () => {
-				try {
-					const initialState = await getInitialState(io, user);
-					// Make sure the user hasn't disconnected while we are getting the initial state.
-					if (this.socket) {
-						this.socket.emit('action', { type: 'SOCKET_INITIAL_STATE', initialState });
-					}
-				} catch (err) {
-					// eslint-disable-next-line no-console
-					console.warn(err);
-				}
-			})();
 		} else {
 			this.user = null;
 			// eslint-disable-next-line no-console
 			console.log('An anonymous user connected');
 		}
+
+		(async () => {
+			try {
+				const initialState = await getInitialState(io, this.user);
+				// Make sure the user hasn't disconnected while we are getting the initial state.
+				if (this.socket) {
+					this.socket.emit('action', { type: 'SOCKET_INITIAL_STATE', initialState });
+				}
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.warn(err);
+			}
+		})();
 	}
 
 	disconnect() {
