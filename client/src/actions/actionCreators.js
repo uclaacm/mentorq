@@ -22,18 +22,6 @@ export function resolveTicket(ticketId) {
 /**
  * @description Calls the API method to get username and update store
  */
-export function getTest(cb) {
-	return (dispatch, prevState) => { // eslint-disable-line
-		api.getTest()
-			.then(response => dispatch({ type: 'USER_TEST', test: response }))
-			.then(() => {
-				if (cb) {
-					cb();
-				}
-			});
-	};
-}
-
 export function getCurrentUser() {
 	return (dispatch, prevState) => { // eslint-disable-line
 		api.getCurrentUser()

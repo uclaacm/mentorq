@@ -6,7 +6,6 @@ const router = new express.Router();
 const userController = require('../controllers/UserController');
 
 router.get('/', userController.getAll);
-router.get('/test', userController.test);
 router.get('/current', userController.current);
 router.get('/mentors/active', userController.getActiveMentors);
 

@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
+import { authURL } from '../Login/Login';
+
 import './Nav.css';
 
 function PrettyLink({
@@ -58,7 +60,7 @@ function Nav({
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
 	} else {
-		buttons.push(<Button key='login' href="http://localhost:8080/auth/google" color="inherit">Login</Button>);
+		buttons.push(<Button key='login' href={authURL} color="inherit">Login</Button>);
 	}
 
 	return (
