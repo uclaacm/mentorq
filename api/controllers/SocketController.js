@@ -1,6 +1,7 @@
 'use strict';
 
 const Ticket = require('../models/Ticket');
+const User = require('../models/User');
 
 class SocketController {
 	constructor(io, socket) {
@@ -17,10 +18,14 @@ class SocketController {
 
 			// Make the admin room and mentor room disjoint:
 			// admins = may or may not be mentor
-			// mentors = must not be admin
+			// mentors = may or may not be admin
+			// mentorsOnly = must not be admin
 			if (user.isAdmin) {
 				socket.join('admins');
 			} else if (user.isMentor) {
+				socket.join('mentorsOnly');
+			}
+			if (user.isMentor) {
 				socket.join('mentors');
 			}
 
@@ -73,6 +78,9 @@ class SocketController {
 
 		// Also notify the submitter that their new ticket has been acknowledged.
 		this.io.to(requestorId).emit('action', action);
+		if (!this.user.isAdmin && !this.user.isMentor) {
+			this.io.to(requestorId).emit('action', action);
+		}
 	}
 
 	async claimTicket(ticketId) {
@@ -91,10 +99,13 @@ class SocketController {
 			mentorName: this.user.name
 		};
 		this.io.to('admins').emit('action', action);
-		this.io.to('mentors').emit('action', action);
+		this.io.to('mentorsOnly').emit('action', action);
 
 		// Also notify the submitter that their ticket has been claimed.
-		this.io.to(ticket.requestorId).emit('action', action);
+		const requestor = await User.getById(ticket.requestorId);
+		if (!requestor.isAdmin && !requestor.isMentor) {
+			this.io.to(requestor._id).emit('action', action);
+		}
 	}
 
 	async unclaimTicket(ticketId) {
@@ -108,10 +119,13 @@ class SocketController {
 		// Notify admins and mentors that someone unclaimed a ticket.
 		const action = { type: 'SOCKET_TICKET_UNCLAIMED', ticketId };
 		this.io.to('admins').emit('action', action);
-		this.io.to('mentors').emit('action', action);
+		this.io.to('mentorsOnly').emit('action', action);
 
 		// Also notify the submitter that their ticket has been unclaimed.
-		this.io.to(ticket.requestorId).emit('action', action);
+		const requestor = await User.getById(ticket.requestorId);
+		if (!requestor.isAdmin && !requestor.isMentor) {
+			this.io.to(requestor._id).emit('action', action);
+		}
 	}
 
 	async resolveTicket(ticketId) {
@@ -125,10 +139,13 @@ class SocketController {
 		// Notify admins and mentors that a ticket has been resolved.
 		const action = { type: 'SOCKET_TICKET_RESOLVED', ticketId };
 		this.io.to('admins').emit('action', action);
-		this.io.to('mentors').emit('action', action);
+		this.io.to('mentorsOnly').emit('action', action);
 
 		// Also notify the submitter that their ticket has been resolved.
-		this.io.to(ticket.requestorId).emit('action', action);
+		const requestor = await User.getById(ticket.requestorId);
+		if (!requestor.isAdmin && !requestor.isMentor) {
+			this.io.to(requestor._id).emit('action', action);
+		}
 	}
 }
 
