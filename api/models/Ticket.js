@@ -69,7 +69,7 @@ ticketSchema.statics.getById = function (id) {
 	});
 };
 
-ticketSchema.statics.claim = function (mentorId) {
+ticketSchema.methods.claim = function (mentorId) {
 	this.mentorId = mentorId;
 	this.isActive = false;
 
@@ -84,7 +84,7 @@ ticketSchema.statics.claim = function (mentorId) {
 	});
 };
 
-ticketSchema.statics.unclaim = function () {
+ticketSchema.methods.unclaim = function () {
 	this.mentorId = null;
 	this.isActive = true;
 
@@ -99,7 +99,7 @@ ticketSchema.statics.unclaim = function () {
 	});
 };
 
-ticketSchema.statics.resolve = function () {
+ticketSchema.methods.resolve = function () {
 	this.isResolved = true;
 	this.isActive = false;
 
