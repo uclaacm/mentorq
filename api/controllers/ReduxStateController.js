@@ -9,6 +9,18 @@ const { getActiveMentors } = require('./UserController');
  * @param {User} user The newly connected user
  */
 async function getInitialState(io, user) {
+	if (!user) {
+		return {
+			user: {
+				mentors: [],
+				current: null
+			},
+			socket: {
+				tickets: []
+			}
+		};
+	}
+
 	const [mentors, tickets] =
 		await Promise.all([getActiveMentors(io), Ticket.getRelevantTickets(user)]);
 	return {
