@@ -6,15 +6,21 @@ function current(req, res) {
 	res.json(req.user);
 }
 
-async function getActiveMentors(req, res, next) {
-	try {
-		const connectedUsers = await getConnectedRegistered(req);
-		const activeMentors = [];
-		for (const user of connectedUsers) {
-			if (user.isMentor) {
-				activeMentors.push(user);
-			}
+async function getActiveMentors(io) {
+	const connectedUsers = await getConnectedRegistered(io);
+	const activeMentors = [];
+	for (const user of connectedUsers) {
+		if (user.isMentor) {
+			activeMentors.push(user);
 		}
+	}
+	return activeMentors;
+}
+
+async function getActiveMentorsRoute(req, res, next) {
+	try {
+		const io = req.app.get('socketio');
+		const activeMentors = await getActiveMentors(io);
 		res.json(activeMentors);
 	} catch (err) {
 		next(err);
@@ -46,8 +52,7 @@ async function getAll(req, res, next) {
 	}
 }
 
-function getConnectedRegistered(req) {
-	const io = req.app.get('socketio');
+function getConnectedRegistered(io) {
 	const rootNamespace = io.sockets;
 	const connectedSockets = rootNamespace.connected;
 	const activeUserIds = new Set();
@@ -70,6 +75,7 @@ function getConnectedRegistered(req) {
 module.exports = {
 	current,
 	getActiveMentors,
+	getActiveMentorsRoute,
 	getAll,
 	update
 };

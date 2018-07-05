@@ -1,3 +1,4 @@
+// N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
 export default function SocketReducer(state = {
 	message: null,
 	tickets: []

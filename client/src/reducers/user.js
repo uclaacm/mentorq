@@ -1,3 +1,4 @@
+// N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
 export default function UserReducer(state = { mentors: [], current: null }, action) {
 	switch (action.type) {
 	case 'USER_TEST':

@@ -12,11 +12,3 @@ function get(url) {
 export function getActiveMentors() {
 	return get('user/mentors/active');
 }
-
-/**
- * @description Makes server request for current user
- * @returns {User} current user
- */
-export function getCurrentUser() {
-	return get('user/current');
-}

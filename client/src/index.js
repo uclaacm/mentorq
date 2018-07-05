@@ -12,12 +12,6 @@ import { App } from './components';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css'; // Our own main stylesheet
 
-// TODO: This should be removed when
-// https://github.com/uclaacm/mentorq/issues/78
-// is fixed.
-import { getCurrentUser } from './actions/actionCreators';
-store.dispatch(getCurrentUser());
-
 const router =
 	<Provider store={store}>
 		<BrowserRouter>
