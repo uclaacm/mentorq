@@ -7,7 +7,7 @@ export const ticketShape = {
 	mentorId: PropTypes.string,
 	mentorName: PropTypes.string,
 	contactInfo: PropTypes.string.isRequired,
-	timeFiled: PropTypes.instanceOf(Date).isRequired,
+	timeFiled: PropTypes.number.isRequired,
 	description: PropTypes.string.isRequired,
 	tableNum: PropTypes.string.isRequired,
 	isActive: PropTypes.bool

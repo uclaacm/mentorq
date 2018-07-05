@@ -47,7 +47,7 @@ function Ticket({
 					{requestorName}
 				</Typography>
 				<Typography gutterBottom variant="subheading">
-					{timeFiled.toString()}
+					{new Date(timeFiled).toString()}
 				</Typography>
 
 				<p>{description} </p>
