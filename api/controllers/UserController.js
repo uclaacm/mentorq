@@ -2,10 +2,6 @@
 
 const User = require('../models/User');
 
-function test(req, res) {
-	res.json('/test endpoint hit');
-}
-
 function current(req, res) {
 	res.json(req.user);
 }
@@ -72,7 +68,6 @@ function getConnectedRegistered(req) {
 }
 
 module.exports = {
-	test,
 	current,
 	getActiveMentors,
 	getAll,

@@ -9,11 +9,11 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 
 import rootReducer from './reducers/index';
-import config from './config';
+import { serverBaseURL } from './config';
 
 const defaultState = {};
 
-const socket = io(`http://${config.server.host}:${config.server.port}`);
+const socket = io(String(serverBaseURL));
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
 const store = createStore(
