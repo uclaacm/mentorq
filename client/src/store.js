@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux';
-import { createBrowserHistory } from 'history';
 
 // import the root reducer
 import thunk from 'redux-thunk';
@@ -33,5 +32,4 @@ if (module.hot) {
 	});
 }
 
-export const history = createBrowserHistory();
 export default store;
