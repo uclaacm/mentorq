@@ -17,7 +17,6 @@ async function getInitialState(io, user) {
 			current: user
 		},
 		socket: {
-			message: null,
 			tickets
 		}
 	};

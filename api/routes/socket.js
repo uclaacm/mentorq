@@ -19,9 +19,6 @@ module.exports = function (app, server) {
 
 		socket.on('action', action => {
 			switch (action.type) {
-			case 'socket/test':
-				socketController.test(action.message);
-				break;
 			case 'socket/ticket/new':
 				socketController.submitTicket(action.ticket).catch(() => { });
 				break;

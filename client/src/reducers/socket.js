@@ -1,14 +1,8 @@
 // N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
 export default function SocketReducer(state = {
-	message: null,
 	tickets: []
 }, action) {
 	switch (action.type) {
-	case 'SOCKET_TEST':
-		return {
-			...state,
-			message: action.message
-		};
 	case 'SOCKET_TICKET_NEW': {
 		const { timeFiled } = action.newTicket;
 		const ticketWithDate = {
