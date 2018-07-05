@@ -19,12 +19,6 @@ export function resolveTicket(ticketId) {
 	return dispatch => dispatch({ type: 'socket/ticket/resolve', ticketId });
 }
 
-export function socketTest(message) {
-	return (dispatch, prevState) => { // eslint-disable-line
-		dispatch({ type: 'socket/test', message });
-	};
-}
-
 export function ticketCreated(newTicket) {
 	return (dispatch, prevState) => { // eslint-disable-line
 		dispatch({ type: 'SOCKET_TICKET_NEW', newTicket });

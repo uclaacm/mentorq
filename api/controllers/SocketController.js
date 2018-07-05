@@ -65,12 +65,6 @@ class SocketController {
 		this.socket = null;
 	}
 
-	test(message) {
-		// eslint-disable-next-line no-console
-		console.log('Server received from client socket: ', message);
-		this.socket.emit('action', { type: 'SOCKET_TEST', message: 'Hello from server!' });
-	}
-
 	async submitTicket(ticket) {
 		if (!this.user) {
 			return;
