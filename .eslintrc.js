@@ -286,5 +286,10 @@ module.exports = {
 		"symbol-description": "error",
 		"template-curly-spacing": ["error", "never"],
 		"yield-star-spacing": ["error", "after"]
+	},
+	"settings": {
+		"react": {
+			"version": "16.6.1"
+		}
 	}
 };
