@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ticketShape } from '../../shapes';
 import TicketEntry from './TicketEntry';
 
-const styles = theme => ({
+const styles = () => ({
 	ticket: {
 		display: 'flex',
 		flexDirection: 'column'
@@ -21,10 +21,6 @@ const styles = theme => ({
 	},
 	buttons: {
 		justifyContent: 'center'
-	},
-	claim: {
-		backgroundColor: theme.palette.secondary.main,
-		color: theme.palette.common.white
 	}
 });
 
@@ -60,7 +56,7 @@ function Ticket({
 }) {
 	const buttons = isActive ?
 		<CardActions className={classes.buttons}>
-			<Button className={classes.claim} onClick={claimTicket}>CLAIM</Button>
+			<Button color='secondary' variant='contained' onClick={claimTicket}>CLAIM</Button>
 		</CardActions> :
 		<CardActions className={classes.buttons}>
 			<div>
