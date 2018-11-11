@@ -30,7 +30,7 @@ function TicketEntry({
 				<Typography className={classes.headerText} component='h3' variant='h6'>{headerText}</Typography>
 			</div>
 			<CardContent>
-				<Typography gutterBottom className={classes.body} component='p'>{bodyText}</Typography>
+				<Typography className={classes.body} component='p'>{bodyText}</Typography>
 			</CardContent>
 		</div>
 	);

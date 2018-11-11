@@ -11,10 +11,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { ticketShape } from '../../shapes';
 import TicketEntry from './TicketEntry';
 
-const styles = () => ({
-	ticket: {
-		display: 'flex',
-		flexDirection: 'column'
+const styles = theme => ({
+	borderLine: {
+		backgroundColor: theme.palette.primary.main,
+		height: 10
 	},
 	header: {
 		fontWeight: 'bold'
@@ -67,8 +67,8 @@ function Ticket({
 			</div>
 		</CardActions>;
 	return (
-		<Card className={classes.ticket}>
-			<div style={{ backgroundColor: '#3F51B5', height: '10px' }} />
+		<Card>
+			<div className={classes.borderLine} />
 			<CardContent>
 				<Typography className={classes.header} variant='h4' component='h2'>
 					{requestorName}
