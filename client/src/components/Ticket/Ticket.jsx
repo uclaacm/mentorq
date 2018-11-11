@@ -6,11 +6,42 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import { ticketShape } from '../../shapes';
+import TicketEntry from './TicketEntry';
+
+const styles = theme => ({
+	borderLine: {
+		backgroundColor: theme.palette.primary.main,
+		height: 10
+	},
+	header: {
+		fontWeight: 'bold'
+	},
+	buttons: {
+		justifyContent: 'center'
+	}
+});
+
+const formatter = new Intl.DateTimeFormat('en-US', {
+	month: 'short', day: 'numeric',
+	hour: 'numeric', minute: 'numeric', second: 'numeric',
+	timeZone: 'America/Los_Angeles'
+});
+
+function PrettyDate({ time }) {
+	const date = new Date(time);
+	return <time dateTime={date.toISOString()}>{formatter.format(date)}</time>;
+}
+
+PrettyDate.propTypes = {
+	time: PropTypes.number.isRequired
+};
 
 function Ticket({
 	requestorName,
-	mentorName,
+	// mentorName,
 	contactInfo,
 	timeFiled,
 	description,
@@ -19,42 +50,39 @@ function Ticket({
 
 	claimTicket,
 	unclaimTicket,
-	resolveTicket
+	resolveTicket,
+
+	classes
 }) {
 	const buttons = isActive ?
-		<CardActions>
-			<Button onClick={claimTicket}>
-				CLAIM TICKET
-			</Button>
+		<CardActions className={classes.buttons}>
+			<Button color='secondary' variant='contained' onClick={claimTicket}>CLAIM</Button>
 		</CardActions> :
-		<CardActions>
+		<CardActions className={classes.buttons}>
 			<div>
-				<Button onClick={unclaimTicket}>
-					REOPEN TICKET
-				</Button>
+				<Button onClick={unclaimTicket}>REOPEN TICKET</Button>
 			</div>
 			<div>
-				<Button onClick={resolveTicket}>
-					MARK AS COMPLETE
-				</Button>
+				<Button onClick={resolveTicket}>MARK AS COMPLETE</Button>
 			</div>
 		</CardActions>;
-
 	return (
 		<Card>
+			<div className={classes.borderLine} />
 			<CardContent>
-				<Typography gutterBottom variant="headline" component="h2">
+				<Typography className={classes.header} variant='h4' component='h2'>
 					{requestorName}
 				</Typography>
-				<Typography gutterBottom variant="subheading">
-					{new Date(timeFiled).toString()}
+				<Typography gutterBottom color='textSecondary'>
+					<PrettyDate time={timeFiled} />
 				</Typography>
-
-				<p>{description} </p>
-				<p>{tableNum} </p>
-				<p>{contactInfo}</p>
-				<p>Mentor: {mentorName}</p>
 			</CardContent>
+			<TicketEntry headerText='I need help with…' bodyText={description} />
+			<TicketEntry headerText='Find me at…' bodyText={tableNum} />
+			<TicketEntry headerText='Reach me at…' bodyText={contactInfo} />
+			{/* <CardContent>
+				{mentorName}
+			</CardContent> */}
 			{buttons}
 		</Card>
 	);
@@ -65,7 +93,9 @@ Ticket.propTypes = {
 
 	claimTicket: PropTypes.func.isRequired,
 	unclaimTicket: PropTypes.func.isRequired,
-	resolveTicket: PropTypes.func.isRequired
+	resolveTicket: PropTypes.func.isRequired,
+
+	classes: PropTypes.object.isRequired
 };
 
-export default Ticket;
+export default withStyles(styles)(Ticket);
