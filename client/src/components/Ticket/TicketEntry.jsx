@@ -5,10 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import { CardContent } from '@material-ui/core';
 
 const styles = theme => ({
-	header: {
+	headerContainer: {
+		backgroundColor: theme.palette.primary.main
+	},
+	headerText: {
 		color: theme.palette.common.white,
 		fontWeight: '200',
-		marginLeft: theme.spacing.unit * 3
+		marginLeft: theme.spacing.unit * 3,
+		marginLeft: theme.spacing.unit * 3,
 	},
 	body: {
 		fontSize: '1rem'
@@ -22,10 +26,8 @@ function TicketEntry({
 }) {
 	return (
 		<div>
-			<div style={{ backgroundColor: '#3F51B5' }}>
-				<div>
-					<Typography className={classes.header} component='h3' variant='h6'>{headerText}</Typography>
-				</div>
+			<div className={classes.headerContainer}>
+				<Typography className={classes.headerText} component='h3' variant='h6'>{headerText}</Typography>
 			</div>
 			<CardContent>
 				<Typography gutterBottom className={classes.body} component='p'>{bodyText}</Typography>
