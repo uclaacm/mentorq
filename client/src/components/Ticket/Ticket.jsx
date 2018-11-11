@@ -34,9 +34,9 @@ const formatter = new Intl.DateTimeFormat('en-US', {
 	timeZone: 'America/Los_Angeles'
 });
 
-function prettyDate(timeFiled) {
-	const date = new Date(timeFiled);
-	return formatter.format(date);
+function PrettyDate({ time }) {
+	const date = new Date(time);
+	return <time datetime={date.toISOString()}>{formatter.format(date)}</time>;
 }
 
 function Ticket({
@@ -73,8 +73,8 @@ function Ticket({
 				<Typography className={classes.header} variant='h4' component='h2'>
 					{requestorName}
 				</Typography>
-				<Typography gutterBottom color='textSecondary' /* variant='subheading' */ >
-					{prettyDate(timeFiled)}
+				<Typography gutterBottom color='textSecondary'>
+					<PrettyDate time={timeFiled} />
 				</Typography>
 			</CardContent>
 			<TicketEntry headerText='I need help with…' bodyText={description} />
