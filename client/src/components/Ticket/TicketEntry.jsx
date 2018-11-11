@@ -12,7 +12,7 @@ const styles = theme => ({
 		color: theme.palette.common.white,
 		fontWeight: '200',
 		marginLeft: theme.spacing.unit * 3,
-		marginLeft: theme.spacing.unit * 3,
+		marginRight: theme.spacing.unit * 3
 	},
 	body: {
 		fontSize: '1rem'
@@ -32,7 +32,8 @@ function TicketEntry({
 			<CardContent>
 				<Typography gutterBottom className={classes.body} component='p'>{bodyText}</Typography>
 			</CardContent>
-		</div>);
+		</div>
+	);
 }
 
 TicketEntry.propTypes = {

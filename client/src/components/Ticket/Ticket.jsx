@@ -36,8 +36,12 @@ const formatter = new Intl.DateTimeFormat('en-US', {
 
 function PrettyDate({ time }) {
 	const date = new Date(time);
-	return <time datetime={date.toISOString()}>{formatter.format(date)}</time>;
+	return <time dateTime={date.toISOString()}>{formatter.format(date)}</time>;
 }
+
+PrettyDate.propTypes = {
+	time: PropTypes.number.isRequired
+};
 
 function Ticket({
 	requestorName,
