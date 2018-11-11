@@ -28,7 +28,7 @@ function TicketEntry({
 				</div>
 			</div>
 			<CardContent>
-				<Typography gutterBottom={true} className={classes.body} component='p'>{bodyText}</Typography>
+				<Typography gutterBottom className={classes.body} component='p'>{bodyText}</Typography>
 			</CardContent>
 		</div>);
 }
