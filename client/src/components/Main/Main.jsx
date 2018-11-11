@@ -20,9 +20,9 @@ function Main({ isSignedIn, isAdmin }) {
 			<Switch>
 				<Route exact path='/' render={() => <HomeContainer isSignedIn={isSignedIn} />} />
 
-				<Route path='/profile' render={() =>
+				{/* <Route path='/profile' render={() =>
 					isSignedIn ? <ConnectedProfileView /> : <Redirect to='/' />
-				} />
+				} /> */}
 				<Route path='/tickets' render={() =>
 					isSignedIn ? <ConnectedTicketList /> : <Redirect to='/' />
 				} />
