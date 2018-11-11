@@ -45,7 +45,7 @@ function TicketList({
 						/>
 					</Grid>)}
 			</Grid>
-		</div >
+		</div>
 	);
 }
 
