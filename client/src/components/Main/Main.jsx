@@ -6,7 +6,6 @@ import {
 	Nav,
 	ConnectedTicketList,
 	HomeContainer,
-	ConnectedProfileView,
 	ConnectedActiveMentors,
 	AdminPanel
 } from '../';
