@@ -37,7 +37,13 @@ const styles = theme => ({
 		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
 	},
 	greet: {
-		marginBottom: theme.spacing.unit * 4
+		marginBottom: theme.spacing.unit * 3
+	},
+	welcome: {
+		marginBottom: theme.spacing.unit * 3
+	},
+	hoth: {
+		color: theme.palette.primary.main
 	}
 });
 
@@ -51,10 +57,10 @@ function SplashPage({
 				<Paper>
 					<div className={classes.grid}>
 						<div className={classes.greet}>
-							<Typography component='h2' variant="h4">
-								Welcome to Hack on the Hill V.
+							<Typography component='h2' variant='h4' className={classes.welcome}>
+								Welcome to <span className={classes.hoth}>Hack on the Hill V.</span>
 							</Typography>
-							<Typography component='p' variant="h6">
+							<Typography component='p' variant='h6'>
 								Hi! To get help from mentors, please sign in with your Google account below.
 							</Typography>
 						</div>
