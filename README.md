@@ -10,17 +10,15 @@
   5. `brew install yarn`
 * For windows users:
   1. Install Docker:
-
-			* Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
-			* Windows 10 Home and below:
-				https://docs.docker.com/toolbox/toolbox_install_windows/
-
-	2. If you have Windows 10 Pro and don't have `docker-compose` yet, go to
-		 https://docs.docker.com/compose/install/#install-compose to install Docker
-		 Compose.
+     * Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
+     * Windows 10 Home and below:
+       https://docs.docker.com/toolbox/toolbox_install_windows/
+  2. If you have Windows 10 Pro and don't have `docker-compose` yet, go to
+     https://docs.docker.com/compose/install/#install-compose to install Docker
+     Compose.
   3. Go to https://nodejs.org/en/download/ to install node.js
-	4. Go to https://yarnpkg.com/lang/en/docs/install/#windows-stable to install
-		 Yarn.
+  4. Go to https://yarnpkg.com/lang/en/docs/install/#windows-stable to install
+     Yarn.
 
 With those steps done:
 
@@ -36,10 +34,10 @@ server and 2) whenever we update packages. If in doubt, do it again won't hurt.
 
 1. Navigate to the project directory
 2. Make sure your Docker Daemon is running. For Mac, you'll see the whale icon
-	 on the top right corner which is the daemon, so make sure that is running.
+   on the top right corner which is the daemon, so make sure that is running.
 3. Run `docker-compose up --build`. You will need to restart the server every
-	 time you change the backend code, through <kbd>Ctrl+C</kbd> and running that
-	 command again.
+   time you change the backend code, through <kbd>Ctrl+C</kbd> and running that
+   command again.
 4. In another terminal tab/window: `cd client` and then `yarn start`.
 5. Go to http://localhost:3000/
 
@@ -70,10 +68,10 @@ server and 2) whenever we update packages. If in doubt, do it again won't hurt.
 
 ## Pull Request Workflow
 * Make a new branch formatted `<your-name>/<feature-name>` to submit a pull
-	request to master.
+  request to master.
 * Notify team that a PR has been made :)
 * After a pull request is approved, rebase and squash commits before merging
-	into master
+  into master
     1. Checkout to master
 
     ```shell
