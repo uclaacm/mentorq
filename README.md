@@ -9,10 +9,12 @@
   4. `brew install node`
   5. `brew install yarn`
 * For windows users:
-  1. Install Docker
+  1. Install Docker:
+
 			* Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
 			* Windows 10 Home and below:
 				https://docs.docker.com/toolbox/toolbox_install_windows/
+
 	2. If you have Windows 10 Pro and don't have `docker-compose` yet, go to
 		 https://docs.docker.com/compose/install/#install-compose to install Docker
 		 Compose.
