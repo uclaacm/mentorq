@@ -26,12 +26,12 @@ const styles = theme => ({
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.common.white
 	}
-})
+});
 
 const formatter = new Intl.DateTimeFormat('en-US', {
 	month: 'short', day: 'numeric',
 	hour: 'numeric', minute: 'numeric', second: 'numeric',
-	timeZone: 'America/Los_Angeles',
+	timeZone: 'America/Los_Angeles'
 });
 
 function prettyDate(timeFiled) {
@@ -41,7 +41,7 @@ function prettyDate(timeFiled) {
 
 function Ticket({
 	requestorName,
-	mentorName,
+	// mentorName,
 	contactInfo,
 	timeFiled,
 	description,
@@ -54,21 +54,18 @@ function Ticket({
 
 	classes
 }) {
-	const buttons = isActive ? (
+	const buttons = isActive ?
 		<CardActions className={classes.buttons}>
 			<Button className={classes.claim} onClick={claimTicket}>CLAIM</Button>
-		</CardActions>
-	) : (
-			<CardActions className={classes.buttons}>
-				<div>
-					<Button onClick={unclaimTicket}>REOPEN TICKET</Button>
-				</div>
-				<div>
-					<Button onClick={resolveTicket}>MARK AS COMPLETE</Button>
-				</div>
-			</CardActions>
-		);
-
+		</CardActions> :
+		<CardActions className={classes.buttons}>
+			<div>
+				<Button onClick={unclaimTicket}>REOPEN TICKET</Button>
+			</div>
+			<div>
+				<Button onClick={resolveTicket}>MARK AS COMPLETE</Button>
+			</div>
+		</CardActions>;
 	return (
 		<Card className={classes.ticket}>
 			<div style={{ backgroundColor: '#3F51B5', height: '10px' }} />

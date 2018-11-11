@@ -11,12 +11,12 @@ const styles = theme => ({
 		width: 'auto',
 		marginLeft: theme.spacing.unit * 3,
 		marginRight: theme.spacing.unit * 3,
-		padding: `${theme.spacing.unit * 2}px 0`,
+		padding: `${theme.spacing.unit * 2}px 0`
 	},
 	item: {
 		width: 'inherit'
 	}
-})
+});
 
 function TicketList({
 	tickets,

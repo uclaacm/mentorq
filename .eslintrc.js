@@ -173,7 +173,6 @@ module.exports = {
 		"func-call-spacing": ["error", "never"],
 		"func-name-matching": ["error"],
 		"func-names": "off",
-		"func-style": ["error", "declaration"],
 		"function-paren-newline": ["error", "consistent"],
 		"id-blacklist": "off",
 		"id-length": "off",
