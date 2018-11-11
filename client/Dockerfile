@@ -7,9 +7,6 @@ WORKDIR /src/app
 # add `/src/app/node_modules/.bin` to $PATH
 ENV PATH /src/app/node_modules/.bin:$PATH
 
-# install and cache app dependencies
-ADD package.json /src/app/package.json
-RUN npm install
 ADD . /src/app
 
 # start app
