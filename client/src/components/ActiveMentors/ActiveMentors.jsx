@@ -25,7 +25,6 @@ function ActiveMentors({
 		initing = false;
 	}
 
-	const waitMinute = 100; // TODO
 	const numActive = mentors.length;
 	return (
 		<Card>
@@ -33,8 +32,8 @@ function ActiveMentors({
 				<p>
 					<Lens style={iconStyles} />
 					<strong>{` ${numActive}`}</strong>
-					{`${numActive > 1 ? ' mentors' : ' mentor'} online.
-					Estimated wait: `} <strong>{waitMinute} minutes</strong>
+					{`${numActive > 1 ? ' mentors' : ' mentor'} online.`}
+					{/* Estimated wait: <strong>{waitMinute} minutes</strong> */}
 				</p>
 			</CardContent>
 		</Card>
