@@ -39,6 +39,7 @@ function Nav({
 	isAdmin
 }) {
 	const buttons = [];
+	/*
 	if (isSignedIn) {
 		buttons.push(
 			<PrettyLink key='profile' component={IconButton} to='/profile' aria-label='Profile'>
@@ -46,6 +47,7 @@ function Nav({
 			</PrettyLink>
 		);
 	}
+	*/
 	buttons.push(
 		<Typography key='title' component={Link} to='/' variant='title' color='inherit' className='toolbar-link'>
 			MentorQ
