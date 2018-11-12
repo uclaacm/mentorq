@@ -21,6 +21,9 @@ const styles = theme => ({
 	},
 	buttons: {
 		justifyContent: 'center'
+	// },
+	// status: {
+	// 	color: '#888888',
 	}
 });
 
@@ -41,7 +44,7 @@ PrettyDate.propTypes = {
 
 function Ticket({
 	requestorName,
-	// mentorName,
+	mentorName,
 	mentorId,
 	contactInfo,
 	timeFiled,
@@ -58,25 +61,30 @@ function Ticket({
 	classes
 }) {
 	const buttons = [];
-	if (isMentor) {
-		if (isActive) {
+	let status = '';
+	if (isMentor && isActive) {
+		buttons.push(
+			<Button color='secondary' variant='contained' key='claim' onClick={claimTicket}>CLAIM</Button>
+		);
+	} else if (isMentor && !isActive) {
+		buttons.push(
+			<Button key='reopen' onClick={unclaimTicket}>REOPEN TICKET</Button>
+		);
+		if (mentorId === userId) {
+			status = 'You claimed this ticket.';
 			buttons.push(
-				<Button color='secondary' variant='contained' key='claim' onClick={claimTicket}>CLAIM</Button>
+				<Button color='secondary' variant='contained' key='markascomplete' onClick={resolveTicket}>
+					MARK AS COMPLETE
+				</Button>
 			);
 		} else {
-			buttons.push(
-				<Button key='reopen' onClick={unclaimTicket}>REOPEN TICKET</Button>
-			);
-			if (mentorId === userId) {
-				buttons.push(
-					<Button color='secondary' variant='contained' key='markascomplete' onClick={resolveTicket}>
-						MARK AS COMPLETE
-					</Button>
-				);
-			}
+			status = `${mentorName} claimed this ticket.`;
 		}
+	} else if (!isMentor && isActive) {
+		status = 'Mentors will be here shortly.';
+	} else { // !isMentor && !isActive
+		status = `${mentorName} is on their way.`;
 	}
-
 	const actions = buttons.length > 0 ? <CardActions className={classes.buttons}>{buttons}</CardActions> : null;
 	return (
 		<Card>
@@ -92,9 +100,13 @@ function Ticket({
 			<TicketEntry headerText='I need help with…' bodyText={description} />
 			<TicketEntry headerText='Find me at…' bodyText={tableNum} />
 			<TicketEntry headerText='Reach me at…' bodyText={contactInfo} />
-			{/* <CardContent>
-				{mentorName}
-			</CardContent> */}
+			{status === '' ?
+				null :
+				<CardContent>
+					<Typography color='textSecondary' component='p' variant='h6'>
+						{status}
+					</Typography>
+				</CardContent>}
 			{actions}
 		</Card>
 	);
