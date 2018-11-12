@@ -6,6 +6,7 @@ import purple from '@material-ui/core/colors/purple';
 
 import {
 	Nav,
+	ConnectedNotifier,
 	ConnectedTicketList,
 	HomeContainer,
 	AdminPanel
@@ -43,6 +44,8 @@ function Main({ isSignedIn, isAdmin }) {
 						isAdmin ? <AdminPanel /> : <Redirect to='/' />
 					} />
 				</Switch>
+
+				<ConnectedNotifier />
 			</div>
 		</MuiThemeProvider>
 	);

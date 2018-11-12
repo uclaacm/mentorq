@@ -16,7 +16,8 @@ async function getInitialState(io, user) {
 				current: null
 			},
 			socket: {
-				tickets: []
+				tickets: [],
+				pendingTickets: 0
 			}
 		};
 	}
@@ -29,7 +30,8 @@ async function getInitialState(io, user) {
 			current: user
 		},
 		socket: {
-			tickets
+			tickets,
+			pendingTickets: 0
 		}
 	};
 }

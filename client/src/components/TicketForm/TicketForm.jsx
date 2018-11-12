@@ -10,6 +10,8 @@ import { Code, LocationOn, Phone } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
+import history from '../../history';
+
 import './TicketForm.css';
 
 const styles = theme => ({
@@ -88,6 +90,7 @@ class TicketForm extends Component {
 				tableNum: this.state.location.value,
 				contactInfo: this.state.contact.value
 			});
+			history.push('tickets');
 		}
 	}
 
@@ -105,7 +108,7 @@ class TicketForm extends Component {
 								<TextField
 									required
 									id="description"
-									label="I need help with..."
+									label="I need help with…"
 									placeholder="Describe your problem"
 									value={this.state.description.value}
 									error={this.state.description.error}
@@ -116,7 +119,6 @@ class TicketForm extends Component {
 											<InputAdornment position="start">
 												<Code />
 											</InputAdornment>
-
 									}}
 								/>
 							</div>
@@ -124,7 +126,7 @@ class TicketForm extends Component {
 								<TextField
 									required
 									id="location"
-									label="You can find me at..."
+									label="You can find me at…"
 									placeholder="where are you? table number?"
 									value={this.state.location.value}
 									error={this.state.location.error}
@@ -135,7 +137,6 @@ class TicketForm extends Component {
 											<InputAdornment position="start">
 												<LocationOn />
 											</InputAdornment>
-
 									}}
 								/>
 							</div>
@@ -143,7 +144,7 @@ class TicketForm extends Component {
 								<TextField
 									required
 									id="contact"
-									label="You can contact me through..."
+									label="You can contact me through…"
 									placeholder="cell phone #"
 									value={this.state.contact.value}
 									error={this.state.contact.error}
@@ -154,11 +155,9 @@ class TicketForm extends Component {
 											<InputAdornment position="start">
 												<Phone />
 											</InputAdornment>
-
 									}}
 								/>
 							</div>
-							<Button onClick={this.onSubmit} fullWidth={true} style={{ display: 'none' }}>x</Button>
 						</form>
 					</CardContent>
 					<CardActions>
