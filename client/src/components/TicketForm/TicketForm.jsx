@@ -7,9 +7,25 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { Code, LocationOn, Phone } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 import './TicketForm.css';
+
+const styles = theme => ({
+	container: {
+		padding: `${theme.spacing.unit * 2}px 0`,
+		width: 'auto',
+		display: 'block', // Fix IE 11 issue.
+		marginLeft: theme.spacing.unit * 3,
+		marginRight: theme.spacing.unit * 3,
+		[theme.breakpoints.up(800 + theme.spacing.unit * 3 * 2)]: {
+			width: 800,
+			marginLeft: 'auto',
+			marginRight: 'auto'
+		}
+	}
+});
 
 class TicketForm extends Component {
 	constructor(props) {
@@ -85,83 +101,89 @@ class TicketForm extends Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		return (
-			<Card>
-				<CardContent>
-					<Typography gutterBottom variant="h5" component="h2">
-						How can we help you?
-					</Typography>
-					<form onSubmit={this.onSubmit}>
-						<div className="field">
-							<TextField
-								required
-								id="description"
-								label="I need help with..."
-								placeholder="Describe your problem"
-								value={this.state.description.value}
-								error={this.state.description.error}
-								onChange={this.handleChange}
-								fullWidth={true}
-								InputProps={{
-									startAdornment:
-										<InputAdornment position="start">
-											<Code />
-										</InputAdornment>
+			<div className={classes.container}>
+				<Card>
+					<CardContent>
+						<Typography gutterBottom variant="h5" component="h2">
+							How can we help you?
+						</Typography>
+						<form onSubmit={this.onSubmit}>
+							<div className="field">
+								<TextField
+									required
+									id="description"
+									label="I need help with..."
+									placeholder="Describe your problem"
+									value={this.state.description.value}
+									error={this.state.description.error}
+									onChange={this.handleChange}
+									fullWidth={true}
+									InputProps={{
+										startAdornment:
+											<InputAdornment position="start">
+												<Code />
+											</InputAdornment>
 
-								}}
-							/>
-						</div>
-						<div className="field">
-							<TextField
-								required
-								id="location"
-								label="You can find me at..."
-								placeholder="where are you? table number?"
-								value={this.state.location.value}
-								error={this.state.location.error}
-								onChange={this.handleChange}
-								fullWidth={true}
-								InputProps={{
-									startAdornment:
-										<InputAdornment position="start">
-											<LocationOn />
-										</InputAdornment>
+									}}
+								/>
+							</div>
+							<div className="field">
+								<TextField
+									required
+									id="location"
+									label="You can find me at..."
+									placeholder="where are you? table number?"
+									value={this.state.location.value}
+									error={this.state.location.error}
+									onChange={this.handleChange}
+									fullWidth={true}
+									InputProps={{
+										startAdornment:
+											<InputAdornment position="start">
+												<LocationOn />
+											</InputAdornment>
 
-								}}
-							/>
-						</div>
-						<div className="field">
-							<TextField
-								required
-								id="contact"
-								label="You can contact me through..."
-								placeholder="cell phone #"
-								value={this.state.contact.value}
-								error={this.state.contact.error}
-								onChange={this.handleChange}
-								fullWidth={true}
-								InputProps={{
-									startAdornment:
-										<InputAdornment position="start">
-											<Phone />
-										</InputAdornment>
+									}}
+								/>
+							</div>
+							<div className="field">
+								<TextField
+									required
+									id="contact"
+									label="You can contact me through..."
+									placeholder="cell phone #"
+									value={this.state.contact.value}
+									error={this.state.contact.error}
+									onChange={this.handleChange}
+									fullWidth={true}
+									InputProps={{
+										startAdornment:
+											<InputAdornment position="start">
+												<Phone />
+											</InputAdornment>
 
-								}}
-							/>
-						</div>
-						<Button onClick={this.onSubmit} fullWidth={true} style={{ display: 'none' }}>x</Button>
-					</form>
-				</CardContent>
-				<CardActions>
-					<Button onClick={this.onSubmit} fullWidth={true}>Help me!</Button>
-				</CardActions>
-			</Card>
+									}}
+								/>
+							</div>
+							<Button onClick={this.onSubmit} fullWidth={true} style={{ display: 'none' }}>x</Button>
+						</form>
+					</CardContent>
+					<CardActions>
+						<Button onClick={this.onSubmit} fullWidth={true} color='primary' variant='contained'>
+							Submit
+						</Button>
+					</CardActions>
+				</Card>
+			</div>
 		);
 	}
 }
 
 TicketForm.propTypes = {
-	submitTicket: PropTypes.func.isRequired
+	submitTicket: PropTypes.func.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
-export default TicketForm;
+export default withStyles(styles)(TicketForm);

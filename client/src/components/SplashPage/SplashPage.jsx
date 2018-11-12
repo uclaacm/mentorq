@@ -7,17 +7,6 @@ import PropTypes from 'prop-types';
 import { Login } from '..';
 
 const styles = theme => ({
-	banner: {
-		position: 'absolute',
-		top: 0,
-		width: '100vw',
-		height: '100vh',
-		zIndex: -1,
-		background: 'url("/banner-hoth.png"), #37293b',
-		backgroundPosition: 'center bottom',
-		backgroundSize: 'contain',
-		backgroundRepeat: 'no-repeat'
-	},
 	container: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
@@ -51,23 +40,20 @@ function SplashPage({
 	classes
 }) {
 	return (
-		<div>
-			<div className={classes.banner} />
-			<div className={classes.container}>
-				<Paper>
-					<div className={classes.grid}>
-						<div className={classes.greet}>
-							<Typography component='h2' variant='h4' className={classes.welcome}>
-								Welcome to <span className={classes.hoth}>Hack on the Hill V.</span>
-							</Typography>
-							<Typography component='p' variant='h6'>
-								Hi! To get help from mentors, please sign in with your Google account below.
-							</Typography>
-						</div>
-						<Login />
+		<div className={classes.container}>
+			<Paper>
+				<div className={classes.grid}>
+					<div className={classes.greet}>
+						<Typography component='h2' variant='h4' className={classes.welcome}>
+							Welcome to <span className={classes.hoth}>Hack on the Hill V.</span>
+						</Typography>
+						<Typography component='p' variant='h6'>
+							Hi! To get help from mentors, please sign in with your Google account below.
+						</Typography>
 					</div>
-				</Paper>
-			</div>
+					<Login />
+				</div>
+			</Paper>
 		</div>
 	);
 }
