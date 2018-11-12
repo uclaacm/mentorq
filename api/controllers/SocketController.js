@@ -11,7 +11,7 @@ class SocketController {
 		this.socket = socket;
 		const { passport } = socket.client.request.session;
 
-		if (passport) {
+		if (passport && passport.user) {
 			const { user } = passport;
 			this.user = user;
 

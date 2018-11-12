@@ -1,14 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-import { Link } from 'react-router-dom';
-
-import { authURL } from '../Login/Login';
-
+import { authURL, logoutURL } from '../Login/Login';
 import './Nav.css';
 
 function PrettyLink({
@@ -32,9 +32,17 @@ PrettyLink.defaultProps = {
 	component: Button
 };
 
+const styles = () => ({
+	grow: {
+		flexGrow: 1
+	}
+});
+
 function Nav({
 	isSignedIn,
-	isAdmin
+	isAdmin,
+
+	classes
 }) {
 	const buttons = [];
 	/*
@@ -59,8 +67,15 @@ function Nav({
 		if (isAdmin) {
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
+		buttons.push(
+			<div className={classes.grow} />,
+			<Button key='logout' href={logoutURL} color='inherit'>Logout</Button>
+		);
 	} else {
-		buttons.push(<Button key='login' href={authURL} color="inherit">Login</Button>);
+		buttons.push(
+			<div className={classes.grow} />,
+			<Button key='login' href={authURL} color="inherit">Login</Button>
+		);
 	}
 
 	return (
@@ -72,7 +87,9 @@ function Nav({
 
 Nav.propTypes = {
 	isSignedIn: PropTypes.bool.isRequired,
-	isAdmin: PropTypes.bool.isRequired
+	isAdmin: PropTypes.bool.isRequired,
+
+	classes: PropTypes.object.isRequired
 };
 
-export default Nav;
+export default withStyles(styles)(Nav);
