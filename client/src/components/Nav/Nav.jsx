@@ -60,20 +60,17 @@ function Nav({
 		</Typography>
 	);
 	if (isSignedIn) {
-		buttons.push(
-			<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>,
-			<PrettyLink key='mentors' to='/mentors'>Mentors</PrettyLink>
-		);
+		buttons.push(<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>);
 		if (isAdmin) {
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
 		buttons.push(
-			<div className={classes.grow} />,
+			<div key='grow' className={classes.grow} />,
 			<Button key='logout' href={logoutURL} color='inherit'>Logout</Button>
 		);
 	} else {
 		buttons.push(
-			<div className={classes.grow} />,
+			<div key='grow' className={classes.grow} />,
 			<Button key='login' href={authURL} color="inherit">Login</Button>
 		);
 	}
