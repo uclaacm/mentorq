@@ -8,7 +8,6 @@ import {
 	Nav,
 	ConnectedTicketList,
 	HomeContainer,
-	ConnectedActiveMentors,
 	AdminPanel
 } from '../';
 
@@ -37,9 +36,9 @@ function Main({ isSignedIn, isAdmin }) {
 					<Route path='/tickets' render={() =>
 						isSignedIn ? <ConnectedTicketList /> : <Redirect to='/' />
 					} />
-					<Route path='/mentors' render={() =>
+					{/* <Route path='/mentors' render={() =>
 						isSignedIn ? <ConnectedActiveMentors /> : <Redirect to='/' />
-					} />
+					} /> */}
 					<Route path='/admin' render={() =>
 						isAdmin ? <AdminPanel /> : <Redirect to='/' />
 					} />

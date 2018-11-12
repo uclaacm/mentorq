@@ -60,10 +60,7 @@ function Nav({
 		</Typography>
 	);
 	if (isSignedIn) {
-		buttons.push(
-			<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>,
-			<PrettyLink key='mentors' to='/mentors'>Mentors</PrettyLink>
-		);
+		buttons.push(<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>);
 		if (isAdmin) {
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
