@@ -32,7 +32,7 @@ PrettyLink.defaultProps = {
 	component: Button
 };
 
-const styles = theme => ({
+const styles = () => ({
 	grow: {
 		flexGrow: 1
 	}
