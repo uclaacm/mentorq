@@ -58,13 +58,11 @@ function TicketList({
 						</Grid>)}
 				</Grid>
 			</div>
-			<Link to="/">
-				<Tooltip title="File Ticket">
-					<Button variant="fab" color="secondary" aria-label="Add" className={classes.fab}>
-						<AddIcon />
-					</Button>
-				</Tooltip>
-			</Link>
+			<Tooltip title="File Ticket">
+				<Button component={Link} to="/" variant="fab" color="secondary" aria-label="Add" className={classes.fab}>
+					<AddIcon />
+				</Button>
+			</Tooltip>
 		</div>
 	);
 }
