@@ -6,7 +6,7 @@ export default function SocketReducer(state = {
 	case 'SOCKET_TICKET_NEW': {
 		return {
 			...state,
-			tickets: [action.newTicket, ...state.tickets]
+			tickets: [...state.tickets, action.newTicket]
 		};
 	}
 	case 'SOCKET_TICKET_CLAIMED': {
