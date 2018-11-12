@@ -21,9 +21,6 @@ const styles = theme => ({
 	},
 	buttons: {
 		justifyContent: 'center'
-	// },
-	// status: {
-	// 	color: '#888888',
 	}
 });
 
@@ -85,7 +82,6 @@ function Ticket({
 	} else { // !isMentor && !isActive
 		status = `${mentorName} is on their way.`;
 	}
-	const actions = buttons.length > 0 ? <CardActions className={classes.buttons}>{buttons}</CardActions> : null;
 	return (
 		<Card>
 			<div className={classes.borderLine} />
@@ -107,7 +103,10 @@ function Ticket({
 						{status}
 					</Typography>
 				</CardContent>}
-			{actions}
+
+			{buttons.length === 0 ?
+				null :
+				<CardActions className={classes.buttons}>{buttons}</CardActions>}
 		</Card>
 	);
 }
