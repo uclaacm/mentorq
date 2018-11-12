@@ -15,6 +15,9 @@ import {
 const theme = createMuiTheme({
 	palette: {
 		primary: purple
+	},
+	typography: {
+		useNextVariants: true
 	}
 });
 
