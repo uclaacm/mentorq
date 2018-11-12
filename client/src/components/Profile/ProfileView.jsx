@@ -133,7 +133,7 @@ class ProfileView extends Component {
 			<div>
 				<Card>
 					<CardContent>
-						<Typography gutterBottom variant="headline" component="h1">
+						<Typography gutterBottom variant='h5' component='h1'>
 							Your Account
 						</Typography>
 						<form onSubmit={this.onSubmit}>

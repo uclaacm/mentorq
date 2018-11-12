@@ -88,7 +88,7 @@ class TicketForm extends Component {
 		return (
 			<Card>
 				<CardContent>
-					<Typography gutterBottom variant="headline" component="h2">
+					<Typography gutterBottom variant="h5" component="h2">
 						How can we help you?
 					</Typography>
 					<form onSubmit={this.onSubmit}>

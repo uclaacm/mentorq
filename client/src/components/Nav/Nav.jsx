@@ -47,7 +47,7 @@ function Nav({
 	}
 	*/
 	buttons.push(
-		<Typography key='title' component={Link} to='/' variant='title' color='inherit' className='toolbar-link'>
+		<Typography key='title' component={Link} to='/' variant='h6' color='inherit' className='toolbar-link'>
 			MentorQ
 		</Typography>
 	);
