@@ -41,7 +41,8 @@ PrettyDate.propTypes = {
 
 function Ticket({
 	requestorName,
-	// mentorName,
+	mentorName,
+	mentorId,
 	contactInfo,
 	timeFiled,
 	description,
@@ -51,21 +52,36 @@ function Ticket({
 	claimTicket,
 	unclaimTicket,
 	resolveTicket,
+	isMentor,
+	userId,
 
 	classes
 }) {
-	const buttons = isActive ?
-		<CardActions className={classes.buttons}>
-			<Button color='secondary' variant='contained' onClick={claimTicket}>CLAIM</Button>
-		</CardActions> :
-		<CardActions className={classes.buttons}>
-			<div>
-				<Button onClick={unclaimTicket}>REOPEN TICKET</Button>
-			</div>
-			<div>
-				<Button onClick={resolveTicket}>MARK AS COMPLETE</Button>
-			</div>
-		</CardActions>;
+	const buttons = [];
+	let status = '';
+	if (isMentor && isActive) {
+		buttons.push(
+			<Button color='secondary' variant='contained' key='claim' onClick={claimTicket}>CLAIM</Button>
+		);
+	} else if (isMentor && !isActive) {
+		buttons.push(
+			<Button key='reopen' onClick={unclaimTicket}>REOPEN TICKET</Button>
+		);
+		if (mentorId === userId) {
+			status = 'You claimed this ticket.';
+			buttons.push(
+				<Button color='secondary' variant='contained' key='markascomplete' onClick={resolveTicket}>
+					MARK AS COMPLETE
+				</Button>
+			);
+		} else {
+			status = `${mentorName} claimed this ticket.`;
+		}
+	} else if (!isMentor && isActive) {
+		status = 'Mentors will be here shortly.';
+	} else { // !isMentor && !isActive
+		status = `${mentorName} is on their way.`;
+	}
 	return (
 		<Card>
 			<div className={classes.borderLine} />
@@ -80,10 +96,17 @@ function Ticket({
 			<TicketEntry headerText='I need help with…' bodyText={description} />
 			<TicketEntry headerText='Find me at…' bodyText={tableNum} />
 			<TicketEntry headerText='Reach me at…' bodyText={contactInfo} />
-			{/* <CardContent>
-				{mentorName}
-			</CardContent> */}
-			{buttons}
+			{status === '' ?
+				null :
+				<CardContent>
+					<Typography color='textSecondary' component='p' variant='h6'>
+						{status}
+					</Typography>
+				</CardContent>}
+
+			{buttons.length === 0 ?
+				null :
+				<CardActions className={classes.buttons}>{buttons}</CardActions>}
 		</Card>
 	);
 }
@@ -94,6 +117,8 @@ Ticket.propTypes = {
 	claimTicket: PropTypes.func.isRequired,
 	unclaimTicket: PropTypes.func.isRequired,
 	resolveTicket: PropTypes.func.isRequired,
+	isMentor: PropTypes.bool.isRequired,
+	userId: PropTypes.string.isRequired,
 
 	classes: PropTypes.object.isRequired
 };

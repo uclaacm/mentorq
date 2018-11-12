@@ -42,6 +42,7 @@ function TicketList({
 							unclaimTicket={() => unclaimTicket(ticket._id)}
 							resolveTicket={() => resolveTicket(ticket._id)}
 							isMentor={isMentor}
+							userId={user._id}
 						/>
 					</Grid>)}
 			</Grid>
