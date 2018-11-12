@@ -117,6 +117,7 @@ ticketSchema.methods.resolve = function () {
 ticketSchema.statics.getRelevantTickets = async function (user) {
 	const query = this.find();
 	query.setOptions({ lean: true });
+	query.sort('timeFiled');
 	query.populate({
 		path: 'requestorId',
 		select: 'name'
