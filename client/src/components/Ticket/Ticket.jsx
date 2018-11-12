@@ -42,6 +42,7 @@ PrettyDate.propTypes = {
 function Ticket({
 	requestorName,
 	// mentorName,
+	mentorId,
 	contactInfo,
 	timeFiled,
 	description,
@@ -51,21 +52,32 @@ function Ticket({
 	claimTicket,
 	unclaimTicket,
 	resolveTicket,
+	isMentor,
+	userId,
 
 	classes
 }) {
-	const buttons = isActive ?
-		<CardActions className={classes.buttons}>
-			<Button color='secondary' variant='contained' onClick={claimTicket}>CLAIM</Button>
-		</CardActions> :
-		<CardActions className={classes.buttons}>
-			<div>
-				<Button onClick={unclaimTicket}>REOPEN TICKET</Button>
-			</div>
-			<div>
-				<Button onClick={resolveTicket}>MARK AS COMPLETE</Button>
-			</div>
-		</CardActions>;
+	const buttons = [];
+	if (isMentor) {
+		if (isActive) {
+			buttons.push(
+				<Button color='secondary' variant='contained' key='claim' onClick={claimTicket}>CLAIM</Button>
+			);
+		} else {
+			buttons.push(
+				<Button key='reopen' onClick={unclaimTicket}>REOPEN TICKET</Button>
+			);
+			if (mentorId === userId) {
+				buttons.push(
+					<Button color='secondary' variant='contained' key='markascomplete' onClick={resolveTicket}>
+						MARK AS COMPLETE
+					</Button>
+				);
+			}
+		}
+	}
+
+	const actions = buttons.length > 0 ? <CardActions className={classes.buttons}>{buttons}</CardActions> : null;
 	return (
 		<Card>
 			<div className={classes.borderLine} />
@@ -83,7 +95,7 @@ function Ticket({
 			{/* <CardContent>
 				{mentorName}
 			</CardContent> */}
-			{buttons}
+			{actions}
 		</Card>
 	);
 }
@@ -94,6 +106,8 @@ Ticket.propTypes = {
 	claimTicket: PropTypes.func.isRequired,
 	unclaimTicket: PropTypes.func.isRequired,
 	resolveTicket: PropTypes.func.isRequired,
+	isMentor: PropTypes.bool.isRequired,
+	userId: PropTypes.string.isRequired,
 
 	classes: PropTypes.object.isRequired
 };
