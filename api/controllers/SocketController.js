@@ -83,7 +83,7 @@ class SocketController {
 
 		// Notify admins and mentors that there is now a new ticket.
 		this.io.to('admins').emit('action', action);
-		this.io.to('mentors').emit('action', action);
+		this.io.to('mentorsOnly').emit('action', action);
 
 		// Also notify the submitter that their new ticket has been acknowledged.
 		if (!this.user.isAdmin && !this.user.isMentor) {
