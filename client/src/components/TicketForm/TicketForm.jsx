@@ -171,7 +171,9 @@ class TicketForm extends Component {
 						</form>
 					</CardContent>
 					<CardActions>
-						<Button onClick={this.onSubmit} fullWidth={true}>Help me!</Button>
+						<Button onClick={this.onSubmit} fullWidth={true} color='primary' variant='contained'>
+							Submit
+						</Button>
 					</CardActions>
 				</Card>
 			</div>
