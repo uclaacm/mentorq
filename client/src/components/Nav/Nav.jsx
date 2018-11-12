@@ -65,12 +65,12 @@ function Nav({
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
 		buttons.push(
-			<div className={classes.grow} />,
+			<div key='grow' className={classes.grow} />,
 			<Button key='logout' href={logoutURL} color='inherit'>Logout</Button>
 		);
 	} else {
 		buttons.push(
-			<div className={classes.grow} />,
+			<div key='grow' className={classes.grow} />,
 			<Button key='login' href={authURL} color="inherit">Login</Button>
 		);
 	}
