@@ -1,5 +1,5 @@
-import UserReducer from './user';
-import SocketReducer from './socket';
+import userReducer from './user';
+import socketReducer from './socket';
 
 // N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
 function rootReducer(state = {}, action) {
@@ -7,8 +7,8 @@ function rootReducer(state = {}, action) {
 		return action.initialState;
 	}
 	return {
-		user: UserReducer(state.user, action),
-		socket: SocketReducer(state.socket, action, state.user)
+		user: userReducer(state.user, action),
+		socket: socketReducer(state.socket, action, state.user)
 	};
 }
 

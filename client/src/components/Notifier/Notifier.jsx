@@ -28,6 +28,9 @@ class Notifier extends Component {
 	addToQueue(message) {
 		this.queue.push({ message, key: Date.now() });
 		if (document.visibilityState === 'hidden') {
+			// Notification class is designed to be used in the following
+			// side-effective way.
+			// eslint-disable-next-line no-new
 			new Notification(message);
 		}
 	}

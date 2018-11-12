@@ -1,5 +1,5 @@
 // N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
-export default function SocketReducer(state = {
+export default function socketReducer(state = {
 	tickets: [],
 	pendingTickets: 0
 }, action, userState = {
