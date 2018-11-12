@@ -33,7 +33,7 @@ PrettyLink.defaultProps = {
 };
 
 const styles = theme => ({
-	logout: {
+	grow: {
 		flexGrow: 1
 	}
 });
@@ -68,11 +68,14 @@ function Nav({
 			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
 		}
 		buttons.push(
-			<div className={classes.logout} />,
+			<div className={classes.grow} />,
 			<Button key='logout' href={logoutURL} color='inherit'>Logout</Button>
 		);
 	} else {
-		buttons.push(<Button key='login' href={authURL} color="inherit">Login</Button>);
+		buttons.push(
+			<div className={classes.grow} />,
+			<Button key='login' href={authURL} color="inherit">Login</Button>
+		);
 	}
 
 	return (
