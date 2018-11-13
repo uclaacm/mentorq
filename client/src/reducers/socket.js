@@ -1,13 +1,27 @@
 // N.B.: Change api/controllers/ReduxStateController.js whenever this is changed.
-export default function SocketReducer(state = {
-	tickets: []
-}, action) {
+export default function socketReducer(state = {
+	tickets: [],
+	pendingTickets: 0
+}, action, userState = {
+	current: null
+}) {
 	switch (action.type) {
-	case 'SOCKET_TICKET_NEW': {
+	// When we just submitted a new ticket request.
+	case 'socket/ticket/new': {
 		return {
+			...state,
+			pendingTickets: state.pendingTickets + 1
+		};
+	}
+	case 'SOCKET_TICKET_NEW': {
+		const newState = {
 			...state,
 			tickets: [...state.tickets, action.newTicket]
 		};
+		if (state.pendingTickets && userState.current && action.newTicket.requestorId === userState.current._id) {
+			newState.pendingTickets--;
+		}
+		return newState;
 	}
 	case 'SOCKET_TICKET_CLAIMED': {
 		const {

@@ -13,3 +13,5 @@ export { default as ConnectedActiveMentors } from './ConnectedActiveMentors/Conn
 export { default as Login } from './Login/Login';
 export { default as AdminPanel } from './AdminPanel/AdminPanel';
 export { default as SplashPage } from './SplashPage/SplashPage';
+export { default as Notifier } from './Notifier/Notifier';
+export { default as ConnectedNotifier } from './ConnectedNotifier/ConnectedNotifier';
