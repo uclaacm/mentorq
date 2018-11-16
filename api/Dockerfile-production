@@ -1,0 +1,8 @@
+FROM node:alpine
+
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+ENV NODE_ENV production
+ADD . /opt/app
+
+CMD node index.js

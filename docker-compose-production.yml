@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db_mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    logging:
+      driver: "none"
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile-production
+    ports:
+      - "8080:8080"
+    links:
+      - db_mongo
+  prod:
+    build: ./prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./prod/build:/usr/share/nginx/html:ro
+      - /var/lib/dehydrated/certs:/var/lib/dehydrated/certs:ro
+    links:
+      - api
