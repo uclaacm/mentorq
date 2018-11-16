@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 	res.status(500).json({ err: err.message });
 });
 
-server.listen(config.server.port, () => {
+server.listen(config.serverPort, () => {
 	// eslint-disable-next-line no-console
-	console.log('Listening on port ' + config.server.port);
+	console.log('Listening on port ' + config.serverPort);
 });
