@@ -2,7 +2,6 @@ export const server = {};
 
 switch (process.env.NODE_ENV) {
 case 'production':
-default:
 	// Server settings
 	server.scheme = 'https';
 	server.host = 'api.mentorq.hack.uclaacm.com';
