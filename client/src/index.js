@@ -11,7 +11,9 @@ import { App } from './components';
 
 import './index.css'; // Our own main stylesheet
 
-Notification.requestPermission();
+if (typeof Notification === 'function') {
+	Notification.requestPermission();
+}
 
 const router =
 	<Provider store={store}>
