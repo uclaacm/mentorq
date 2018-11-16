@@ -10,6 +10,7 @@ module.exports = (() => {
 			},
 
 			// Server settings
+			serverBaseURL: 'https://api.mentorq.hack.uclaacm.com/',
 			serverPort: 8080,
 			frontendBaseURL: 'https://mentorq.hack.uclaacm.com/'
 		};
@@ -22,6 +23,7 @@ module.exports = (() => {
 			},
 
 			// Server settings
+			serverBaseURL: 'http://localhost:8080/',
 			serverPort: 8080,
 			frontendBaseURL: 'http://localhost:3000/'
 		};

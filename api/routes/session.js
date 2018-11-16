@@ -6,6 +6,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
+const config = require('../config');
+
 const router = new express.Router();
 
 // Initialize user session
@@ -32,7 +34,7 @@ if (secret) {
 	passport.use(new GoogleStrategy({
 		clientID: secret.web.client_id,
 		clientSecret: secret.web.client_secret,
-		callbackURL: '/auth/google/callback'
+		callbackURL: new URL('/auth/google/callback', config.serverBaseURL).href
 	}, async (token, tokenSecret, profile, done) => {
 		try {
 			let user = await User.read(profile.id);
