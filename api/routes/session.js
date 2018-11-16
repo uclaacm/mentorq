@@ -2,6 +2,7 @@
 
 const express = require('express');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
@@ -11,8 +12,14 @@ const config = require('../config');
 const router = new express.Router();
 
 // Initialize user session
+const sessionStore = new MongoDBStore({
+	uri: config.database.uri + '/sessions',
+	collection: 'session'
+});
+const sessionSecret = process.env.NODE_ENV === 'production' ? require('../config/session-secret') : 'deadbeef 314';
 router.use(session({
-	secret: 'deadbeef 314',
+	store: sessionStore,
+	secret: sessionSecret,
 	resave: true,
 	saveUninitialized: true
 }));
