@@ -8,8 +8,7 @@ import {
 	Nav,
 	ConnectedNotifier,
 	ConnectedTicketList,
-	HomeContainer,
-	AdminPanel
+	HomeContainer
 } from '../';
 
 const theme = createMuiTheme({
@@ -40,9 +39,10 @@ function Main({ isSignedIn, isAdmin }) {
 					{/* <Route path='/mentors' render={() =>
 						isSignedIn ? <ConnectedActiveMentors /> : <Redirect to='/' />
 					} /> */}
-					<Route path='/admin' render={() =>
+					{/* <Route path='/admin' render={() =>
 						isAdmin ? <AdminPanel /> : <Redirect to='/' />
-					} />
+					} /> */}
+					<Route render={() => <Redirect to='/' />} />
 				</Switch>
 
 				<ConnectedNotifier />

@@ -40,7 +40,7 @@ const styles = () => ({
 
 function Nav({
 	isSignedIn,
-	isAdmin,
+	// isAdmin,
 
 	classes
 }) {
@@ -61,9 +61,9 @@ function Nav({
 	);
 	if (isSignedIn) {
 		buttons.push(<PrettyLink key='tickets' to='/tickets'>Tickets</PrettyLink>);
-		if (isAdmin) {
-			buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
-		}
+		// if (isAdmin) {
+		// 	buttons.push(<PrettyLink key='admin' to='/admin'>Admin Panel</PrettyLink>);
+		// }
 		buttons.push(
 			<div key='grow' className={classes.grow} />,
 			<Button key='logout' href={logoutURL} color='inherit'>Logout</Button>
@@ -84,7 +84,7 @@ function Nav({
 
 Nav.propTypes = {
 	isSignedIn: PropTypes.bool.isRequired,
-	isAdmin: PropTypes.bool.isRequired,
+	// isAdmin: PropTypes.bool.isRequired,
 
 	classes: PropTypes.object.isRequired
 };
