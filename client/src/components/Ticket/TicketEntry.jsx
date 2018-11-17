@@ -10,7 +10,7 @@ const styles = theme => ({
 	},
 	headerText: {
 		color: theme.palette.common.white,
-		fontWeight: '200',
+		fontWeight: '300',
 		marginLeft: theme.spacing.unit * 3,
 		marginRight: theme.spacing.unit * 3
 	},
