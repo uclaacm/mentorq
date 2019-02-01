@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authURL, logoutURL } from '../Login/Login';
-import './Nav.css';
 
 function PrettyLink({
 	component: ButtonBase,
@@ -35,6 +34,9 @@ PrettyLink.defaultProps = {
 const styles = () => ({
 	grow: {
 		flexGrow: 1
+	},
+	toolbarLink: {
+		textDecoration: 'inherit'
 	}
 });
 
@@ -55,7 +57,7 @@ function Nav({
 	}
 	*/
 	buttons.push(
-		<Typography key='title' component={Link} to='/' variant='h6' color='inherit' className='toolbar-link'>
+		<Typography key='title' component={Link} to='/' variant='h6' color='inherit' className={classes.toolbarLink}>
 			MentorQ
 		</Typography>
 	);
