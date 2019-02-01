@@ -12,11 +12,12 @@ import PropTypes from 'prop-types';
 
 import history from '../../history';
 
-import './TicketForm.css';
-
 const styles = theme => ({
 	container: {
 		padding: `${theme.spacing.unit * 2}px 0`
+	},
+	formField: {
+		marginBottom: '20px'
 	}
 });
 
@@ -104,7 +105,7 @@ class TicketForm extends Component {
 							How can we help you?
 						</Typography>
 						<form onSubmit={this.onSubmit}>
-							<div className="field">
+							<div className={classes.formField}>
 								<TextField
 									required
 									id="description"
@@ -122,7 +123,7 @@ class TicketForm extends Component {
 									}}
 								/>
 							</div>
-							<div className="field">
+							<div className={classes.formField}>
 								<TextField
 									required
 									id="location"
@@ -140,7 +141,7 @@ class TicketForm extends Component {
 									}}
 								/>
 							</div>
-							<div className="field">
+							<div className={classes.formField}>
 								<TextField
 									required
 									id="contact"
