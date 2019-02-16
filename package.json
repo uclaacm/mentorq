@@ -4,8 +4,8 @@
   "description": "",
   "main": "",
   "devDependencies": {
-    "eslint": "^5.9.0",
-    "eslint-plugin-react": "^7.11.1"
+    "eslint": "^5.14.0",
+    "eslint-plugin-react": "^7.12.4"
   },
   "scripts": {
     "test": "eslint --ext js,jsx ."
