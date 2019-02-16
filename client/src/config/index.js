@@ -1,5 +1,7 @@
 export const server = {};
 
+export const eventName = 'Hack on the Hill 6';
+
 switch (process.env.NODE_ENV) {
 case 'production':
 	// Server settings

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 import { Login } from '..';
+import { eventName } from '../../config/';
 
 const styles = theme => ({
 	container: {
@@ -31,7 +32,7 @@ const styles = theme => ({
 	welcome: {
 		marginBottom: theme.spacing.unit * 3
 	},
-	hoth: {
+	eventName: {
 		color: theme.palette.primary.main
 	}
 });
@@ -45,7 +46,7 @@ function SplashPage({
 				<div className={classes.grid}>
 					<div className={classes.greet}>
 						<Typography component='h2' variant='h4' className={classes.welcome}>
-							Welcome to <span className={classes.hoth}>Hack on the Hill V.</span>
+							Welcome to <span className={classes.eventName}>{eventName}.</span>
 						</Typography>
 						<Typography component='p' variant='h6'>
 							Hi! To get help from mentors, please sign in with your Google account below.
