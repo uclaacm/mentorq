@@ -5,7 +5,14 @@ services:
     ports:
       - "27017:27017"
     logging:
-      driver: "none"
+      driver: none
+  db_postgres:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: mentorq-api
+      POSTGRES_DB: mentorq
+    logging:
+      driver: none
   api:
     build: ./api
     ports:
