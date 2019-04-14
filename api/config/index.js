@@ -12,7 +12,9 @@ module.exports = (() => {
 			// Server settings
 			serverBaseURL: 'https://api.mentorq.hack.uclaacm.com/',
 			serverPort: 8080,
-			frontendBaseURL: 'https://mentorq.hack.uclaacm.com/'
+			frontendBaseURL: 'https://mentorq.hack.uclaacm.com/',
+
+			enablePostgres: false,
 		};
 	case 'development':
 	default:
@@ -25,7 +27,9 @@ module.exports = (() => {
 			// Server settings
 			serverBaseURL: 'http://localhost:8080/',
 			serverPort: 8080,
-			frontendBaseURL: 'http://localhost:3000/'
+			frontendBaseURL: 'http://localhost:3000/',
+
+			enablePostgres: true,
 		};
 	}
 })();

@@ -8,7 +8,11 @@ const cors = require('cors');
 const config = require('./config');
 
 // Connect to database
-require('./models');
+if (config.enablePostgres) {
+	require('./models-postgres');
+} else {
+	require('./models');
+}
 
 app.use(cors({
 	credentials: true,
