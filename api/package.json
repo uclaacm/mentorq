@@ -10,18 +10,15 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "connect-mongodb-session": "^2.0.4",
+    "connect-mongodb-session": "^2.1.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "express-session": "1.15.6",
-    "mongoose": "^5.0.3",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.2",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
-    "passport-local": "^1.0.0",
-    "pg": "^7.8.1",
-    "pg-hstore": "^2.3.2",
-    "redux-socket.io": "^1.4.0",
-    "sequelize": "^4.43.0",
-    "socket.io": "^2.0.4"
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^7.10.0",
+    "sequelize": "^5.7.1",
+    "socket.io": "^2.2.0"
   }
 }
