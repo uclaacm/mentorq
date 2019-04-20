@@ -1,7 +1,20 @@
 'use strict';
 
-const Ticket = require('../models/Ticket');
 const { getActiveMentors } = require('./UserController');
+
+const config = require('../config');
+/* eslint-disable global-require */
+let Ticket;
+if (config.enablePostgres) {
+	Ticket = {
+		getRelevantTickets() {
+			return [];
+		}
+	};
+} else {
+	Ticket = require('../models/Ticket');
+}
+/* eslint-enable global-require */
 
 /**
  * Get the initial Redux state corresponding to the given user.

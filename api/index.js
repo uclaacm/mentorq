@@ -7,12 +7,14 @@ const server = http.createServer(app);
 const cors = require('cors');
 const config = require('./config');
 
+/* eslint-disable global-require */
 // Connect to database
 if (config.enablePostgres) {
 	require('./models-postgres');
 } else {
 	require('./models');
 }
+/* eslint-enable global-require */
 
 app.use(cors({
 	credentials: true,
@@ -34,6 +36,7 @@ app.set('socketio', socketio);
 // some of them are unused.
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+	console.error(err); // eslint-disable-line no-console
 	res.status(500).json({ err: err.message });
 });
 

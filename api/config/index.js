@@ -14,7 +14,7 @@ module.exports = (() => {
 			serverPort: 8080,
 			frontendBaseURL: 'https://mentorq.hack.uclaacm.com/',
 
-			enablePostgres: false,
+			enablePostgres: false
 		};
 	case 'development':
 	default:
@@ -29,7 +29,7 @@ module.exports = (() => {
 			serverPort: 8080,
 			frontendBaseURL: 'http://localhost:3000/',
 
-			enablePostgres: true,
+			enablePostgres: true
 		};
 	}
 })();

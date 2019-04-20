@@ -1,12 +1,14 @@
 'use strict';
 
-const config = require('./config');
+const config = require('../config');
 let User;
+/* eslint-disable global-require */
 if (config.enablePostgres) {
 	User = require('../models-postgres/User');
 } else {
 	User = require('../models/User');
 }
+/* eslint-enable global-require */
 
 function current(req, res) {
 	res.json(req.user);
@@ -69,10 +71,8 @@ function getConnectedRegistered(io) {
 		const socket = connectedSockets[socketID];
 		const { client } = socket;
 		const clientReq = client.request;
-		const { passport } = clientReq.session;
-
-		if (passport) {
-			const { user } = passport;
+		const { user } = clientReq.session;
+		if (user) {
 			activeUserIds.add(user._id);
 		}
 	}

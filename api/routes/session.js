@@ -5,9 +5,19 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('../models/User');
-
 const config = require('../config');
+
+/* eslint-disable global-require */
+let User;
+let id;
+if (config.enablePostgres) {
+	User = require('../models-postgres/User');
+	id = 'id';
+} else {
+	User = require('../models/User');
+	id = '_id';
+}
+/* eslint-enable global-require */
 
 const router = new express.Router();
 
@@ -57,11 +67,15 @@ if (secret) {
 }
 
 passport.serializeUser((user, done) => {
-	done(null, user);
+	done(null, user[id]);
 });
 
-passport.deserializeUser((user, done) => {
-	done(null, user);
+passport.deserializeUser(async (userId, done) => {
+	try {
+		done(null, await User.getById(userId));
+	} catch (err) {
+		done(err);
+	}
 });
 
 module.exports = router;

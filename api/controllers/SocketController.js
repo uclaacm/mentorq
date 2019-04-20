@@ -1,7 +1,20 @@
 'use strict';
 
-const Ticket = require('../models/Ticket');
-const User = require('../models/User');
+const config = require('../config');
+/* eslint-disable global-require */
+let User;
+let Ticket;
+let id;
+if (config.enablePostgres) {
+	User = require('../models-postgres/User');
+	// Ticket = require('../models-postgres/Ticket');
+	id = 'id';
+} else {
+	User = require('../models/User');
+	Ticket = require('../models/Ticket');
+	id = '_id';
+}
+/* eslint-enable global-require */
 
 const { getInitialState } = require('./ReduxStateController');
 
@@ -9,14 +22,13 @@ class SocketController {
 	constructor(io, socket) {
 		this.io = io;
 		this.socket = socket;
-		const { passport } = socket.client.request.session;
+		const { user } = socket.client.request;
 
-		if (passport && passport.user) {
-			const { user } = passport;
+		if (user) {
 			this.user = user;
 
-			// Allows us to use this.io.to() directly on a user's MongoDB ID.
-			socket.join(user._id);
+			// Allows us to use this.io.to() directly on a user's database ID.
+			socket.join(user[id]);
 
 			// Make the admin room and mentor room disjoint:
 			// admins = may or may not be mentor
@@ -70,7 +82,7 @@ class SocketController {
 			return;
 		}
 
-		const requestorId = this.user._id;
+		const requestorId = this.user[id];
 		const { description, tableNum, contactInfo } = ticket;
 		const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
 		const action = {
@@ -97,13 +109,13 @@ class SocketController {
 		}
 
 		const ticket = await Ticket.getById(ticketId);
-		await ticket.claim(this.user._id);
+		await ticket.claim(this.user[id]);
 
 		// Notify admins and mentors that someone claimed a ticket.
 		const action = {
 			type: 'SOCKET_TICKET_CLAIMED',
 			ticketId,
-			mentorId: this.user._id,
+			mentorId: this.user[id],
 			mentorName: this.user.name
 		};
 		this.io.to('admins').emit('action', action);
@@ -112,7 +124,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been claimed.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor._id).emit('action', action);
+			this.io.to(requestor[id]).emit('action', action);
 		}
 	}
 
@@ -132,7 +144,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been unclaimed.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor._id).emit('action', action);
+			this.io.to(requestor[id]).emit('action', action);
 		}
 	}
 
@@ -152,7 +164,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been resolved.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor._id).emit('action', action);
+			this.io.to(requestor[id]).emit('action', action);
 		}
 	}
 }
