@@ -5,20 +5,17 @@ const { sequelize } = require('./index.js');
 const User = require('./User');
 
 class Ticket extends Sequelize.Model {
-	static create(name, email, phone, googleId) {
-		return super.create({ name, email, googleId });
+	static create(requestorId, description, tableNum, contactInfo) {
+		return super.create({
+			requestorId,
+			description,
+			tableNum,
+			contactInfo
+		});
 	}
 
-	/**
-	 * Read and Retrieve a Ticket object from the database
-	 * @param {string} Ticket's googleID (as hash)
-	 * @returns {Ticket} one Ticket object with matching ID
-	 * @example
-	 * const ticket = await Ticket.read('someGoogleIdHash');
-	 * console.log(Ticket);
-	 */
-	static read(googleId) {
-		return this.findOne({ where: { googleId } });
+	static /* async */ getRelevantTickets(/* user */) {
+		return Promise.resolve([]);
 	}
 }
 Ticket.getById = Ticket.findByPk;

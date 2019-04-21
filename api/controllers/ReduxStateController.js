@@ -6,11 +6,7 @@ const config = require('../config');
 /* eslint-disable global-require */
 let Ticket;
 if (config.enablePostgres) {
-	Ticket = {
-		getRelevantTickets() {
-			return [];
-		}
-	};
+	Ticket = require('../models-postgres/Ticket');
 } else {
 	Ticket = require('../models/Ticket');
 }
