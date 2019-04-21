@@ -7,7 +7,7 @@ let Ticket;
 let id;
 if (config.enablePostgres) {
 	User = require('../models-postgres/User');
-	// Ticket = require('../models-postgres/Ticket');
+	Ticket = require('../models-postgres/Ticket');
 	id = 'id';
 } else {
 	User = require('../models/User');

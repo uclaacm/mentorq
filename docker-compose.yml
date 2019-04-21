@@ -19,6 +19,7 @@ services:
       - "8080:8080"
     links:
       - db_mongo
+      - db_postgres
   # web_client:
   #   build: ./client
   #   ports:
