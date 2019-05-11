@@ -4,6 +4,8 @@ const Sequelize = require('sequelize');
 const { sequelize } = require('./index.js');
 const User = require('./User');
 
+const { or } = Sequelize.Op;
+
 class Ticket extends Sequelize.Model {
 	static create(requestorId, description, tableNum, contactInfo) {
 		return super.create({
@@ -14,8 +16,54 @@ class Ticket extends Sequelize.Model {
 		});
 	}
 
-	static /* async */ getRelevantTickets(/* user */) {
-		return Promise.resolve([]);
+	claim(mentorId) {
+		this.set('mentorId', mentorId);
+		this.set('isActive', false);
+
+		return this.save();
+	}
+
+	unclaim() {
+		this.set('mentorId', null);
+		this.set('isActive', true);
+
+		return this.save();
+	}
+
+	resolve() {
+		this.set('mentorId', null);
+		this.set('isActive', true);
+
+		return this.save();
+	}
+
+	static async getRelevantTickets(user) {
+		let where;
+		if (user.isAdmin) {
+			// If the user is an admin, every unresolved ticket is relevant.
+			where = { isResolved: false };
+		} else if (user.isMentor) {
+			// If the user is a mentor, all unresolved tickets the user claimed + all
+			// unclaimed tickets are relevant.
+			where = {
+				[or]: [
+					{ isResolved: false, mentorId: user.id },
+					{ isActive: true }
+				]
+			};
+		} else {
+			// If the user is neither, all unresolved tickets requested by the student
+			// are relevant.
+			where = { isResolved: false, requestorId: user.id };
+		}
+
+		const options = {
+			order: ['timeFiled'],
+			where
+		};
+		const res = await this.findAll(options);
+		// TODO: Fix up output
+		return res;
 	}
 }
 Ticket.getById = Ticket.findByPk;
