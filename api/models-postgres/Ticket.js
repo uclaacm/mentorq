@@ -59,10 +59,27 @@ class Ticket extends Sequelize.Model {
 
 		const options = {
 			order: ['timeFiled'],
-			where
+			where,
+			include: [
+				{ as: 'requestorId', attributes: ['name', 'id'] },
+				{ as: 'mentorId', attributes: ['name', 'id'] }
+			]
 		};
 		const res = await this.findAll(options);
-		// TODO: Fix up output
+		console.log(res); // eslint-disable-line no-console
+		for (const ticket of res) {
+			const requestorId = ticket.requestorId.id;
+			const requestorName = ticket.requestorId.name;
+			ticket.requestorId = requestorId;
+			ticket.requestorName = requestorName;
+
+			if (ticket.mentorId) {
+				const mentorId = ticket.mentorId.id;
+				const mentorName = ticket.mentorId.name;
+				ticket.mentorId = mentorId;
+				ticket.mentorName = mentorName;
+			}
+		}
 		return res;
 	}
 }
@@ -100,12 +117,13 @@ Ticket.init({
 }, { sequelize });
 
 Ticket.belongsTo(User, {
-	foreignKey: {
-		name: 'requestorId',
-		allowNull: false
-	}
+	as: 'requestorId',
+	foreignKey: 'requestorIdFk'
 });
-Ticket.belongsTo(User, { foreignKey: 'mentorId' });
+Ticket.belongsTo(User, {
+	as: 'mentorId',
+	foreignKey: 'mentorIdFk'
+});
 
 Ticket.sync({ force: true }).catch(err => {
 	process.nextTick(() => {

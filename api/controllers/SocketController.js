@@ -82,6 +82,8 @@ class SocketController {
 			return;
 		}
 
+		console.log('Someone tried to submit a ticket'); // eslint-disable-line no-console
+
 		const requestorId = this.user[id];
 		const { description, tableNum, contactInfo } = ticket;
 		const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
