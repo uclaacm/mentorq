@@ -57,30 +57,42 @@ class Ticket extends Sequelize.Model {
 			where = { isResolved: false, requestorId: user.id };
 		}
 
+		// For "include", we have to use the Sequelize identifiers, so "…As"
+		// versions are used.
 		const options = {
 			order: ['timeFiled'],
 			where,
 			include: [
-				{ as: 'requestorId', attributes: ['name', 'id'] },
-				{ as: 'mentorId', attributes: ['name', 'id'] }
+				{ model: User, as: 'requestorIdAs', attributes: ['name', 'id'] },
+				{ model: User, as: 'mentorIdAs', attributes: ['name', 'id'] }
 			]
 		};
 		const res = await this.findAll(options);
-		console.log(res); // eslint-disable-line no-console
-		for (const ticket of res) {
-			const requestorId = ticket.requestorId.id;
-			const requestorName = ticket.requestorId.name;
-			ticket.requestorId = requestorId;
+		const objs = [];
+		for (const ticketRes of res) {
+			const ticket = { ...ticketRes.toJSON() };
+			const requestorId = ticket.requestorIdAs.id;
+			const requestorName = ticket.requestorIdAs.name;
+			ticket.requestorId = String(requestorId);
 			ticket.requestorName = requestorName;
+			delete ticket.requestorIdAs;
 
-			if (ticket.mentorId) {
-				const mentorId = ticket.mentorId.id;
-				const mentorName = ticket.mentorId.name;
-				ticket.mentorId = mentorId;
+			if (ticket.mentorIdAs) {
+				const mentorId = ticket.mentorIdAs.id;
+				const mentorName = ticket.mentorIdAs.name;
+				ticket.mentorId = String(mentorId);
 				ticket.mentorName = mentorName;
 			}
+			delete ticket.mentorIdAs;
+
+			ticket.timeFiled = ticket.timeFiled.valueOf();
+			ticket.createdAt = ticket.createdAt.valueOf();
+			ticket.updatedAt = ticket.updatedAt.valueOf();
+			ticket._id = String(ticket.id);
+
+			objs.push(ticket);
 		}
-		return res;
+		return objs;
 	}
 }
 Ticket.getById = Ticket.findByPk;
@@ -116,13 +128,19 @@ Ticket.init({
 	}
 }, { sequelize });
 
+// It appears that "as" and "foreignKey" must be different, so we affix the
+// as with "As".
+// - as: an identifier for Sequelize
+// - foreignKey: the key actually stored in the DB
+// See
+// https://github.com/sequelize/sequelize/issues/3678#issuecomment-102460069
 Ticket.belongsTo(User, {
-	as: 'requestorId',
-	foreignKey: 'requestorIdFk'
+	as: 'requestorIdAs',
+	foreignKey: 'requestorId'
 });
 Ticket.belongsTo(User, {
-	as: 'mentorId',
-	foreignKey: 'mentorIdFk'
+	as: 'mentorIdAs',
+	foreignKey: 'mentorId'
 });
 
 Ticket.sync({ force: true }).catch(err => {
