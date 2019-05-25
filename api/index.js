@@ -7,14 +7,8 @@ const server = http.createServer(app);
 const cors = require('cors');
 const config = require('./config');
 
-/* eslint-disable global-require */
 // Connect to database
-if (config.enablePostgres) {
-	require('./models-postgres');
-} else {
-	require('./models');
-}
-/* eslint-enable global-require */
+require('./models-postgres');
 
 app.use(cors({
 	credentials: true,

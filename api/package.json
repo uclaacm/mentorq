@@ -10,12 +10,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "connect-mongodb-session": "^2.1.1",
     "connect-session-sequelize": "^6.0.0",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-session": "^1.16.1",
-    "mongoose": "^5.5.2",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^7.10.0",

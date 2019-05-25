@@ -1,14 +1,6 @@
 'use strict';
 
-const config = require('../config');
-let User;
-/* eslint-disable global-require */
-if (config.enablePostgres) {
-	User = require('../models-postgres/User');
-} else {
-	User = require('../models/User');
-}
-/* eslint-enable global-require */
+const User = require('../models-postgres/User');
 
 function current(req, res) {
 	res.json(req.user);

@@ -1,20 +1,8 @@
 'use strict';
 
-const config = require('../config');
-/* eslint-disable global-require */
-let User;
-let Ticket;
-let id;
-if (config.enablePostgres) {
-	User = require('../models-postgres/User');
-	Ticket = require('../models-postgres/Ticket');
-	id = 'id';
-} else {
-	User = require('../models/User');
-	Ticket = require('../models/Ticket');
-	id = '_id';
-}
-/* eslint-enable global-require */
+const User = require('../models-postgres/User');
+const Ticket = require('../models-postgres/Ticket');
+const id = 'id';
 
 const { getInitialState } = require('./ReduxStateController');
 

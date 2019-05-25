@@ -7,18 +7,9 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('../config');
 const { sequelize } = require('../models-postgres/index');
+const User = require('../models-postgres/User');
 
-/* eslint-disable global-require */
-let User;
-let id;
-if (config.enablePostgres) {
-	User = require('../models-postgres/User');
-	id = 'id';
-} else {
-	User = require('../models/User');
-	id = '_id';
-}
-/* eslint-enable global-require */
+const id = 'id';
 
 const router = new express.Router();
 
