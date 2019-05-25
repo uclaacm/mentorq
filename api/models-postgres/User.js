@@ -19,6 +19,32 @@ class User extends Sequelize.Model {
 	static read(googleId) {
 		return this.findOne({ where: { googleId } });
 	}
+
+	/**
+	 * Change User's isAdmin status
+	 * @param {Boolean} User's new isAdmin status
+	 * @returns {User} changed user object
+	 * @example
+	 * const user = await User.read('someGoogleIdHash');
+	 * await user.setAdminStatus(true);
+	 */
+	setAdminStatus(adminStatus) {
+		this.set('isAdmin', adminStatus);
+		return this.save();
+	}
+
+	/**
+	 * Change User's isMentor status
+	 * @param {Boolean} User's new isMentor status
+	 * @returns {User} changed user object
+	 * @example
+	 * const user = await User.read('someGoogleIdHash');
+	 * await user.setMentorStatus(true);
+	 */
+	setMentorStatus(mentorStatus) {
+		this.set('isMentor', mentorStatus);
+		return this.save();
+	}
 }
 User.getById = User.findByPk;
 User.getAll = User.all;

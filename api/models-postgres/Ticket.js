@@ -143,7 +143,7 @@ Ticket.belongsTo(User, {
 	foreignKey: 'mentorId'
 });
 
-Ticket.sync({ force: true }).catch(err => {
+Ticket.sync().catch(err => {
 	process.nextTick(() => {
 		console.error('Failed to sync Ticket db'); // eslint-disable-line no-console
 		throw err;

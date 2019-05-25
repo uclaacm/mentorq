@@ -38,14 +38,12 @@ async function getActiveMentorsRoute(req, res, next) {
 async function update(req, res, next) {
 	try {
 		const user = await User.getById(req.params.id);
-		if (!config.enablePostgres) {
-			const { mentor, admin } = req.query;
-			if (mentor !== undefined) {
-				await user.setMentorStatus(Boolean(mentor));
-			}
-			if (admin !== undefined) {
-				await user.setAdminStatus(Boolean(admin));
-			}
+		const { mentor, admin } = req.query;
+		if (mentor !== undefined) {
+			await user.setMentorStatus(Boolean(mentor));
+		}
+		if (admin !== undefined) {
+			await user.setAdminStatus(Boolean(admin));
 		}
 		res.json(user);
 	} catch (err) {
