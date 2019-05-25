@@ -103,7 +103,8 @@ class SocketController {
 		const action = {
 			type: 'SOCKET_TICKET_CLAIMED',
 			ticketId,
-			mentorId: this.user[id],
+			// FIXME: MIGRATION: change frontend so that it expects a number
+			mentorId: this.user._id,
 			mentorName: this.user.name
 		};
 		this.io.to('admins').emit('action', action);

@@ -45,6 +45,17 @@ class User extends Sequelize.Model {
 		this.set('isMentor', mentorStatus);
 		return this.save();
 	}
+
+	get _id() {
+		return String(this.id);
+	}
+
+	toJSON() {
+		return {
+			...super.toJSON(),
+			_id: this._id
+		};
+	}
 }
 User.getById = User.findByPk;
 User.getAll = User.all;

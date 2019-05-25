@@ -94,6 +94,17 @@ class Ticket extends Sequelize.Model {
 		}
 		return objs;
 	}
+
+	get _id() {
+		return String(this.id);
+	}
+
+	toJSON() {
+		return {
+			...super.toJSON(),
+			_id: this._id
+		};
+	}
 }
 Ticket.getById = Ticket.findByPk;
 Ticket.getAll = Ticket.all;
