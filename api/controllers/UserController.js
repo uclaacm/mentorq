@@ -1,14 +1,6 @@
 'use strict';
 
-const config = require('../config');
-let User;
-/* eslint-disable global-require */
-if (config.enablePostgres) {
-	User = require('../models-postgres/User');
-} else {
-	User = require('../models/User');
-}
-/* eslint-enable global-require */
+const User = require('../models-postgres/User');
 
 function current(req, res) {
 	res.json(req.user);
@@ -38,14 +30,12 @@ async function getActiveMentorsRoute(req, res, next) {
 async function update(req, res, next) {
 	try {
 		const user = await User.getById(req.params.id);
-		if (!config.enablePostgres) {
-			const { mentor, admin } = req.query;
-			if (mentor !== undefined) {
-				await user.setMentorStatus(Boolean(mentor));
-			}
-			if (admin !== undefined) {
-				await user.setAdminStatus(Boolean(admin));
-			}
+		const { mentor, admin } = req.query;
+		if (mentor !== undefined) {
+			await user.setMentorStatus(Boolean(mentor));
+		}
+		if (admin !== undefined) {
+			await user.setAdminStatus(Boolean(admin));
 		}
 		res.json(user);
 	} catch (err) {

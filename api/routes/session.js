@@ -2,30 +2,22 @@
 
 const express = require('express');
 const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('../config');
+const { sequelize } = require('../models-postgres/index');
+const User = require('../models-postgres/User');
 
-/* eslint-disable global-require */
-let User;
-let id;
-if (config.enablePostgres) {
-	User = require('../models-postgres/User');
-	id = 'id';
-} else {
-	User = require('../models/User');
-	id = '_id';
-}
-/* eslint-enable global-require */
+const id = 'id';
 
 const router = new express.Router();
 
 // Initialize user session
-const sessionStore = new MongoDBStore({
-	uri: config.database.uri + '/sessions',
-	collection: 'session'
+const sessionStore = new SequelizeStore({
+	db: sequelize
 });
+
 const sessionSecret = process.env.NODE_ENV === 'production' ? require('../config/session-secret') : 'deadbeef 314';
 router.use(session({
 	store: sessionStore,
@@ -35,6 +27,13 @@ router.use(session({
 }));
 router.use(passport.initialize());
 router.use(passport.session());
+
+sessionStore.sync().catch(err => {
+	process.nextTick(() => {
+		console.error('Failed to sync Session db'); // eslint-disable-line no-console
+		throw err;
+	});
+});
 
 let secret;
 try {

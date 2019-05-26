@@ -94,6 +94,17 @@ class Ticket extends Sequelize.Model {
 		}
 		return objs;
 	}
+
+	get _id() {
+		return String(this.id);
+	}
+
+	toJSON() {
+		return {
+			...super.toJSON(),
+			_id: this._id
+		};
+	}
 }
 Ticket.getById = Ticket.findByPk;
 Ticket.getAll = Ticket.all;
@@ -143,7 +154,7 @@ Ticket.belongsTo(User, {
 	foreignKey: 'mentorId'
 });
 
-Ticket.sync({ force: true }).catch(err => {
+Ticket.sync().catch(err => {
 	process.nextTick(() => {
 		console.error('Failed to sync Ticket db'); // eslint-disable-line no-console
 		throw err;
