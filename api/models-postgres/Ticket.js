@@ -32,7 +32,7 @@ class Ticket extends Sequelize.Model {
 
 	resolve() {
 		this.set('mentorId', null);
-		this.set('isActive', true);
+		this.set('isActive', false);
 
 		return this.save();
 	}
