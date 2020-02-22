@@ -1,6 +1,6 @@
 export const server = {};
 
-export const eventName = 'Hack on the Hill 6';
+export const eventName = 'Hack on the Hill 7';
 
 switch (process.env.NODE_ENV) {
 case 'production':
