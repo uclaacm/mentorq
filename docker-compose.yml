@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_USER: mentorq-api
       POSTGRES_DB: mentorq
+			POSTGRES_HOST_AUTH_METHOD: trust
     logging:
       driver: none
   api:

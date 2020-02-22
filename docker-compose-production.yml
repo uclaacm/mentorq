@@ -1,19 +1,19 @@
 version: '3'
 services:
-  db_mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
+  db_postgres:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: mentorq-api
+      POSTGRES_DB: mentorq
+			POSTGRES_HOST_AUTH_METHOD: trust
     logging:
-      driver: "none"
+      driver: none
   api:
     build:
       context: ./api
       dockerfile: Dockerfile-production
-    ports:
-      - "8080:8080"
     links:
-      - db_mongo
+      - db_postgres
   prod:
     build: ./prod
     ports:
