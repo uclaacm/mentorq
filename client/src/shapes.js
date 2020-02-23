@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 export const ticketShape = {
-	_id: PropTypes.string.isRequired,
-	requestorId: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
+	requestorId: PropTypes.number.isRequired,
 	requestorName: PropTypes.string.isRequired,
-	mentorId: PropTypes.string,
+	mentorId: PropTypes.number,
 	mentorName: PropTypes.string,
 	contactInfo: PropTypes.string.isRequired,
 	timeFiled: PropTypes.number.isRequired,
@@ -14,7 +14,7 @@ export const ticketShape = {
 };
 
 export const userShape = {
-	_id: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
 	phone: PropTypes.string,

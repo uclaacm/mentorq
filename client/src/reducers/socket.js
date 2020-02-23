@@ -18,7 +18,7 @@ export default function socketReducer(state = {
 			...state,
 			tickets: [...state.tickets, action.newTicket]
 		};
-		if (state.pendingTickets && userState.current && action.newTicket.requestorId === userState.current._id) {
+		if (state.pendingTickets && userState.current && action.newTicket.requestorId === userState.current.id) {
 			newState.pendingTickets--;
 		}
 		return newState;
@@ -33,7 +33,7 @@ export default function socketReducer(state = {
 		return {
 			...state,
 			tickets: state.tickets.map(ticket => {
-				if (ticket._id === ticketId) {
+				if (ticket.id === ticketId) {
 					return {
 						...ticket,
 						mentorId,
@@ -49,7 +49,7 @@ export default function socketReducer(state = {
 		return {
 			...state,
 			tickets: state.tickets.map(ticket => {
-				if (ticket._id === action.ticketId) {
+				if (ticket.id === action.ticketId) {
 					return {
 						...ticket,
 						mentorId: null,
@@ -64,7 +64,7 @@ export default function socketReducer(state = {
 	case 'SOCKET_TICKET_RESOLVED': {
 		return {
 			...state,
-			tickets: state.tickets.filter(({ _id }) => _id !== action.ticketId)
+			tickets: state.tickets.filter(({ id }) => id !== action.ticketId)
 		};
 	}
 	default:

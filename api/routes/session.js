@@ -9,8 +9,6 @@ const config = require('../config');
 const { sequelize } = require('../models-postgres/index');
 const User = require('../models-postgres/User');
 
-const id = 'id';
-
 const router = new express.Router();
 
 // Initialize user session
@@ -66,7 +64,7 @@ if (secret) {
 }
 
 passport.serializeUser((user, done) => {
-	done(null, user[id]);
+	done(null, user.id);
 });
 
 passport.deserializeUser(async (userId, done) => {

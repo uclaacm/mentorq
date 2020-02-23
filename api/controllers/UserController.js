@@ -61,9 +61,9 @@ function getConnectedRegistered(io) {
 		const socket = connectedSockets[socketID];
 		const { client } = socket;
 		const clientReq = client.request;
-		const { user } = clientReq.session;
+		const { user } = clientReq;
 		if (user) {
-			activeUserIds.add(user._id);
+			activeUserIds.add(user.id);
 		}
 	}
 

@@ -46,14 +46,14 @@ function TicketList({
 			<div className={classes.layout}>
 				<Grid container spacing={16}>
 					{tickets.map(ticket =>
-						<Grid className={classes.item} item key={ticket._id} sm={6} md={4} lg={3}>
+						<Grid className={classes.item} item key={ticket.id} sm={6} md={4} lg={3}>
 							<Ticket
 								{...ticket}
-								claimTicket={() => claimTicket(ticket._id)}
-								unclaimTicket={() => unclaimTicket(ticket._id)}
-								resolveTicket={() => resolveTicket(ticket._id)}
+								claimTicket={() => claimTicket(ticket.id)}
+								unclaimTicket={() => unclaimTicket(ticket.id)}
+								resolveTicket={() => resolveTicket(ticket.id)}
 								isMentor={isMentor}
-								userId={user._id}
+								userId={user.id}
 							/>
 						</Grid>)}
 				</Grid>

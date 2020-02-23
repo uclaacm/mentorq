@@ -46,15 +46,11 @@ class User extends Sequelize.Model {
 		return this.save();
 	}
 
-	get _id() {
-		return String(this.id);
-	}
-
 	toJSON() {
-		return {
-			...super.toJSON(),
-			_id: this._id
-		};
+		const user = { ...super.toJSON() };
+		user.createdAt = user.createdAt.valueOf();
+		user.updatedAt = user.updatedAt.valueOf();
+		return user;
 	}
 }
 User.getById = User.findByPk;

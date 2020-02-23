@@ -2,7 +2,6 @@
 
 const User = require('../models-postgres/User');
 const Ticket = require('../models-postgres/Ticket');
-const id = 'id';
 
 const { getInitialState } = require('./ReduxStateController');
 
@@ -16,7 +15,7 @@ class SocketController {
 			this.user = user;
 
 			// Allows us to use this.io.to() directly on a user's database ID.
-			socket.join(user[id]);
+			socket.join(user.id);
 
 			// Make the admin room and mentor room disjoint:
 			// admins = may or may not be mentor
@@ -70,7 +69,7 @@ class SocketController {
 			return;
 		}
 
-		const requestorId = this.user[id];
+		const requestorId = this.user.id;
 		const { description, tableNum, contactInfo } = ticket;
 		const newTicket = await Ticket.create(requestorId, description, tableNum, contactInfo);
 		const action = {
@@ -97,14 +96,13 @@ class SocketController {
 		}
 
 		const ticket = await Ticket.getById(ticketId);
-		await ticket.claim(this.user[id]);
+		await ticket.claim(this.user.id);
 
 		// Notify admins and mentors that someone claimed a ticket.
 		const action = {
 			type: 'SOCKET_TICKET_CLAIMED',
 			ticketId,
-			// FIXME: MIGRATION: change frontend so that it expects a number
-			mentorId: this.user._id,
+			mentorId: this.user.id,
 			mentorName: this.user.name
 		};
 		this.io.to('admins').emit('action', action);
@@ -113,7 +111,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been claimed.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor[id]).emit('action', action);
+			this.io.to(requestor.id).emit('action', action);
 		}
 	}
 
@@ -133,7 +131,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been unclaimed.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor[id]).emit('action', action);
+			this.io.to(requestor.id).emit('action', action);
 		}
 	}
 
@@ -153,7 +151,7 @@ class SocketController {
 		// Also notify the submitter that their ticket has been resolved.
 		const requestor = await User.getById(ticket.requestorId);
 		if (!requestor.isAdmin && !requestor.isMentor) {
-			this.io.to(requestor[id]).emit('action', action);
+			this.io.to(requestor.id).emit('action', action);
 		}
 	}
 }

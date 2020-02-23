@@ -10,7 +10,7 @@ function filterTickets(tickets, user) {
 	// If the user is a mentor but not an admin, only display tickets that are
 	// active or claimed by the user.
 	if (user.isMentor && !user.isAdmin) {
-		return tickets.filter(ticket => ticket.isActive || ticket.mentorId === user._id);
+		return tickets.filter(ticket => ticket.isActive || ticket.mentorId === user.id);
 	}
 
 	// If the user isn't a mentor or an admin, every ticket in tickets must be

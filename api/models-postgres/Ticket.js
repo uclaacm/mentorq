@@ -71,40 +71,33 @@ class Ticket extends Sequelize.Model {
 		const res = await this.findAll(options);
 		const objs = [];
 		for (const ticketRes of res) {
-			const ticket = { ...ticketRes.toJSON() };
-			const requestorId = ticket.requestorIdAs.id;
-			const requestorName = ticket.requestorIdAs.name;
-			ticket.requestorId = String(requestorId);
-			ticket.requestorName = requestorName;
-			delete ticket.requestorIdAs;
-
-			if (ticket.mentorIdAs) {
-				const mentorId = ticket.mentorIdAs.id;
-				const mentorName = ticket.mentorIdAs.name;
-				ticket.mentorId = String(mentorId);
-				ticket.mentorName = mentorName;
-			}
-			delete ticket.mentorIdAs;
-
-			ticket.timeFiled = ticket.timeFiled.valueOf();
-			ticket.createdAt = ticket.createdAt.valueOf();
-			ticket.updatedAt = ticket.updatedAt.valueOf();
-			ticket._id = String(ticket.id);
-
-			objs.push(ticket);
+			objs.push(ticketRes.toJSON());
 		}
 		return objs;
 	}
 
-	get _id() {
-		return String(this.id);
-	}
-
 	toJSON() {
-		return {
-			...super.toJSON(),
-			_id: this._id
-		};
+		const ticket = { ...super.toJSON() };
+
+		const requestorId = ticket.requestorIdAs.id;
+		const requestorName = ticket.requestorIdAs.name;
+		ticket.requestorId = requestorId;
+		ticket.requestorName = requestorName;
+		delete ticket.requestorIdAs;
+
+		if (ticket.mentorIdAs) {
+			const mentorId = ticket.mentorIdAs.id;
+			const mentorName = ticket.mentorIdAs.name;
+			ticket.mentorId = mentorId;
+			ticket.mentorName = mentorName;
+		}
+		delete ticket.mentorIdAs;
+
+		ticket.timeFiled = ticket.timeFiled.valueOf();
+		ticket.createdAt = ticket.createdAt.valueOf();
+		ticket.updatedAt = ticket.updatedAt.valueOf();
+
+		return ticket;
 	}
 }
 Ticket.getById = Ticket.findByPk;
