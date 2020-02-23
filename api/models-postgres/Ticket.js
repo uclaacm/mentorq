@@ -33,6 +33,7 @@ class Ticket extends Sequelize.Model {
 	resolve() {
 		this.set('mentorId', null);
 		this.set('isActive', false);
+		this.set('isResolved', true);
 
 		return this.save();
 	}
