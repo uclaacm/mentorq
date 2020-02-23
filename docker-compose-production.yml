@@ -12,6 +12,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile-production
+    restart: always
     links:
       - db_postgres
   prod:
@@ -22,5 +23,6 @@ services:
     volumes:
       - ./prod/build:/usr/share/nginx/html:ro
       - /var/lib/dehydrated/certs:/var/lib/dehydrated/certs:ro
+    restart: always
     links:
       - api
